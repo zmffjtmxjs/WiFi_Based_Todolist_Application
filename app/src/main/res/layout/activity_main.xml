@@ -20,6 +20,13 @@
             android:id="@+id/toolBar"
             android:layout_alignParentTop="true" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/goSetWiFi"
+            android:text="WiFi 설정정" />
+
     </RelativeLayout>
 
     <include layout="@layout/nav_filter_menu" />
