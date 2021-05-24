@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         //ImageView 등록
         sideBarButton = (ImageView) findViewById(R.id.sideBarButton);
         //DrawerLayout 등록
-        sideBarDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        sideBarDrawer = (DrawerLayout) findViewById(R.id.drawerLayout);
 
         //사이드 메뉴 버튼 터치 시 사이드 바 활성화 기능
         sideBarButton.setOnClickListener(new View.OnClickListener() {
