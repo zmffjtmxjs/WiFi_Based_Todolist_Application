@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/toolbar"
+            layout="@layout/main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:id="@+id/toolBar"
