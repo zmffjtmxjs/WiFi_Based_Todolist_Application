@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         sideBarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sideBarDrawer.openDrawer(Gravity.RIGHT);
+                sideBarDrawer.openDrawer(Gravity.LEFT);
             }
         });
     }

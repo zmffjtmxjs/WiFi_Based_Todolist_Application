@@ -12,7 +12,7 @@
         android:id="@+id/navigation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="end|right"
+        android:layout_gravity="start|left"
         app:headerLayout="@layout/nav_header"
         app:menu="@layout/nav_menus" />
 
