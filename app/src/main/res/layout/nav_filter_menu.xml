@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="표시할 태그 선택"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:gravity="center" />
 
     <!-- 태그 리스트와 체크박스 -->
