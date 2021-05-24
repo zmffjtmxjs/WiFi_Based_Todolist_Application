@@ -8,16 +8,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="70dp"
+            android:id="@+id/toolBar"
+            android:layout_alignParentTop="true" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <include layout="@layout/nav_filter_menu" />
 
