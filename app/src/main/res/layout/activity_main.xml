@@ -19,4 +19,6 @@
 
     </LinearLayout>
 
+    <include layout="@layout/nav_filter_menu" />
+
 </androidx.drawerlayout.widget.DrawerLayout>
