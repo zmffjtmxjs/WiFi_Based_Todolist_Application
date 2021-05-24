@@ -8,5 +8,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start|end"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@layout/nav_menus" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
