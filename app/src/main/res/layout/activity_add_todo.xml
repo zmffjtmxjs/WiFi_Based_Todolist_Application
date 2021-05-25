@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/toolbar_add_todo"
+        layout="@layout/toolbar_cancel_save"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:id="@+id/toolBar"
