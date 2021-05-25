@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddToDoActivity" android:label="할일 추가 화면 엑티비티" />
+        <activity android:name=".SetWiFiActivity" android:label="WiFi 설정 화면 엑티비티" />
     </application>
 
 </manifest>
