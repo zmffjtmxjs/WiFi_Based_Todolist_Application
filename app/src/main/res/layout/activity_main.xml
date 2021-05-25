@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:id="@+id/goSetWiFi"
-            android:text="WiFi 설정정" />
+            android:text="WiFi 설정" />
 
         <LinearLayout
             android:layout_width="match_parent"
