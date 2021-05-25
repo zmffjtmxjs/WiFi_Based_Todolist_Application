@@ -16,6 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AddToDoActivity" android:label="할일 추가 화면 엑티비티" />
     </application>
 
 </manifest>
