@@ -24,7 +24,7 @@ public class SetWiFiActivity extends Activity {
         titleText = (TextView) findViewById(R.id.titleText);
 
         //화면 제목 표시
-        titleText.setText("할 일 편집");
+        titleText.setText("WiFi 설정");
 
         //메인화면으로 돌아감
         cancelAddToDo.setOnClickListener(new View.OnClickListener() {
