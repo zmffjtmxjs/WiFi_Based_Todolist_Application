@@ -1,4 +1,4 @@
-package com.cookandroid.wifi_based_todolist;
+package com.cookandroid.wifi_based_todolist.page;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 
+import com.cookandroid.wifi_based_todolist.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {

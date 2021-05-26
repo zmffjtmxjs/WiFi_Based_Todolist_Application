@@ -1,4 +1,4 @@
-package com.cookandroid.wifi_based_todolist;
+package com.cookandroid.wifi_based_todolist.page;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class AddToDoActivity extends Activity {
+import com.cookandroid.wifi_based_todolist.R;
+
+public class SetWiFiActivity extends Activity {
 
     ImageView cancelAddToDo, saveAddToDo;
     TextView titleText;
