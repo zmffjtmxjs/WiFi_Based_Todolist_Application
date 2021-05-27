@@ -19,42 +19,43 @@
         android:layout_below="@+id/toolBar"
         android:orientation="vertical">
 
+        <!-- 할 일 제목 입력 -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="더미"/>
+            android:text="할 일" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ToDoTiTle" />
+        <!-- 만료 날짜와 시간 -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="더미"/>
+            android:text="날짜 및 시간" />
+        <!-- 만료 날짜 선택 -->
+        <!-- 만료 시간 선택 -->
+        <!-- 알람 설정 (우선순위 : 하)
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="더미"/>
+            android:text="알람" />
+        -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="더미"/>
+            android:text="메모" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ToDoNote" />
+        <!-- 그룹 선택 -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
+            android:text="표시 그룹" />
+        <!-- 그룹 선택 부분 -->
+
 
     </LinearLayout>
 
