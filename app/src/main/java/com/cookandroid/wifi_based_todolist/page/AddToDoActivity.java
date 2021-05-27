@@ -19,7 +19,7 @@ public class AddToDoActivity extends Activity {
         setContentView(R.layout.activity_add_todo);
 
         //ImageView 등록
-        cancelAddToDo = (ImageView) findViewById(R.id.cancelAddToDo);
+        cancelAddToDo = (ImageView) findViewById(R.id.discard);
         //TextView 등록
         titleText = (TextView) findViewById(R.id.titleText);
 

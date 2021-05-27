@@ -14,14 +14,14 @@
         android:textSize="25sp" />
 
     <ImageView
-        android:id="@+id/cancelAddToDo"
+        android:id="@+id/discard"
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         app:srcCompat="@drawable/ic_arrow_back" />
 
     <ImageView
-        android:id="@+id/saveAddToDo"
+        android:id="@+id/save"
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
