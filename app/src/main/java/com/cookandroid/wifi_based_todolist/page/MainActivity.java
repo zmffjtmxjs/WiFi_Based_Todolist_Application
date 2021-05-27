@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         SetWiFiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AddToDoActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SetWiFiActivity.class);
                 startActivity(intent);
             }
         });
