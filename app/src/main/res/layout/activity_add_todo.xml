@@ -30,17 +30,46 @@
             android:id="@+id/ToDoTiTle" />
         <!-- 만료 날짜와 시간 -->
         <TextView
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:text="날짜 및 시간" />
-        <!-- 만료 날짜 선택 -->
-        <!-- 만료 시간 선택 -->
+        <!-- 만료 날짜 및 시간 선택 영역 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- 뷰를 중앙에 위치 시키기 위한 레이아웃 중첩 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true">
+                <!-- 만료 날짜 선택(기본 값은 내일) -->
+                <TextView
+                    android:id="@+id/pickedDueDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="20dp"
+                    android:textSize="30dp"
+                    android:text="2021-05-28"/>
+
+                <!-- 만료 시간 선택(기본 값은 현재시간) -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/pickedDueTime"
+                    android:textSize="30dp"
+                    android:text="오전 9:11" />
+            </LinearLayout>
+        </RelativeLayout>
+
         <!-- 알람 설정 (우선순위 : 하)
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="알람" />
         -->
+
+        <!-- 메모 작성 -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,12 +78,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ToDoNote" />
-        <!-- 그룹 선택 -->
+
+        <!-- 그룹 작성 -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="표시 그룹" />
-        <!-- 그룹 선택 부분 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pickedGroup"
+            android:text="표시 그룹 선택" />
 
 
     </LinearLayout>
