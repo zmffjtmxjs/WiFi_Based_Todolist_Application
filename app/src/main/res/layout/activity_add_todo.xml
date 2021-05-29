@@ -42,7 +42,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:onClick="mOnPopupClick" >
                 <!-- 만료 날짜 선택(기본 값은 내일) -->
                 <TextView
                     android:id="@+id/pickedDueDate"

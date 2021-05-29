@@ -45,22 +45,6 @@ public class AddToDoActivity extends Activity {
 
         pickDueDate.setText(mYear + "-" + mMonth + "-" + mDay);
 
-        //만료 날짜 텍스트 뷰 터치 시...
-        pickDueDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        //만료 시간 텍스트 뷰 터치 시...
-        pickDueTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         //메인화면으로 돌아감
         cancelAddToDo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,5 +52,20 @@ public class AddToDoActivity extends Activity {
                 finish();
             }
         });
+    }
+
+    //만료 날짜 또는 시간이 포함된 레이아웃을 터치 시 팝업을 띄운다.
+    public void mOnPopupClick (View view) {
+        Intent intent = new Intent(this, DuePickerActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1) {
+            if(requestCode == RESULT_OK) {
+
+            }
+        }
     }
 }
