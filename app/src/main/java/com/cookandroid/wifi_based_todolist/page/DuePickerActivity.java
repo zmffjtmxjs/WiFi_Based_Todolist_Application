@@ -37,10 +37,19 @@ public class DuePickerActivity extends Activity {
     }
 
     //확인 버튼 클릭
-    public void mOnClose(View v){
+    public void mOnSubmit(View v) {
         //원래의 엑티비티에 결과 전송
         Intent intent = new Intent();
         setResult(RESULT_OK, intent); //결과 : 확인됨
+
+        //액티비티(팝업) 닫기
+        finish();
+    }
+
+    public void mOnDiscard(View v) {
+        //원래의 엑티비티에 결과 전송
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent); //결과 : 취소됨
 
         //액티비티(팝업) 닫기
         finish();
