@@ -12,14 +12,18 @@ import android.widget.TextView;
 
 import com.cookandroid.wifi_based_todolist.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class AddToDoActivity extends Activity {
 
     ImageView cancelAddToDo, saveAddToDo;
-    TextView titleText, pickDueDate, pickDueTime;
-    //날짜 연산을 위한 변수 선언
-    private int mYear = 0, mMonth = 0, mDay = 0;
+    TextView titleText, pickDue;
+    Calendar cal = Calendar.getInstance();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd  (EEE) aaa HH시mm분",
+            new Locale(Locale.KOREAN.getLanguage(), Locale.KOREAN.getCountry()));
+    String date = dateFormat.format(cal.getTime());
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -31,19 +35,10 @@ public class AddToDoActivity extends Activity {
         cancelAddToDo = (ImageView) findViewById(R.id.discard);
         //TextView 등록
         titleText = (TextView) findViewById(R.id.titleText);
-        pickDueDate = (TextView) findViewById(R.id.pickedDueDate);
-        pickDueTime = (TextView) findViewById(R.id.pickedDueTime);
+        pickDue = (TextView) findViewById(R.id.pickedDue);
 
-        //화면 제목 표시
-        titleText.setText("할 일 편집");
+        pickDue.setText(date);
 
-        //달력 인스턴스 생성
-        Calendar getToday = Calendar.getInstance();
-        mYear = getToday.get(Calendar.YEAR);
-        mMonth = getToday.get(Calendar.MONTH);
-        mDay = getToday.get(Calendar.DAY_OF_MONTH);
-
-        pickDueDate.setText(mYear + "-" + mMonth + "-" + mDay);
 
         //메인화면으로 돌아감
         cancelAddToDo.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +50,7 @@ public class AddToDoActivity extends Activity {
     }
 
     //만료 날짜 또는 시간이 포함된 레이아웃을 터치 시 팝업을 띄운다.
-    public void mOnPopupClick (View view) {
+    public void mOnClickPopup (View view) {
         Intent intent = new Intent(this, DuePickerActivity.class);
         startActivityForResult(intent, 1);
     }
