@@ -18,12 +18,20 @@ import java.util.Locale;
 
 public class AddToDoActivity extends Activity {
 
+    //뷰 등록을 위한 선언
     ImageView cancelAddToDo, saveAddToDo;
     TextView titleText, pickDueDate;
 
-    Calendar cal = Calendar.getInstance();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd  '('EEE')' aaa h'시'mm'분'",
+    final Calendar cal = Calendar.getInstance();
+
+    //선택한 만료 날짜와 시간을 표시하기 위한 포맷
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd (EEE) aaa hh시mm분",
             new Locale(Locale.KOREAN.getLanguage(), Locale.KOREAN.getCountry()));
+
+    //팝업 엑티비티와 정보교환을 위한 포맷
+    SimpleDateFormat transport = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+    //초기값은 현재시간을 가져온다.
     String date = dateFormat.format(cal.getTime());
     String newPickDate;
 
@@ -39,6 +47,7 @@ public class AddToDoActivity extends Activity {
         titleText = (TextView) findViewById(R.id.titleText);
         pickDueDate = (TextView) findViewById(R.id.pickedDue);
 
+        //화면 진입 시 만료 날짜 및 시간 기본값 설정
         pickDueDate.setText(date);
 
         //메인화면으로 돌아감
@@ -53,6 +62,7 @@ public class AddToDoActivity extends Activity {
     //만료 날짜 또는 시간이 포함된 레이아웃을 터치 시 팝업을 띄운다.
     public void mOnClickPopup (View view) {
         Intent intent = new Intent(this, DuePickerActivity.class);
+        //선택된 날짜의 값을 보낸다.
         intent.putExtra("Date", date);
         startActivityForResult(intent, 1);
     }
@@ -63,7 +73,6 @@ public class AddToDoActivity extends Activity {
         if(requestCode == 1) {
             if(resultCode == RESULT_OK) {
                 newPickDate = data.getStringExtra("NewDueDate");
-                SimpleDateFormat transport = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
                 //가져온 시간을 Calender타입으로 변환
                 try {

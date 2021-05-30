@@ -21,12 +21,20 @@ import static java.util.Calendar.*;
 
 public class DuePickerActivity extends Activity {
 
+    //뷰 등록을 위한 변수선언
     DatePicker datePicker;
     TimePicker timePicker;
     TextView dateView;
+
     final Calendar pickDate = getInstance();
+
+    //선택한 만료 날짜와 시간을 표시하기 위한 포맷
     final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd (EEE) aaa hh시mm분",
             new Locale(Locale.KOREAN.getLanguage(), Locale.KOREAN.getCountry()));
+
+    //팝업 엑티비티와 정보교환을 위한 포맷
+    SimpleDateFormat transport = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +54,6 @@ public class DuePickerActivity extends Activity {
         //로드 시 기본값을 할 일 추가(편집) 화면의 만료 기한과 동일
         dateView.setText(pickedStrDate);
 
-        Log.v("그럼넌?", pickedStrDate.getClass().getName());
         //가져온 시간을 Calender타입으로 변환
         try {
             pickDate.setTime(dateFormat.parse(pickedStrDate));
@@ -94,14 +101,13 @@ public class DuePickerActivity extends Activity {
 
         dateView.setText(dateFormat.format(pickDate.getTime()));
 
-        String newDueDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(pickDate.getTime());
+        String newDueDate = transport.format(pickDate.getTime());
 
         return newDueDate;
     }
 
     //확인 버튼 클릭
     public void mOnSubmit(View v) {
-        Log.v("결과","확인됨");
         //원래의 엑티비티에 결과 전송
         Intent intent = new Intent();
         intent.putExtra("NewDueDate", autoUpdatePickDateView());

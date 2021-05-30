@@ -43,12 +43,12 @@
             android:textSize="25dp"
             android:text="2021-05-30 (일)  오전 10시49분"/>
 
-        <!-- 알람 설정 (우선순위 : 하)
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="알람" />
-        -->
+        <!-- Todo 알람 설정 (우선순위 : 하) -->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="알람" />-->
+
 
         <!-- 메모 작성 -->
         <TextView
