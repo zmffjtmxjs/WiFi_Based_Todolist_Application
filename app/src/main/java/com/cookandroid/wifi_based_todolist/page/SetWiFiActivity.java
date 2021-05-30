@@ -16,7 +16,7 @@ public class SetWiFiActivity extends Activity {
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.activity_add_todo);
+        setContentView(R.layout.activity_set_wifi);
 
         //ImageView 등록
         cancelAddToDo = (ImageView) findViewById(R.id.discard);
