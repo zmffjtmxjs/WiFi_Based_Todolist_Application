@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".page.AddToDoActivity" android:label="할일 추가 화면 엑티비티" />
         <activity android:name=".page.SetWiFiActivity" android:label="WiFi 설정 화면 엑티비티" />
-        <activity android:name=".page.DuePickerActivity" android:label="날짜 및 시간 선택 화면 엑티비티" />
+        <activity android:name=".page.DuePickerActivity" android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" android:label="날짜 및 시간 선택 다이얼로그 엑티비티" />
     </application>
 
 </manifest>
