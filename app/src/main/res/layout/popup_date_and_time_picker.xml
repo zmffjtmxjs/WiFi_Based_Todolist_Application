@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_width="275dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="25dp"
+    android:orientation="vertical" >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="만료 날짜와 시간" />
+        android:text="할 일의 만료 날짜와 시간 설정" />
 
     <DatePicker
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
         android:id="@+id/datePicker" />
 
     <TimePicker
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:timePickerMode="spinner"
         android:id="@+id/timePicker" />
@@ -36,21 +37,18 @@
         android:layout_gravity="right"
         android:layout_marginTop="20dp" >
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="취소"
-            android:layout_marginRight="30dp"
-            android:textSize="30dp"
             android:onClick="mOnDiscard"
+            android:layout_marginRight="15dp"
             android:id="@+id/pickDiscard" />
 
-        <TextView
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="확인"
-            android:layout_marginRight="30dp"
-            android:textSize="30dp"
             android:onClick="mOnSubmit"
             android:id="@+id/pickSubmit" />
     </LinearLayout>
