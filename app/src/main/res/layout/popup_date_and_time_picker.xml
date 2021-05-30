@@ -20,14 +20,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:timePickerMode="spinner"
-        android:id="@+id/timePicker"
-        android:layout_marginBottom="20dp" />
+        android:id="@+id/timePicker" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/dateView"
+        android:text="선택한 날짜와 시간" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="right">
+        android:layout_gravity="right"
+        android:layout_marginTop="20dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,6 +51,6 @@
             android:layout_marginRight="30dp"
             android:textSize="30dp"
             android:id="@+id/pickSubmit" />
-
     </LinearLayout>
+
 </LinearLayout>

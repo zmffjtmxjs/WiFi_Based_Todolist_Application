@@ -5,15 +5,35 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.cookandroid.wifi_based_todolist.R;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class DuePickerActivity extends Activity {
+
+    TextView dateView;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd (EEE) aaa HH시MM분",
+            new Locale(Locale.KOREAN.getLanguage(), Locale.KOREAN.getCountry()));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_date_and_time_picker);
+
+        dateView = findViewById(R.id.dateView);
+
+        Intent intent = getIntent();
+        String pickedStrDate = intent.getStringExtra("Date");
+
+        dateView.setText(pickedStrDate);
+
+/*        try {
+            Date date = (Date) dateFormat.parse(pickedStrDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } */
     }
 
     //확인 버튼 클릭
