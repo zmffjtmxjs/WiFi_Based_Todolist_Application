@@ -56,11 +56,14 @@ public class DuePickerActivity extends Activity {
 
         //가져온 시간을 Calender타입으로 변환
         try {
-            pickDate.setTime(dateFormat.parse(pickedStrDate));
+            pickDate.setTime(transport.parse(pickedStrDate));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
+        /*TODO
+           날짜 및 시간 설정 다이얼로그 재호출 시 데이트 피커와 타임 피커의 시간이 기설정된 날짜 및 시간으로 기본값이 되도록한다.
+        *  (실제로 작동하는 데에 큰 문제는 없고 시간 관계상 다른 뷰 작업부터 진행) */
         //데이트 피커 초기값 지정
         datePicker.init(
                 pickDate.get(YEAR),

@@ -14,6 +14,12 @@ import com.cookandroid.wifi_based_todolist.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
+    /* TODO
+    *      DB 연동하여 할 일 목록(리스트)을 출력 */
+    /* TODO
+    *      출력된 리스트의 각 항목 왼쪽에 완료 체크 버튼을 생성 및 체크 시 평시에는 보이지 않음 설정  */
+    /* TODO (우선순위 : 하)
+           사용자가 원하는 조건(분류)를 선택하여 해당하는 할 일만 출력 */
 
     ImageView sideBarButton;
     DrawerLayout sideBarDrawer;
