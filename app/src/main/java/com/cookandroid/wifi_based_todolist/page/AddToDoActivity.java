@@ -76,4 +76,9 @@ public class AddToDoActivity extends Activity {
             }
         }
     }
+
+
+    public void groupSelectorPopup (View view) {
+
+    }
 }
