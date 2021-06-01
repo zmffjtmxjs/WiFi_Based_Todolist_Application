@@ -51,7 +51,7 @@ public class AddToDoActivity extends Activity {
     }
 
     //만료 날짜 또는 시간이 포함된 레이아웃을 터치 시 팝업을 띄운다.
-    public void mOnClickPopup (View view) {
+    public void dateTimePickerPopup (View view) {
         Intent intent = new Intent(this, DuePickerActivity.class);
         intent.putExtra("Date", date);
         startActivityForResult(intent, 1);
