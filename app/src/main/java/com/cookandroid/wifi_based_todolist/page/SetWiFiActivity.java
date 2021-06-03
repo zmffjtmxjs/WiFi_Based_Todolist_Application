@@ -15,7 +15,7 @@ import com.cookandroid.wifi_based_todolist.module.MacAddress;
 public class SetWiFiActivity extends Activity {
 
     //............toolbar 관련 요소
-    ImageView cancelAddToDo, saveAddToDo;
+    ImageView cancelSetWifi, saveSetWifi;
     TextView titleText;
 
     //............toolbar 외의 요소
@@ -34,15 +34,17 @@ public class SetWiFiActivity extends Activity {
         //.................toolbar 관련 코드
 
         //ImageView 등록
-        cancelAddToDo = (ImageView) findViewById(R.id.discard);
+        cancelSetWifi = (ImageView) findViewById(R.id.discard);
         //TextView 등록
         titleText = (TextView) findViewById(R.id.titleText);
+        //ImageView 등록
+        saveSetWifi = (ImageView) findViewById(R.id.save);
 
         //화면 제목 표시
         titleText.setText("WiFi 설정");
 
         //메인화면으로 돌아감
-        cancelAddToDo.setOnClickListener(new View.OnClickListener() {
+        cancelSetWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
