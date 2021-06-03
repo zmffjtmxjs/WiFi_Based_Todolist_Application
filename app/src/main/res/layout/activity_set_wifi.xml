@@ -53,15 +53,16 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/locationText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="위치 이름"
                 />
 
             <EditText
+                android:id="@+id/locationName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/locationName"
                 />
 
         </LinearLayout>

@@ -22,6 +22,7 @@ public class SetWiFiActivity extends Activity {
     Button selectWifi; // 현재 연결 된 wifi를 선택하는 버튼
     Button manageLocation; // 이전에 설정한 위치를 관리하는 팝업창을 띄우는 버튼
     TextView selectedMac; // 선택 된 MAC주소를 보여줍니다.
+    TextView locationText; // "위치 이름"을 입력해야 한다고 알려줄 텍스트 뷰
     EditText locationName; // 선택한 wifi에 대응되는 위치 이름을 입력하기 위한 EditText
 
     String macAddress; // 가져온 mac 주소입니다.
@@ -56,17 +57,22 @@ public class SetWiFiActivity extends Activity {
         selectWifi = (Button) findViewById(R.id.selectWifi);
         manageLocation = (Button) findViewById(R.id.manageLocation);
         selectedMac = (TextView) findViewById(R.id.selectedMac);
+        locationText = (TextView) findViewById(R.id.locationText);
         locationName = (EditText) findViewById(R.id.locationName);
+
+        locationText.setVisibility(View.INVISIBLE);
+        locationName.setVisibility(View.INVISIBLE);// 와이파이가 선택되기 전에는 숨깁니다.
 
         selectWifi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 macAddress = MacAddress.getMACAddress("wlan0"); // 현재 연결 된 wifi의 Mac주소를 가져 옵니다
                 Toast.makeText(getApplicationContext(), macAddress + "선택 됨", Toast.LENGTH_SHORT).show(); // Mac주소를 Toast로 띄워줍니다
                 selectedMac.setText("현재 선택 : " + macAddress); // 선택 된 Mac주소를 보여줍니다.
+
+                locationText.setVisibility(View.VISIBLE);
+                locationName.setVisibility(View.VISIBLE);// 와이파이가 선택되면 보입니다.
             }
         });
-        
-        
 
     }
 }
