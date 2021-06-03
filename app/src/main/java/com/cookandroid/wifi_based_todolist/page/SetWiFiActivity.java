@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,9 +20,9 @@ public class SetWiFiActivity extends Activity {
 
     //............toolbar 외의 요소
     Button selectWifi; // 현재 연결 된 wifi를 선택하는 버튼
-    Button manageLocation; // 이전에 설정한 장소를 관리하는 (팝업?화면? 뭐였었죠)창을 띄우는 버튼
-    Button locationName; // 선택한 wifi에 대응되는 위치 이름을 입력하기 위한 버튼
+    Button manageLocation; // 이전에 설정한 위치를 관리하는 팝업창을 띄우는 버튼
     TextView selectedMac; // 선택 된 MAC주소를 보여줍니다.
+    EditText locationName; // 선택한 wifi에 대응되는 위치 이름을 입력하기 위한 EditText
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -50,8 +51,8 @@ public class SetWiFiActivity extends Activity {
 
         selectWifi = (Button) findViewById(R.id.selectWifi);
         manageLocation = (Button) findViewById(R.id.manageLocation);
-        locationName = (Button) findViewById(R.id.locationName);
         selectedMac = (TextView) findViewById(R.id.selectedMac);
+        locationName = (EditText) findViewById(R.id.locationName);
 
         selectWifi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
