@@ -4,58 +4,59 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Todo {
-    private int Index;
-    private String Content;
-    private String WifiInfo;
-    private Date date;
-    private Time time;
+    private int id;
+    private String content;
+    private String wifiInfo;
+    private String date;
+    private String time;
+    private String memo;
 
 
-    public int getIndex() {
-        return Index;
+    public int getId() {
+        return id;
     }
 
-    public void setIndex(int index) {
-        Index = index;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getContent() {
-
-        return Content;
+        return content;
     }
 
     public void setContent(String content) {
-
-        Content = content;
+        this.content = content;
     }
 
     public String getWifiInfo() {
-
-        return WifiInfo;
+        return wifiInfo;
     }
 
     public void setWifiInfo(String wifiInfo) {
-
-        WifiInfo = wifiInfo;
+        this.wifiInfo = wifiInfo;
     }
 
-    public Date getDate() {
-
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Time getTime() {
-
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
-
+    public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }
