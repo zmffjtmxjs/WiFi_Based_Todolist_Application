@@ -24,6 +24,8 @@ public class SetWiFiActivity extends Activity {
     TextView selectedMac; // 선택 된 MAC주소를 보여줍니다.
     EditText locationName; // 선택한 wifi에 대응되는 위치 이름을 입력하기 위한 EditText
 
+    String macAddress; // 가져온 mac 주소입니다.
+
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -56,7 +58,7 @@ public class SetWiFiActivity extends Activity {
 
         selectWifi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                String macAddress = MacAddress.getMACAddress("wlan0"); // 현재 연결 된 wifi의 Mac주소를 가져 옵니다
+                macAddress = MacAddress.getMACAddress("wlan0"); // 현재 연결 된 wifi의 Mac주소를 가져 옵니다
                 Toast.makeText(getApplicationContext(), macAddress + "선택 됨", Toast.LENGTH_SHORT).show(); // Mac주소를 Toast로 띄워줍니다
                 selectedMac.setText("현재 선택 : " + macAddress); // 선택 된 Mac주소를 보여줍니다.
             }
