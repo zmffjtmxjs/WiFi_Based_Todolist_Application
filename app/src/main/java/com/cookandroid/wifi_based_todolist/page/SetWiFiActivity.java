@@ -36,10 +36,9 @@ public class SetWiFiActivity extends Activity {
 
         //ImageView 등록
         cancelSetWifi = (ImageView) findViewById(R.id.discard);
+        saveSetWifi = (ImageView) findViewById(R.id.save);
         //TextView 등록
         titleText = (TextView) findViewById(R.id.titleText);
-        //ImageView 등록
-        saveSetWifi = (ImageView) findViewById(R.id.save);
 
         //화면 제목 표시
         titleText.setText("WiFi 설정");
@@ -49,6 +48,26 @@ public class SetWiFiActivity extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        //Mac주소와 위치 이름이 입력되어 있다면 -> 저장작업 / 그렇지 않다면 -> 아무 동작도 하지 않음
+        saveSetWifi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(macAddress != null && locationName != null && !locationName.equals("") ){
+
+                    //macAddress와 locationName을 DB에 저장하는 코드 => junhyeok
+                    // [중복 체크 필요할 듯 / 중복 시 break;]
+
+
+                    selectedMac.setText(""); // 저장 성공할 경우. 첫 상태로 만듭니다.
+                    locationName.setText("");
+                    locationText.setVisibility(View.INVISIBLE);
+                    locationName.setVisibility(View.INVISIBLE);
+                    macAddress = null;
+                    Toast.makeText(getApplicationContext(), "저장 완료", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
