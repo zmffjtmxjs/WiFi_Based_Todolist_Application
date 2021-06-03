@@ -13,48 +13,51 @@
         android:id="@+id/toolBar"
         android:layout_alignParentTop="true" />
 
+    <!-- 임시 레이아웃. 수정 바랍니다. -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolBar"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/selectWifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="연결된 Wifi 선택" />
+
+            <Button
+                android:id="@+id/manageLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기존 위치 관리" />
+
+            <TextView
+                android:id="@+id/selectedMac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                ></TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="더미"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/locationName"
+                android:text="위치 이름"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 
