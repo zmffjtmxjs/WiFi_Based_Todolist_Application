@@ -1,6 +1,7 @@
 package com.cookandroid.wifi_based_todolist.page;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -93,5 +94,11 @@ public class SetWiFiActivity extends Activity {
             }
         });
 
+    }
+
+    //기존 위치 관리 버튼을 눌렀을 때
+    public void locationPopup (View view) {
+        Intent intent = new Intent(this, GroupSelector.class);
+        startActivityForResult(intent, 1);
     }
 }
