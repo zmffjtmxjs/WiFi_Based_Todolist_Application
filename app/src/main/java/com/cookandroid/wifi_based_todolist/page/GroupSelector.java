@@ -10,7 +10,7 @@ public class GroupSelector extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.popup_group_selector);
+        setContentView(R.layout.popup_pres);
 
 
     }
