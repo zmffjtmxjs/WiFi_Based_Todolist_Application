@@ -47,6 +47,9 @@ public class AddToDoActivity extends Activity {
         titleText = (TextView) findViewById(R.id.titleText);
         pickDueDate = (TextView) findViewById(R.id.pickedDue);
 
+        //화면 제목 표시
+        titleText.setText("할 일 편집");
+
         //화면 진입 시 만료 날짜 및 시간 기본값 설정
         pickDueDate.setText(date);
 
