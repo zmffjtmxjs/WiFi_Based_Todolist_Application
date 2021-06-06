@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <!-- 화면 상단 툴바 -->
     <include
         layout="@layout/toolbar_cancel_save"
         android:layout_width="match_parent"
@@ -13,7 +14,9 @@
         android:id="@+id/toolBar"
         android:layout_alignParentTop="true" />
 
-    <!-- 임시 레이아웃. 수정 바랍니다. -->
+    <!-- TODO 와이파이 설정 화면 디테일 : zmffjtmxjs -->
+    <!-- wifi 설정화면 본문 -->
+    <!-- wifi 선택 및 위치 설정 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
