@@ -1,6 +1,6 @@
 package com.cookandroid.wifi_based_todolist.DB.DTO;
 
-public class WIfi {
+public class Wifi {
     private String WifiMac;
     private String WifiInfo;
 

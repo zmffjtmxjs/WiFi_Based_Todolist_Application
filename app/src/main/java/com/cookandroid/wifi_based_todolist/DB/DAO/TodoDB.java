@@ -8,15 +8,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
-import com.cookandroid.wifi_based_todolist.DB.DTO.TodoItem;
 
 import java.util.ArrayList;
 
-public class DBHelper extends SQLiteOpenHelper {
+public class TodoDB extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "Todo.db";
 
-    public DBHelper(@Nullable Context context) {
+    public TodoDB(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -42,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
             while (cursor.moveToNext()) {
                 int id = cursor.getInt(cursor.getColumnIndex("id"));
                 String content = cursor.getString(cursor.getColumnIndex("content"));
-                String wifiINfo = cursor.getString(cursor.getColumnIndex("wifiInfo"));
+                String wifiInfo = cursor.getString(cursor.getColumnIndex("wifiInfo"));
                 String date = cursor.getString(cursor.getColumnIndex("date"));
                 String time = cursor.getString(cursor.getColumnIndex("time"));
                 String memo = cursor.getString(cursor.getColumnIndex("memo"));
@@ -50,7 +49,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 Todo todo = new Todo();
                 todo.setId(id);
                 todo.setContent(content);
-                todo.setWifiInfo(wifiINfo);
+                todo.setWifiInfo(wifiInfo);
                 todo.setDate(date);
                 todo.setTime(time);
                 todo.setMemo(memo);
@@ -65,22 +64,20 @@ public class DBHelper extends SQLiteOpenHelper {
     //여기까지 06.03 수정완료
 
     //INSERT 문
-    public void InsertTodo(String _title, String _content, String _writeDate){
+    public void InsertTodo(int id, String content, String wifiInfo, String date, String time, String memo){
         SQLiteDatabase db = getWritableDatabase();//쓰기가 가능한
-//        db.execSQL("INSERT INTO TodoList (title, content, writeDate) VALUES('"+_title +"','"+_content +"','"+_writeDate +"');");//물음표 순서대로 매개변수의 값이 들어감
-      db.execSQL("INSERT INTO TodoList (title, content, writeDate) VALUES(?,?,?);");
+        db.execSQL("INSERT INTO TodoList (content, wifiInfo, date, time, memo) VALUES(?,?,?,?,?);");
     }
 
     // UPDATE 문
-    public void UpdateTodo(String _title, String _content, String _writeDate, String _beforeDate){
+    public void UpdateTodo(String content, String wifiInfo, String date, String time, String memo){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE TodoList SET title = '"+_title +"', content = '"+_content +"', writeDate = '"+_writeDate +"' WHERE writeDate = '"+_beforeDate +"'");//key값으로 조건을 지정 id로도 가능
-//      db.execSQL("UPDATE TodoList SET title = ?, content = ?, writeDate = ? where id = ?");
+        db.execSQL("UPDATE TodoList SET content = ?, wifiInfo = ?, date = ?, time = ?, memo = ? where id = ?");
     }
 
     //DELETE 문
-    public void DeleteTodo(String _beforeDate){
+    public void DeleteTodo(int id){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM TodoList WHERE writeDate = ?");
+        db.execSQL("DELETE FROM TodoList WHERE id = ?");
     }
 }
