@@ -39,7 +39,7 @@
                 android:text="기존 위치 관리" />
 
             <TextView
-                android:id="@+id/selectedMac"
+                android:id="@+id/selectedIP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
