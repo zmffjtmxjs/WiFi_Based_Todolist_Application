@@ -16,11 +16,14 @@ import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.module.IPAddress;
 import com.cookandroid.wifi_based_todolist.popup.GroupSelector;
 
+import java.util.ArrayList;
+
 public class SetWiFiActivity extends Activity {
 
-    //DB DAO
-    private WifiDB wifidb = new WifiDB(getApplicationContext());
-    private Wifi wifi = new Wifi();
+    //DB
+    private WifiDB wifidb;
+    private Wifi wifi;
+    private ArrayList<Wifi> wifis;
 
     //............toolbar 관련 요소
     ImageView cancelSetWifi, saveSetWifi;
@@ -40,6 +43,9 @@ public class SetWiFiActivity extends Activity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_set_wifi);
 
+        wifidb = new WifiDB(this);
+        wifis = new ArrayList<>();
+
         new Thread(){//네트워크 작업을 위해서 스레드 작업
             public void run(){
                 try {
@@ -50,13 +56,18 @@ public class SetWiFiActivity extends Activity {
             }
         }.start();
 
-        //.................toolbar 관련 코드
-
         //ImageView 등록
         cancelSetWifi = (ImageView) findViewById(R.id.discard);
         saveSetWifi = (ImageView) findViewById(R.id.save);
         //TextView 등록
         titleText = (TextView) findViewById(R.id.titleText);
+        selectWifi = (Button) findViewById(R.id.selectWifi);
+        manageLocation = (Button) findViewById(R.id.manageLocation);
+        selectedIP = (TextView) findViewById(R.id.selectedIP);
+        locationText = (TextView) findViewById(R.id.locationText);
+        locationName = (EditText) findViewById(R.id.locationName);
+
+        //.................toolbar 관련 코드
 
         //화면 제목 표시
         titleText.setText("WiFi 설정");
@@ -80,6 +91,7 @@ public class SetWiFiActivity extends Activity {
 
                 //insert UI
 
+
 //                    for( Wifi wifi : wifidb.getWifiList()) {
 //                        Toast.makeText(getApplicationContext(),"맥주소 " +wifi.getWifiMac()+"위치 "+ wifi.getWifiInfo(), Toast.LENGTH_SHORT).show();
 //                    }
@@ -100,12 +112,6 @@ public class SetWiFiActivity extends Activity {
         });
 
         //..................toolbar 이외의 기능 코드
-
-        selectWifi = (Button) findViewById(R.id.selectWifi);
-        manageLocation = (Button) findViewById(R.id.manageLocation);
-        selectedIP = (TextView) findViewById(R.id.selectedIP);
-        locationText = (TextView) findViewById(R.id.locationText);
-        locationName = (EditText) findViewById(R.id.locationName);
 
         locationText.setVisibility(View.INVISIBLE);
         locationName.setVisibility(View.INVISIBLE);// 와이파이가 선택되기 전에는 숨깁니다.

@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
+import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
+import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     //DB부분 추가
     private TodoDB todoDB;
     private ArrayList<Todo> todos;
+    private WifiDB wifiDB;
+    private ArrayList<Wifi> wifis;
 
 
     @Override
@@ -43,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
         //DB부분 추가
         todoDB = new TodoDB(this);
-        todos = new ArrayList<>();
+        todos = todoDB.getTodoList();
+        wifiDB = new WifiDB(this);
+        wifis = wifiDB.getWifiList();
 
         //ImageView 등록
         sideBarButton = (ImageView) findViewById(R.id.sideBarButton);
@@ -81,5 +87,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+//    private void loadRecentDB() {
+//        //저장된 DB가져옴
+//        todos = todoDB.getTodoList();
+//        if (mAdapter == null) {
+//            mAdapter = new CustomAdapter(mtodoItems, this);
+//            mrv_todo.setHasFixedSize(true);
+//            mrv_todo.setAdapter(mAdapter);
+//
+//        }
+//    }
 
 }

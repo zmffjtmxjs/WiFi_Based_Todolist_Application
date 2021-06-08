@@ -22,7 +22,7 @@ public class WifiDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {//DB가 생성됬을 때 호출
-        db.execSQL("CREATE TABLE IF NOT EXISTS WifiInfo (wifiMac String PRIMARY KEY , wifiInfo TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS WifiInfo (wifiMac String PRIMARY KEY , wifiInfo TEXT NOT NULL);");
     }
 
     @Override
@@ -53,7 +53,7 @@ public class WifiDB extends SQLiteOpenHelper {
 
         return wifis;
     }
-    
+
     //여기까지 06.08 수정완료
 
     //INSERT 문

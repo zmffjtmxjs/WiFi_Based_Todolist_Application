@@ -21,7 +21,7 @@ public class TodoDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {//DB가 생성됬을 때 호출
-        db.execSQL("CREATE TABLE IF NOT EXISTS TodoList (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, memo TEXT, wifiInfo TEXT NOT NULL)");//id는 pk, 자동으로 하나씩 증가
+        db.execSQL("CREATE TABLE IF NOT EXISTS TodoList (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, memo TEXT, wifiInfo TEXT NOT NULL);");//id는 pk, 자동으로 하나씩 증가
     }
 
     @Override

@@ -8,6 +8,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
+import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.popup.DuePickerActivity;
 
@@ -35,10 +37,19 @@ public class AddToDoActivity extends Activity {
     String date = dateFormat.format(cal.getTime());
     String newPickDate;
 
+    //Data
+    Todo todo;
+    TodoDB todoDB;
+
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_add_todo);
+
+        //DB
+        todo = new Todo();
+        todoDB = new TodoDB(this);
+        //아직 todo 저장이 없음
 
         //ImageView 등록
         cancelAddToDo = (ImageView) findViewById(R.id.discard);
