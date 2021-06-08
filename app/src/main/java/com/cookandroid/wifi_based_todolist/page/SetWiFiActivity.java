@@ -14,6 +14,10 @@ import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.module.MacAddress;
 import com.cookandroid.wifi_based_todolist.popup.GroupSelector;
 
+import org.w3c.dom.Text;
+
+import java.text.ParseException;
+
 public class SetWiFiActivity extends Activity {
 
     //............toolbar 관련 요소
@@ -106,5 +110,16 @@ public class SetWiFiActivity extends Activity {
     public void locationPopup (View view) {
         Intent intent = new Intent(this, GroupSelector.class);
         startActivityForResult(intent, 1);
+    }
+
+    //와이파이 선택 팝업에서 리스트 아이템을 선택했을 경우
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                //선택한 리스트 뷰의 id값을 가져옴 (DB에 맞게 변경필요)
+                String getData = data.getStringExtra("id");
+            }
+        }
     }
 }
