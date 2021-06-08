@@ -118,6 +118,7 @@ public class SetWiFiActivity extends Activity {
         if(requestCode == 1) {
             if(resultCode == RESULT_OK) {
                 //선택한 리스트 뷰의 id값을 가져옴 (DB에 맞게 변경필요)
+                //TODO 와이파이 이름 & IP 보내기
                 String getData = data.getStringExtra("id");
             }
         }
