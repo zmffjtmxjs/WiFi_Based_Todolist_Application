@@ -21,11 +21,11 @@ public class TodoDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {//DB가 생성됬을 때 호출
-        db.execSQL("CREATE TABLE IF NOT EXISTS TodoList (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, memo TEXT, wifiInfo TEXT NOT NULL)");//id는 pk값, 자동으로 하나씩 증가 / title은 text 데이터 타입 사용(string)
+        db.execSQL("CREATE TABLE IF NOT EXISTS TodoList (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, memo TEXT, wifiInfo TEXT NOT NULL)");//id는 pk, 자동으로 하나씩 증가
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oidVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onCreate(db);
     }
 
@@ -34,7 +34,7 @@ public class TodoDB extends SQLiteOpenHelper {
         ArrayList<Todo> todos = new ArrayList<>();
 
         SQLiteDatabase db = getReadableDatabase();//읽기 가능한
-        Cursor cursor = db.rawQuery("SELECT * FROM TodoList ORDER BY writeDATE DESC", null);//가르키는 행위
+        Cursor cursor = db.rawQuery("SELECT * FROM TodoList ORDER BY date DESC", null);//가르키는 행위
 
         if (cursor.getCount() != 0) {
             //조회한 데이터가 있는 경우
@@ -53,7 +53,7 @@ public class TodoDB extends SQLiteOpenHelper {
                 todo.setDate(date);
                 todo.setTime(time);
                 todo.setMemo(memo);
-                todos.add((todo));
+                todos.add(todo);
             }
         }
         cursor.close();
@@ -64,7 +64,7 @@ public class TodoDB extends SQLiteOpenHelper {
     //여기까지 06.03 수정완료
 
     //INSERT 문
-    public void InsertTodo(int id, String content, String wifiInfo, String date, String time, String memo){
+    public void InsertTodo(String content, String wifiInfo, String date, String time, String memo){
         SQLiteDatabase db = getWritableDatabase();//쓰기가 가능한
         db.execSQL("INSERT INTO TodoList (content, wifiInfo, date, time, memo) VALUES(?,?,?,?,?);");
     }

@@ -46,7 +46,7 @@ public class WifiDB extends SQLiteOpenHelper {
                 Wifi wifi = new Wifi();
                 wifi.setWifiInfo(wifiMac);
                 wifi.setWifiInfo(wifiInfo);
-                wifis.add((wifi));
+                wifis.add(wifi);
             }
         }
         cursor.close();

@@ -15,10 +15,13 @@ import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.module.MacAddress;
 
+import java.util.ArrayList;
+
 public class SetWiFiActivity extends Activity {
 
     //DB DAO
-    private WifiDB wifidb;
+    private WifiDB wifidb = new WifiDB(getApplicationContext());
+    private  Wifi wifi = new Wifi();
 
     //............toolbar 관련 요소
     ImageView cancelSetWifi, saveSetWifi;
@@ -32,6 +35,7 @@ public class SetWiFiActivity extends Activity {
     EditText locationName; // 선택한 wifi에 대응되는 위치 이름을 입력하기 위한 EditText
 
     String macAddress; // 가져온 mac 주소입니다.
+
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -61,23 +65,29 @@ public class SetWiFiActivity extends Activity {
         saveSetWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //insert DB
+                wifi.setWifiMac(macAddress);
+                wifi.setWifiInfo(locationName.getText().toString());
+                wifidb.InsertTodo(macAddress, locationName.getText().toString());
+
+                //insert UI
+
+//
+//                    for( Wifi wifi : wifidb.getWifiList()) {
+//                        Toast.makeText(getApplicationContext(),"맥주소 " +wifi.getWifiMac()+"위치 "+ wifi.getWifiInfo(), Toast.LENGTH_SHORT).show();
+//                    }
+
+
                 if(macAddress != null && locationName != null && !locationName.equals("") ){
 
                     //macAddress와 locationName을 DB에 저장하는 코드 => junhyeok
                     // [중복 체크 필요할 듯 / 중복 시 break;]
-
 
                     selectedMac.setText(""); // 저장 성공할 경우. 첫 상태로 만듭니다.
                     locationName.setText("");
                     locationText.setVisibility(View.INVISIBLE);
                     locationName.setVisibility(View.INVISIBLE);
                     macAddress = null;
-
-                    wifidb.InsertTodo(selectedMac.getText().toString(), locationName.getText().toString());
-
-                    Wifi db = new Wifi();
-                    db.setWifiMac(selectedMac.getText().toString());
-                    db.setWifiInfo(locationName.getText().toString());
 
                     Toast.makeText(getApplicationContext(), "저장 완료", Toast.LENGTH_SHORT).show();
                 }

@@ -10,8 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
+import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     /* TODO
@@ -26,10 +31,19 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton addToDoButton;
     Button SetWiFiButton;
 
+    //DB부분 추가
+    private TodoDB todoDB;
+    private ArrayList<Todo> todos;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //DB부분 추가
+        todoDB = new TodoDB(this);
+        todos = new ArrayList<>();
 
         //ImageView 등록
         sideBarButton = (ImageView) findViewById(R.id.sideBarButton);
@@ -67,4 +81,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 }
