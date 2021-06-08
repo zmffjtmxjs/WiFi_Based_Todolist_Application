@@ -23,6 +23,7 @@ public class SetWiFiActivity extends Activity {
     //............toolbar 외의 요소
     Button selectWifi; // 현재 연결 된 wifi를 선택하는 버튼
     Button manageLocation; // 이전에 설정한 위치를 관리하는 팝업창을 띄우는 버튼
+    Button deleteWifi;  //와이파이 삭제 버튼      (추가 zmffjtmxjs)
     TextView selectedMac; // 선택 된 MAC주소를 보여줍니다.
     TextView locationText; // "위치 이름"을 입력해야 한다고 알려줄 텍스트 뷰
     EditText locationName; // 선택한 wifi에 대응되는 위치 이름을 입력하기 위한 EditText
@@ -80,9 +81,12 @@ public class SetWiFiActivity extends Activity {
         selectedMac = (TextView) findViewById(R.id.selectedMac);
         locationText = (TextView) findViewById(R.id.locationText);
         locationName = (EditText) findViewById(R.id.locationName);
+        deleteWifi = (Button) findViewById(R.id.deleteWiFi);
+
 
         locationText.setVisibility(View.INVISIBLE);
         locationName.setVisibility(View.INVISIBLE);// 와이파이가 선택되기 전에는 숨깁니다.
+        deleteWifi.setVisibility(View.INVISIBLE);
 
         selectWifi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -92,6 +96,7 @@ public class SetWiFiActivity extends Activity {
 
                 locationText.setVisibility(View.VISIBLE);
                 locationName.setVisibility(View.VISIBLE);// 와이파이가 선택되면 보입니다.
+                deleteWifi.setVisibility(View.VISIBLE);
             }
         });
 
