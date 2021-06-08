@@ -85,28 +85,24 @@ public class SetWiFiActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //insert DB
-                wifi.setWifiMac(IP);
-                wifi.setWifiInfo(locationName.getText().toString());
+//                wifi.setWifiMac(IP);
+//                wifi.setWifiInfo(locationName.getText().toString());
                 wifidb.InsertTodo(IP, locationName.getText().toString());
 
-                //insert UI
-
-
-//                    for( Wifi wifi : wifidb.getWifiList()) {
-//                        Toast.makeText(getApplicationContext(),"맥주소 " +wifi.getWifiMac()+"위치 "+ wifi.getWifiInfo(), Toast.LENGTH_SHORT).show();
-//                    }
-
-
                 if(IP != null && locationName != null && !locationName.equals("") ){
-
-                    //IP와 locationName을 DB에 저장하는 코드 => junhyeok
-                    // [중복 체크 필요할 듯 / 중복 시 break;]
-
-
+                    if(IP == wifi.getWifiMac()) {
+                        Toast.makeText(getApplicationContext(), "이미 저장된 wifi입니다.", Toast.LENGTH_SHORT).show();
+                    }
                     Intent intent = getIntent();// 저장 성공할 경우. 첫 상태로 만듭니다.
                     finish();
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "저장 완료", Toast.LENGTH_SHORT).show();
+                    System.out.println(IP);
+                    System.out.println(locationName);
+
+                        //IP와 locationName을 DB에 저장하는 코드 => junhyeok
+                        // [중복 체크 필요할 듯 / 중복 시 break;]
+
                 }
             }
         });
