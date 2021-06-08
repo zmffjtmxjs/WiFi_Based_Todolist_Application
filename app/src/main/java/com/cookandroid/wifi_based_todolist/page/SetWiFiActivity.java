@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.module.MacAddress;
+import com.cookandroid.wifi_based_todolist.popup.GroupSelector;
 
 public class SetWiFiActivity extends Activity {
 

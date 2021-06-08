@@ -9,11 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cookandroid.wifi_based_todolist.R;
+import com.cookandroid.wifi_based_todolist.popup.DuePickerActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class AddToDoActivity extends Activity {
