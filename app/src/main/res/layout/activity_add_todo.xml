@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/pickedGroup"
             android:text="표시 위치 선택"
-            android:onClick="groupListPopup" />
+            android:onClick="groupSelectorPopup" />
 
     </LinearLayout>
 
