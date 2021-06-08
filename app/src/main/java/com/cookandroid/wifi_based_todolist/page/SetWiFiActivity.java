@@ -10,10 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
+import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.module.MacAddress;
 
 public class SetWiFiActivity extends Activity {
+
+    //DB DAO
+    private WifiDB wifidb;
 
     //............toolbar 관련 요소
     ImageView cancelSetWifi, saveSetWifi;
@@ -67,6 +72,13 @@ public class SetWiFiActivity extends Activity {
                     locationText.setVisibility(View.INVISIBLE);
                     locationName.setVisibility(View.INVISIBLE);
                     macAddress = null;
+
+                    wifidb.InsertTodo(selectedMac.getText().toString(), locationName.getText().toString());
+
+                    Wifi db = new Wifi();
+                    db.setWifiMac(selectedMac.getText().toString());
+                    db.setWifiInfo(locationName.getText().toString());
+
                     Toast.makeText(getApplicationContext(), "저장 완료", Toast.LENGTH_SHORT).show();
                 }
             }
