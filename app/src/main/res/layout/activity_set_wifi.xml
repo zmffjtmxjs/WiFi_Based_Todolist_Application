@@ -9,19 +9,15 @@
     <!-- 화면 상단 툴바 -->
     <include
         layout="@layout/toolbar_cancel_save"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
         android:id="@+id/toolBar"
-        android:layout_alignParentTop="true" />
+        style="@style/toolbar"/>
 
     <!-- TODO 와이파이 설정 화면 디테일 : zmffjtmxjs -->
-    <!-- wifi 설정화면 본문 -->
+    <!-- 툴바 아래 구역(본문) -->
     <!-- wifi 선택 및 위치 설정 -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_below="@+id/toolBar"
-        android:orientation="vertical">
+        style="@style/mainDivision">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,10 +39,9 @@
                 android:text="기존 위치 관리" />
 
             <TextView
-                android:id="@+id/selectedMac"
+                android:id="@+id/selectedIP"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                ></TextView>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

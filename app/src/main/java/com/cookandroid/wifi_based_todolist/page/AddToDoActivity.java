@@ -9,11 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cookandroid.wifi_based_todolist.R;
+import com.cookandroid.wifi_based_todolist.popup.DuePickerActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class AddToDoActivity extends Activity {
@@ -38,7 +38,6 @@ public class AddToDoActivity extends Activity {
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_add_todo);
 
         //ImageView 등록
@@ -46,6 +45,9 @@ public class AddToDoActivity extends Activity {
         //TextView 등록
         titleText = (TextView) findViewById(R.id.titleText);
         pickDueDate = (TextView) findViewById(R.id.pickedDue);
+
+        //화면 제목 표시
+        titleText.setText("할 일 편집");
 
         //화면 진입 시 만료 날짜 및 시간 기본값 설정
         pickDueDate.setText(date);

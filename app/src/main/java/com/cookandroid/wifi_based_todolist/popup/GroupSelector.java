@@ -1,4 +1,4 @@
-package com.cookandroid.wifi_based_todolist.page;
+package com.cookandroid.wifi_based_todolist.popup;
 
 import android.app.Activity;
 import android.content.Context;
