@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
+import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
@@ -33,6 +34,7 @@ public class GroupSelector extends Activity {
     TodoDB tododb;
     ArrayList<Wifi> wifis;
     Wifi wifi;
+    WifiDB wifidb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +70,9 @@ public class GroupSelector extends Activity {
 //            }
 //        }
 
-        tododb = new TodoDB(this);
-        for(int i=0; i<tododb.getTodoList().size();i++){
-            preWifi.add(tododb.getTodoList().get(i).getWifiInfo());
+        wifidb = new WifiDB(this);
+        for(int i=0; i<wifidb.getWifiList().size();i++){
+            preWifi.add(wifidb.getWifiList().get(i).getWifiInfo());
         }
 //        for (int i = 0; i < 50; i++) {
 //            //리스트에 원소 추가 (공간의 한계는 없음)
