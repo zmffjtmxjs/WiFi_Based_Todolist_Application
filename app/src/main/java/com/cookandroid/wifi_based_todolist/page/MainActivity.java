@@ -67,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
         todoDB = new TodoDB(this);
 
         //todos = todoDB.getTodoList();
-        todos = new ArrayList<Todo>();
-        todos.add(new Todo("임시"));
+        todos = todoDB.getTodoList();
 
         wifiDB = new WifiDB(this);
         wifis = wifiDB.getWifiList();

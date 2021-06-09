@@ -11,10 +11,6 @@ public class Todo {
     private String time;
     private String memo;
 
-    public Todo(String s){
-        content = s;
-    }
-
 
     public int getId() {
         return id;

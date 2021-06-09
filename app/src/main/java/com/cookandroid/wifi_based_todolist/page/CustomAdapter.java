@@ -28,9 +28,8 @@ public class CustomAdapter extends BaseAdapter {
 
     public CustomAdapter(ArrayList<Todo> todo, Context context) {
         this.context = context;
-        //todoDB = new TodoDB(context);
-        this.todos = todo;
-        //this.todos = todoDB.getTodoList();
+        todoDB = new TodoDB(context);
+        this.todos = todoDB.getTodoList();
     }
 
     @Override
@@ -46,7 +45,6 @@ public class CustomAdapter extends BaseAdapter {
         CheckBox checkBox = view.findViewById(R.id.checkBox);
         TextView textView = view.findViewById(R.id.tv_content);
         textView.setText(item.getContent());
-
         return view;
     }
 

@@ -56,8 +56,6 @@ public class AddToDoActivity extends Activity {
         setContentView(R.layout.activity_add_todo);
 
         //DB
-        todo = new Todo("임시");
-        todoDB = new TodoDB(this);
         //아직 todo 저장이 없음
         todo = new Todo();
         tododb = new TodoDB(this);
@@ -102,7 +100,7 @@ public class AddToDoActivity extends Activity {
                 String getToDoNote = String.valueOf(toDoNote.getText());
                 String getToDoGroup = String.valueOf(toDoGroup.getText());
 
-                todo = new Todo("임시");
+                todo = new Todo();
                 todo.setContent(getTitle);
                 todo.setDate(getDate);
                 todo.setTime(getTime);
@@ -111,7 +109,7 @@ public class AddToDoActivity extends Activity {
                 todos.add(todo);
 
 
-                tododb.InsertTodo(getTitle,getDate,getTime,getToDoNote,getToDoNote);
+                tododb.InsertTodo(getTitle,getDate,getTime,getToDoNote,getToDoGroup);
 
 
 
