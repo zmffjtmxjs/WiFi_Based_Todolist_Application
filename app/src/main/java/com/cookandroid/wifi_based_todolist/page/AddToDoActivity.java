@@ -10,13 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
+import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
+import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.popup.DuePickerActivity;
 import com.cookandroid.wifi_based_todolist.popup.GroupSelector;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -42,7 +45,10 @@ public class AddToDoActivity extends Activity {
 
     //Data
     Todo todo;
-    TodoDB todoDB;
+    TodoDB tododb;
+    ArrayList<Todo> todos;
+    Wifi wifi;
+    WifiDB wifidb;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -53,6 +59,12 @@ public class AddToDoActivity extends Activity {
         todo = new Todo("임시");
         todoDB = new TodoDB(this);
         //아직 todo 저장이 없음
+        todo = new Todo();
+        tododb = new TodoDB(this);
+        todos = new ArrayList<>();
+
+        wifi = new Wifi();
+        wifidb = new WifiDB(this);
 
         //ImageView 등록
         cancelAddToDo = (ImageView) findViewById(R.id.discard);
@@ -92,6 +104,16 @@ public class AddToDoActivity extends Activity {
 
                 todo = new Todo("임시");
                 todo.setContent(getTitle);
+                todo.setDate(getDate);
+                todo.setTime(getTime);
+                todo.setMemo(getToDoNote);
+                todo.setWifiInfo(getToDoGroup);
+                todos.add(todo);
+
+
+                tododb.InsertTodo(getTitle,getDate,getTime,getToDoNote,getToDoNote);
+
+
 
                 Log.v("제목", getTitle);
                 Log.v("날짜", getDate);

@@ -64,9 +64,9 @@ public class TodoDB extends SQLiteOpenHelper {
     //여기까지 06.03 수정완료
 
     //INSERT 문
-    public void InsertTodo(String content, String wifiInfo, String date, String time, String memo){
+    public void InsertTodo(String content, String date, String time, String memo, String wifiInfo){
         SQLiteDatabase db = getWritableDatabase();//쓰기가 가능한
-        db.execSQL("INSERT INTO TodoList (content, wifiInfo, date, time, memo) VALUES('"+content +"','"+wifiInfo +"','"+date +"','"+time +"','"+memo +"');");
+        db.execSQL("INSERT INTO TodoList (content, date, time, memo, wifiInfo) VALUES('"+content +"','"+date +"','"+time +"','"+memo +"','"+wifiInfo +"');");
     }
 
     // UPDATE 문
