@@ -79,12 +79,18 @@ public class SetWiFiActivity extends Activity {
                 wifi.setWifiMac(IP);
                 wifi.setWifiInfo(locationName.getText().toString());
                 wifis.add(wifi);
-                wifidb.InsertTodo(IP, locationName.getText().toString());
+
 
                 if(IP != null && locationName != null && !locationName.equals("") ){
-//                    if(IP == wifi.getWifiMac()) {
-//                        Toast.makeText(getApplicationContext(), "이미 저장된 wifi입니다.", Toast.LENGTH_SHORT).show();
-//                    }
+//                    System.out.println("결과는 : "+wifidb.getWifiList().isEmpty());
+                    for(Wifi wifi : wifidb.getWifiList()){
+                        if(IP.equals(wifi.getWifiMac())) {
+                            Toast.makeText(getApplicationContext(), "이미 저장된 wifi입니다.", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
+
+                    wifidb.InsertTodo(IP, locationName.getText().toString());
 
                     // 저장 성공할 경우. 첫 상태로 만듭니다.
                     IP = null;
