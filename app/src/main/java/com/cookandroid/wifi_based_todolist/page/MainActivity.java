@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,14 +47,10 @@ public class MainActivity extends AppCompatActivity {
     private WifiDB wifiDB;
     private ArrayList<Wifi> wifis;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        todoDB = new TodoDB(this);
-//        todos = new ArrayList<>();
 
         //백그라운드 서비스 계속 작동시키기
         Intent intent = new Intent(
@@ -61,20 +58,16 @@ public class MainActivity extends AppCompatActivity {
                 BackgroundService.class);
         startService(intent);// 백그라운드 서비스 "BackgroundService"를 시작합니다. 일단 어플이 시작되면 멈추지 않습니다.onStartCommand()가 실행됩니다.
 
-//        todoDB = new TodoDB(this);
-//        todos = new ArrayList<>();
-
         //DB부분 추가
         todoDB = new TodoDB(this);
 
-        //todos = todoDB.getTodoList();
         todos = todoDB.getTodoList();
 
         wifiDB = new WifiDB(this);
         wifis = wifiDB.getWifiList();
 
         customAdapter = new CustomAdapter(todos,this);
-//        loadReceontDB();
+
 
         //RecyclerView 등록 --6맨--
         rv_todo = findViewById(R.id.rv_todo);
@@ -96,23 +89,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sideBarDrawer.openDrawer(Gravity.LEFT);
-            }
-        });
-
-        //리스트 내의 할일을 터치 했을 시
-        rv_todo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int toDoId = Integer.parseInt(String.valueOf(parent.getItemAtPosition(position)));
-
-                Intent intent = new Intent(getApplicationContext(), AddToDoActivity.class);
-                intent.putExtra("Mode", 1);
-                //할일의 인덱스 번호를 보냄
-                intent.putExtra("toDoId", toDoId);
-
-                startActivity(intent);
-
-
             }
         });
 
@@ -145,14 +121,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-//    private void loadRecentDB() {
-//        //저장된 DB가져옴
-//        todos = todoDB.getTodoList();
-//        if (mAdapter == null) {
-//            mAdapter = new CustomAdapter(mtodoItems, this);
-//            mrv_todo.setHasFixedSize(true);
-//            mrv_todo.setAdapter(mAdapter);
-//        }
-//    }
-
 }

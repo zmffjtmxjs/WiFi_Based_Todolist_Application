@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
@@ -67,9 +68,10 @@ public class AddToDoActivity extends Activity {
         //할일 추가를 위해 로드 된건지 디테일 화면을 위해 로드 된건지 확인
         Intent intent = new Intent();
         try {
-            mode = Integer.parseInt(intent.getStringExtra("Mode"));
-            toDoId = Integer.parseInt((intent.getStringExtra("toDoId")));
+            mode = Integer.parseInt(intent.getStringExtra("mode"));
+
         } catch (Exception e) {
+            Log.e("에러", String.valueOf(e));
             mode = 0;
         }
 
