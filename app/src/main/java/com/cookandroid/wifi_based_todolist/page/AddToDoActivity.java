@@ -108,7 +108,7 @@ public class AddToDoActivity extends Activity {
                 todos.add(todo);
 
 
-                tododb.InsertTodo(getTitle,getDate,getTime,getToDoNote,getToDoNote);
+                tododb.InsertTodo(getTitle,getDate,getTime,getToDoNote,getToDoGroup);
 
 
 
