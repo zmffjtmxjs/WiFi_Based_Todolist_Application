@@ -66,18 +66,18 @@ public class TodoDB extends SQLiteOpenHelper {
     //INSERT 문
     public void InsertTodo(String content, String wifiInfo, String date, String time, String memo){
         SQLiteDatabase db = getWritableDatabase();//쓰기가 가능한
-        db.execSQL("INSERT INTO TodoList (content, wifiInfo, date, time, memo) VALUES(?,?,?,?,?);");
+        db.execSQL("INSERT INTO TodoList (content, wifiInfo, date, time, memo) VALUES('"+content +"','"+wifiInfo +"','"+date +"','"+time +"','"+memo +"');");
     }
 
     // UPDATE 문
-    public void UpdateTodo(String content, String wifiInfo, String date, String time, String memo){
+    public void UpdateTodo(String content, String wifiInfo, String date, String time, String memo, int id){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE TodoList SET content = ?, wifiInfo = ?, date = ?, time = ?, memo = ? where id = ?");
+        db.execSQL("UPDATE TodoList SET content = '"+content +"', wifiInfo = '"+wifiInfo +"', date = '"+date +"', time = '"+time +"', memo = '"+memo +"' where id = '"+id +"'");
     }
 
     //DELETE 문
     public void DeleteTodo(int id){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM TodoList WHERE id = ?");
+        db.execSQL("DELETE FROM TodoList WHERE id = '"+id +"'");
     }
 }
