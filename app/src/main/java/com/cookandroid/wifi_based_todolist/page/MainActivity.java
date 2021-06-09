@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -95,6 +96,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sideBarDrawer.openDrawer(Gravity.LEFT);
+            }
+        });
+
+        //리스트 내의 할일을 터치 했을 시
+        rv_todo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int toDoId = Integer.parseInt(String.valueOf(parent.getItemAtPosition(position)));
+
+                Intent intent = new Intent(getApplicationContext(), AddToDoActivity.class);
+                intent.putExtra("Mode", 1);
+                //할일의 인덱스 번호를 보냄
+                intent.putExtra("toDoId", toDoId);
+
+                startActivity(intent);
+
+
             }
         });
 

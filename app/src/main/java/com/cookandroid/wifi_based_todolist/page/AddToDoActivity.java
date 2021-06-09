@@ -1,10 +1,13 @@
 package com.cookandroid.wifi_based_todolist.page;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +32,7 @@ public class AddToDoActivity extends Activity {
     ImageView cancelAddToDo, saveAddToDo;
     TextView titleText, pickDueDate, toDoGroup;
     EditText toDoTitle, toDoNote;
+    Button deleteToDo;
 
     final Calendar cal = Calendar.getInstance();
 
@@ -40,8 +44,13 @@ public class AddToDoActivity extends Activity {
     SimpleDateFormat transport = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     //초기값은 현재시간을 가져온다.
-    String date = dateFormat.format(cal.getTime());
+    String date;
     String newPickDate;
+
+    //할일 추가 또는 할일 디테일 여부 확인
+    Integer mode;
+    //할일 디테일 상태일 때 toDo의 인덱스 값 받는 변수
+    Integer toDoId;
 
     //Data
     Todo todo;
@@ -54,6 +63,15 @@ public class AddToDoActivity extends Activity {
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_add_todo);
+
+        //할일 추가를 위해 로드 된건지 디테일 화면을 위해 로드 된건지 확인
+        Intent intent = new Intent();
+        try {
+            mode = Integer.parseInt(intent.getStringExtra("Mode"));
+            toDoId = Integer.parseInt((intent.getStringExtra("toDoId")));
+        } catch (Exception e) {
+            mode = 0;
+        }
 
         //DB
         //아직 todo 저장이 없음
@@ -74,13 +92,30 @@ public class AddToDoActivity extends Activity {
         //EditText
         toDoTitle = (EditText) findViewById(R.id.ToDoTitle);
         toDoNote = (EditText) findViewById(R.id.ToDoNote);
+        //Button
+        deleteToDo = (Button) findViewById(R.id.deleteBtn);
 
+        //디테일 화면 상태일 시 인덱스 변수(toDoId) 기반으로 데이터 베이스에서 정보를 가져오고 setText()적용
+        if (mode == 1) {
+            //화면 제목 표시
+            titleText.setText("할 일 편집");
 
-        //화면 제목 표시
-        titleText.setText("할 일 편집");
+            toDoTitle.setText("불러온 할일 제목");
+            //cal.setTime(transport.parse());           <==날짜 변수
+            toDoNote.setText("불러온 할일 메모");
+            toDoGroup.setText("불러온 할일 그룹");
+
+            deleteToDo.setVisibility(View.VISIBLE);
+        } else {
+            //화면 제목 표시
+            titleText.setText("할 일 추가");
+        }
 
         //화면 진입 시 만료 날짜 및 시간 기본값 설정
+        date = dateFormat.format(cal.getTime());
         pickDueDate.setText(date);
+
+
 
         //메인화면으로 돌아감
         cancelAddToDo.setOnClickListener(new View.OnClickListener() {
@@ -108,16 +143,28 @@ public class AddToDoActivity extends Activity {
                 todo.setWifiInfo(getToDoGroup);
                 todos.add(todo);
 
-
                 tododb.InsertTodo(getTitle,getDate,getTime,getToDoNote,getToDoGroup);
-
-
 
                 Log.v("제목", getTitle);
                 Log.v("날짜", getDate);
                 Log.v("시간", getTime);
                 Log.v("메모", getToDoNote);
                 Log.v("그룹", getToDoGroup);
+
+                if(mode == 0) {                     //할일 추가 버튼을 통해서 들어온 상태일때
+                    //TODO 할일 추가(INSERT문)
+                } else if(mode == 1) {              //리스트뷰 터치를 통해서 들어온 상태일때
+                    //TODO 할일 편집(UPDATE문)
+                    //toDoId   <== 디테일화면으로 표시된 할일의 인덱스번호 변수
+                }
+            }
+        });
+
+        //삭제버튼 클릭 시 삭제 확인을 위해 얼럿다이얼로그를 출력
+        deleteToDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteAlert();
             }
         });
     }
@@ -126,7 +173,7 @@ public class AddToDoActivity extends Activity {
     public void dateTimePickerPopup (View view) {
         Intent intent = new Intent(this, DuePickerActivity.class);
         //선택된 날짜의 값을 보낸다.
-        intent.putExtra("Date", date);
+        intent.putExtra("Date", transport.format(cal.getTime()));
         startActivityForResult(intent, 1);
     }
 
@@ -161,5 +208,26 @@ public class AddToDoActivity extends Activity {
 
             toDoGroup.setText(getGroupName + getGroupId);
         }
+    }
+
+    //삭제 재차 확인을 위한 대화상자
+    void deleteAlert() {
+        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(this)
+                .setTitle("삭제하시겠습니까?")
+                .setMessage("이 작업은 되돌릴 수 없습니다.")
+                .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //TODO 할일 삭제(DELETE문)
+                    finish();
+                }
+            }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                }
+            });
+
+        AlertDialog msgDlg = msgBuilder.create();
+        msgDlg.show();
     }
 }
