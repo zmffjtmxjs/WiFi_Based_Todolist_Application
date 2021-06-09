@@ -47,22 +47,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-<<<<<<< HEAD
 //        todoDB = new TodoDB(this);
 //        todos = new ArrayList<>();
-=======
->>>>>>> origin/HEAD
+
         //백그라운드 서비스 계속 작동시키기
         Intent intent = new Intent(
                 getApplicationContext(),
                 BackgroundService.class);
         startService(intent);// 백그라운드 서비스 "BackgroundService"를 시작합니다. 일단 어플이 시작되면 멈추지 않습니다.onStartCommand()가 실행됩니다.
-<<<<<<< HEAD
-=======
 
 //        todoDB = new TodoDB(this);
 //        todos = new ArrayList<>();
->>>>>>> origin/HEAD
 
         //DB부분 추가
         todoDB = new TodoDB(this);
