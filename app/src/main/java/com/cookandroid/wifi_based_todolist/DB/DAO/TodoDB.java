@@ -28,7 +28,31 @@ public class TodoDB extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onCreate(db);
     }
+    public Todo getTodo(int i){
+        Todo todo=null;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM TodoList WHERE id ="+i, null);//가르키는 행위
+        if (cursor.getCount() != 0) {
+            while (cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex("id"));
+                String content = cursor.getString(cursor.getColumnIndex("content"));
+                String wifiInfo = cursor.getString(cursor.getColumnIndex("wifiInfo"));
+                String date = cursor.getString(cursor.getColumnIndex("date"));
+                String time = cursor.getString(cursor.getColumnIndex("time"));
+                String memo = cursor.getString(cursor.getColumnIndex("memo"));
 
+                todo = new Todo();
+                todo.setId(id);
+                todo.setContent(content);
+                todo.setWifiInfo(wifiInfo);
+                todo.setDate(date);
+                todo.setTime(time);
+                todo.setMemo(memo);
+            }
+        }
+        cursor.close();
+        return todo;
+    }
     //SELECT 문
     public ArrayList<Todo> getTodoList() {
         ArrayList<Todo> todos = new ArrayList<>();
