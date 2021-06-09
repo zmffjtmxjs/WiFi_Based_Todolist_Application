@@ -31,9 +31,8 @@
             android:layout_above="@+id/goSetWiFi"
             style="@style/mainDivision">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <ListView
                 android:id="@+id/rv_todo"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

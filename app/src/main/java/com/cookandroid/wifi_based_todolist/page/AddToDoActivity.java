@@ -56,6 +56,7 @@ public class AddToDoActivity extends Activity {
         setContentView(R.layout.activity_add_todo);
 
         //DB
+        //아직 todo 저장이 없음
         todo = new Todo();
         tododb = new TodoDB(this);
         todos = new ArrayList<>();

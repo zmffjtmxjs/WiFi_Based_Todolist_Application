@@ -146,4 +146,16 @@ public class SetWiFiActivity extends Activity {
         Intent intent = new Intent(this, GroupSelector.class);
         startActivityForResult(intent, 1);
     }
+
+    //와이파이 선택 팝업에서 리스트 아이템을 선택했을 경우
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                //선택한 리스트 뷰의 id값을 가져옴 (DB에 맞게 변경필요)
+                //TODO 와이파이 이름 & IP 보내기
+                String getData = data.getStringExtra("id");
+            }
+        }
+    }
 }
