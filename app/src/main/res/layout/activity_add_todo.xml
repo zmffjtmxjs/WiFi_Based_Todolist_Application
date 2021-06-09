@@ -24,7 +24,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ToDoTiTle" />
+            android:id="@+id/ToDoTitle" />
         <!-- 만료 날짜와 시간 -->
         <TextView
             android:layout_height="wrap_content"

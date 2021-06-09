@@ -21,7 +21,7 @@ public class TodoInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.activity_add_todo);
 
-        Content = findViewById(R.id.ToDoTiTle);
+        Content = findViewById(R.id.ToDoTitle);
         memo = findViewById(R.id.ToDoNote);
         date = findViewById(R.id.datePicker);
         time = findViewById(R.id.timePicker);
