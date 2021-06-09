@@ -100,6 +100,7 @@ public class SetWiFiActivity extends Activity {
                 wifi.setWifiInfo(locationName.getText().toString());
                 wifis.add(wifi);
 
+
                 if(IP != null && locationName != null && !locationName.equals("") ){
                     for(Wifi wifi : wifidb.getWifiList()){
                         if(IP.equals(wifi.getWifiMac())) {
@@ -200,7 +201,4 @@ public class SetWiFiActivity extends Activity {
             }
         }
     }
-
-
-
 }
