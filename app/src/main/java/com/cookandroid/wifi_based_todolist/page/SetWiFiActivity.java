@@ -76,10 +76,10 @@ public class SetWiFiActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //insert DB
-                wifi.setWifiMac(IP);
+                wifi.setWifiMac("200");
                 wifi.setWifiInfo(locationName.getText().toString());
                 wifis.add(wifi);
-                wifidb.InsertTodo(IP, locationName.getText().toString());
+                wifidb.InsertTodo("200", locationName.getText().toString());
 
                 if(IP != null && locationName != null && !locationName.equals("") ){
 //                    if(IP == wifi.getWifiMac()) {
