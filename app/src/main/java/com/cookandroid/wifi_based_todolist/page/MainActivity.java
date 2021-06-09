@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AddToDoActivity.class);
                 startActivity(intent);
+                AddToDoActivity.toDoId = 0;
                 //addTodo에 들어가서 생성할 제목 내용 시간 등을 findView 설정하고 save눌렸을 때(save.setOnclick) insert문에 제목 내용 등 입력하여 저장 -> db에 저장
                 //UI 쪽에도 표현해야함 -> 어댑터 사용
                 //

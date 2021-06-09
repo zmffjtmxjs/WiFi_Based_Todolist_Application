@@ -51,7 +51,8 @@ public class AddToDoActivity extends Activity {
     //할일 추가 또는 할일 디테일 여부 확인
     Integer mode;
     //할일 디테일 상태일 때 toDo의 인덱스 값 받는 변수
-    Integer toDoId;
+    static Integer toDoId;
+
 
     //Data
     Todo todo;
@@ -64,16 +65,6 @@ public class AddToDoActivity extends Activity {
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_add_todo);
-
-        //할일 추가를 위해 로드 된건지 디테일 화면을 위해 로드 된건지 확인
-
-        if ((CustomAdapter.mode != null) && (CustomAdapter.toDoId != null)) {
-            mode = CustomAdapter.mode;
-            toDoId = CustomAdapter.toDoId;
-            mode += 1;
-        } else {
-            mode = 0;
-        }
 
         //DB
         //아직 todo 저장이 없음
@@ -97,8 +88,7 @@ public class AddToDoActivity extends Activity {
         //Button
         deleteToDo = (Button) findViewById(R.id.deleteBtn);
 
-        //디테일 화면 상태일 시 인덱스 변수(toDoId) 기반으로 데이터 베이스에서 정보를 가져오고 setText()적용
-        if (mode == 1) {
+        if (toDoId != 0) {
             //화면 제목 표시
             Todo todo = tododb.getTodo(toDoId);
 
@@ -106,7 +96,7 @@ public class AddToDoActivity extends Activity {
 
             toDoTitle.setText(todo.getContent());
             try {
-                cal.setTime(transport.parse(todo.getDate() + ' ' + todo.getTime()));
+                cal.setTime(new SimpleDateFormat("yyyy.MM.dd HH:mm").parse((todo.getDate() + ' ' + todo.getTime())));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -151,17 +141,9 @@ public class AddToDoActivity extends Activity {
                 todo.setWifiInfo(getToDoGroup);
                 todos.add(todo);
 
-                tododb.InsertTodo(getTitle,getDate,getTime,getToDoNote,getToDoGroup);
-
-                Log.v("제목", getTitle);
-                Log.v("날짜", getDate);
-                Log.v("시간", getTime);
-                Log.v("메모", getToDoNote);
-                Log.v("그룹", getToDoGroup);
-
-                if(mode == 0) {                     //할일 추가 버튼을 통해서 들어온 상태일때
-                    //TODO 할일 추가(INSERT문)
-                } else if(mode == 1) {              //리스트뷰 터치를 통해서 들어온 상태일때
+                if(toDoId == 0) {                     //할일 추가 버튼을 통해서 들어온 상태일때
+                    tododb.InsertTodo(getTitle,getDate,getTime,getToDoNote,getToDoGroup);
+                } else {              //리스트뷰 터치를 통해서 들어온 상태일때
                     //TODO 할일 편집(UPDATE문)
                     //toDoId   <== 디테일화면으로 표시된 할일의 인덱스번호 변수
                 }
@@ -212,9 +194,8 @@ public class AddToDoActivity extends Activity {
             //선택한 리스트 뷰의 id값을 가져옴 (DB에 맞게 변경필요)
             //TODO 와이파이 이름 & IP 받기
             String getGroupId = data.getStringExtra("Id");
-            String getGroupName = data.getStringExtra("Name");
 
-            toDoGroup.setText(getGroupName + getGroupId);
+            toDoGroup.setText(getGroupId);
         }
     }
 

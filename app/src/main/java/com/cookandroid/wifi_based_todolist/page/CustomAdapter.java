@@ -29,7 +29,6 @@ public class CustomAdapter extends BaseAdapter {
     private ArrayList<Todo> todos;
     private Context context;
     private TodoDB todoDB;
-    static Integer mode, toDoId;
 
     public CustomAdapter(ArrayList<Todo> todo, Context context) {
         this.context = context;
@@ -57,8 +56,7 @@ public class CustomAdapter extends BaseAdapter {
         toDoItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mode = 1;
-                toDoId = pos;
+                AddToDoActivity.toDoId = pos + 1;
                 Intent intent = new Intent(view.getContext(), AddToDoActivity.class);
                 view.getContext().startActivity(intent);
             }
