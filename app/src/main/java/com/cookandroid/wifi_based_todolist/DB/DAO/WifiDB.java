@@ -44,7 +44,7 @@ public class WifiDB extends SQLiteOpenHelper {
                 String wifiInfo = cursor.getString(cursor.getColumnIndex("wifiInfo"));
 
                 Wifi wifi = new Wifi();
-                wifi.setWifiInfo(wifiMac);
+                wifi.setWifiMac(wifiMac);
                 wifi.setWifiInfo(wifiInfo);
                 wifis.add(wifi);
             }
