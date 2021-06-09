@@ -67,12 +67,10 @@ public class AddToDoActivity extends Activity {
 
         //할일 추가를 위해 로드 된건지 디테일 화면을 위해 로드 된건지 확인
 
-        try {
-          mode = CustomAdapter.mode;
-          toDoId = CustomAdapter.toDoId;
-
-        } catch (Exception e) {
-            Log.e("에러", String.valueOf(e));
+        if ((CustomAdapter.mode != null) && (CustomAdapter.toDoId != null)) {
+            mode = CustomAdapter.mode;
+            toDoId = CustomAdapter.toDoId;
+        } else {
             mode = 0;
         }
 
