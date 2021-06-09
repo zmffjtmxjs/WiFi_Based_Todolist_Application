@@ -1,16 +1,15 @@
 package com.cookandroid.wifi_based_todolist.page;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +29,7 @@ public class CustomAdapter extends BaseAdapter {
     private ArrayList<Todo> todos;
     private Context context;
     private TodoDB todoDB;
+    static Integer mode, toDoId;
 
     public CustomAdapter(ArrayList<Todo> todo, Context context) {
         this.context = context;
@@ -59,18 +59,26 @@ public class CustomAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Toast.makeText(context, pos + "번", Toast.LENGTH_SHORT).show();
 
+                mode = 1;
+                toDoId = pos;
+
                 Intent intent = new Intent(view.getContext(), AddToDoActivity.class);
-                intent.putExtra("mode", 1);
-                intent.putExtra("toDoId", pos);
-                intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 view.getContext().startActivity(intent);
             }
         });
 
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                } else {
+                    textView.setPaintFlags(0);
 
-
-
+                }
+            }
+        });
 
         return view;
     }

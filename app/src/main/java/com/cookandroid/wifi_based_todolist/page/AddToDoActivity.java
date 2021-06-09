@@ -66,9 +66,10 @@ public class AddToDoActivity extends Activity {
         setContentView(R.layout.activity_add_todo);
 
         //할일 추가를 위해 로드 된건지 디테일 화면을 위해 로드 된건지 확인
-        Intent intent = new Intent();
+
         try {
-            mode = Integer.parseInt(intent.getStringExtra("mode"));
+          mode = CustomAdapter.mode;
+          toDoId = CustomAdapter.toDoId;
 
         } catch (Exception e) {
             Log.e("에러", String.valueOf(e));
