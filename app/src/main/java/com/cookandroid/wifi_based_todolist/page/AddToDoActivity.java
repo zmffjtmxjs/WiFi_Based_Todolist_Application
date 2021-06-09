@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -146,6 +147,8 @@ public class AddToDoActivity extends Activity {
                 } else {              //리스트뷰 터치를 통해서 들어온 상태일때
                     //TODO 할일 편집(UPDATE문)
                     //toDoId   <== 디테일화면으로 표시된 할일의 인덱스번호 변수
+                    tododb.UpdateTodo(getTitle,getToDoGroup,getDate,getTime,getToDoNote, toDoId);
+
                 }
             }
         });
@@ -208,6 +211,7 @@ public class AddToDoActivity extends Activity {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     //TODO 할일 삭제(DELETE문)
+                    tododb.DeleteTodo(toDoId);
                     finish();
                 }
             }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
