@@ -142,14 +142,13 @@ public class AddToDoActivity extends Activity {
                 todo.setWifiInfo(getToDoGroup);
                 todos.add(todo);
 
-                if(toDoId == 0) {                     //할일 추가 버튼을 통해서 들어온 상태일때
+                if(toDoId == 0) {     //할일 추가 버튼을 통해서 들어온 상태일때
                     tododb.InsertTodo(getTitle,getDate,getTime,getToDoNote,getToDoGroup);
                 } else {              //리스트뷰 터치를 통해서 들어온 상태일때
-                    //TODO 할일 편집(UPDATE문)
-                    //toDoId   <== 디테일화면으로 표시된 할일의 인덱스번호 변수
                     tododb.UpdateTodo(getTitle,getToDoGroup,getDate,getTime,getToDoNote, toDoId);
-
                 }
+
+                finish();
             }
         });
 
