@@ -36,6 +36,7 @@ public class SetWiFiActivity extends Activity {
     TextView selectedIP; // 선택 된 IP주소를 보여줍니다.
     TextView locationText; // "위치 이름"을 입력해야 한다고 알려줄 텍스트 뷰
     EditText locationName; // 선택한 wifi에 대응되는 위치 이름을 입력하기 위한 EditText
+    Button deleteWifi; //불러온 wifi 삭제버튼
 
     String IP; // 가져온 IP 주소입니다.
 
@@ -58,6 +59,7 @@ public class SetWiFiActivity extends Activity {
         selectedIP = (TextView) findViewById(R.id.selectedIP);
         locationText = (TextView) findViewById(R.id.locationText);
         locationName = (EditText) findViewById(R.id.locationName);
+        deleteWifi = (Button) findViewById(R.id.deleteWiFi);
 
         //.................toolbar 관련 코드
 
@@ -110,6 +112,7 @@ public class SetWiFiActivity extends Activity {
 
         locationText.setVisibility(View.INVISIBLE);
         locationName.setVisibility(View.INVISIBLE);// 와이파이가 선택되기 전에는 숨깁니다.
+        deleteWifi.setVisibility(View.INVISIBLE);
 
         selectWifi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -136,6 +139,7 @@ public class SetWiFiActivity extends Activity {
 
                 locationText.setVisibility(View.VISIBLE);
                 locationName.setVisibility(View.VISIBLE);// 와이파이가 선택되면 보입니다.
+                deleteWifi.setVisibility(View.VISIBLE);
             }
         });
 
@@ -145,5 +149,17 @@ public class SetWiFiActivity extends Activity {
     public void locationPopup (View view) {
         Intent intent = new Intent(this, GroupSelector.class);
         startActivityForResult(intent, 1);
+    }
+
+    //와이파이 선택 팝업에서 리스트 아이템을 선택했을 경우
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                //선택한 리스트 뷰의 id값을 가져옴 (DB에 맞게 변경필요)
+                //TODO 와이파이 이름 & IP 보내기
+                String getData = data.getStringExtra("id");
+            }
+        }
     }
 }
