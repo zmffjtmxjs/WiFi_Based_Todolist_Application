@@ -8,6 +8,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class IPAddress {
+    //ip주소를 얻기 위한 모듈입니다.
+    //IPAddress.getRealIP()호출하면
+    //String 타입으로 리턴합니다.
 
     private final static String USER_AGENT = "Mozilla/5.0";
 
