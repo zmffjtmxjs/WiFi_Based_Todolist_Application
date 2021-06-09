@@ -208,6 +208,7 @@ public class AddToDoActivity extends Activity {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     //TODO 할일 삭제(DELETE문)
+                    tododb.DeleteTodo(toDoId);
                     finish();
                 }
             }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
