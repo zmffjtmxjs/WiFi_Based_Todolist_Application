@@ -144,11 +144,12 @@ public class AddToDoActivity extends Activity {
 
                 if(toDoId == 0) {     //할일 추가 버튼을 통해서 들어온 상태일때
                     tododb.InsertTodo(getTitle,getDate,getTime,getToDoNote,getToDoGroup);
+                    finish();
                 } else {              //리스트뷰 터치를 통해서 들어온 상태일때
                     tododb.UpdateTodo(getTitle,getToDoGroup,getDate,getTime,getToDoNote, toDoId);
+                    finish();
                 }
 
-                finish();
             }
         });
 
