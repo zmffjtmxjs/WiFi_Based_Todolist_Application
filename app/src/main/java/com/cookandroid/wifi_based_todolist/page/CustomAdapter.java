@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -16,79 +17,54 @@ import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
-
+public class CustomAdapter extends BaseAdapter {
     private ArrayList<Todo> todos;
     private Context context;
     private TodoDB todoDB;
 
-    public CustomAdapter(ArrayList<Todo> todos, Context context) {
-        this.todos = todos;
+    public CustomAdapter(ArrayList<Todo> todo, Context context) {
         this.context = context;
-        todoDB = new TodoDB(context);
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View holder = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-
-        return new ViewHolder(holder);
-
+        //todoDB = new TodoDB(context);
+        this.todos = todo;
+        //this.todos = todoDB.getTodoList();
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv_content.setText(todos.get(position).getContent());
-        //checkbox?
-        //holder.checkBox.setChecked();
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        Todo item = todos.get(i);
+        final int pos = i;
+        final Context context = viewGroup.getContext();
+
+        if(view == null){
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.item_list,viewGroup,false);
+        }
+        CheckBox checkBox = view.findViewById(R.id.checkBox);
+        TextView textView = view.findViewById(R.id.tv_content);
+        textView.setText(item.getContent());
+
+        return view;
     }
 
+
     @Override
-    public int getItemCount() {
+    public int getCount() {
         return todos.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_content;
-        private CheckBox checkBox;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tv_content = itemView.findViewById(R.id.tv_content);
-            checkBox = itemView.findViewById(R.id.checkBox);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int curPos = getAdapterPosition();
-                    Todo todo = todos.get(curPos);
-
-                    String[] strChoiceItems = {"수정","삭제"};
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("원하는 작업 선택");
-                    builder.setItems(strChoiceItems, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int position) {
-                            if (position == 0){//수정하기
-
-                            }else if (position == 1){//삭제하기
-
-                            }
-
-                        }
-                    });
-                    builder.show();
-
-                }
-            });
-        }
-        public void addItem(Todo _item){
-            todos.add(0,_item);
-            notifyItemInserted(0);
-
-        }
+    @Override
+    public Object getItem(int i) {
+        return todos.get(i);
     }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+
 }

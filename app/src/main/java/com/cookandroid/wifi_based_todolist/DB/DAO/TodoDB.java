@@ -46,7 +46,7 @@ public class TodoDB extends SQLiteOpenHelper {
                 String time = cursor.getString(cursor.getColumnIndex("time"));
                 String memo = cursor.getString(cursor.getColumnIndex("memo"));
 
-                Todo todo = new Todo();
+                Todo todo = new Todo("임시");
                 todo.setId(id);
                 todo.setContent(content);
                 todo.setWifiInfo(wifiInfo);
