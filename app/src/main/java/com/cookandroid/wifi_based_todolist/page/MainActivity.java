@@ -4,23 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
+import com.cookandroid.wifi_based_todolist.module.BackgroundService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //백그라운드 서비스 계속 작동시키기
+        Intent intent = new Intent(
+                getApplicationContext(),
+                BackgroundService.class);
+        startService(intent);// 백그라운드 서비스 "BackgroundService"를 시작합니다. 일단 어플이 시작되면 멈추지 않습니다.onStartCommand()가 실행됩니다.
 
 //        todoDB = new TodoDB(this);
 //        todos = new ArrayList<>();
@@ -110,16 +112,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-//    private void loadReceontDB() {
+//    private void loadRecentDB() {
+//        //저장된 DB가져옴
 //        todos = todoDB.getTodoList();
-//        if(adapter == null){
-//            adapter = new CustomAdapter(todos, this);
-//            rv_todo.setHasFixedSize(true);
-//            rv_todo.setAdapter(adapter);
+//        if (mAdapter == null) {
+//            mAdapter = new CustomAdapter(mtodoItems, this);
+//            mrv_todo.setHasFixedSize(true);
+//            mrv_todo.setAdapter(mAdapter);
 //        }
 //    }
-
-
 
 }
