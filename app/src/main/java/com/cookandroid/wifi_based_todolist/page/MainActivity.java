@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         wifiDB = new WifiDB(this);
         wifis = wifiDB.getWifiList();
 
-        loadReceontDB();
+//        loadReceontDB();
 
         rv_todo = findViewById(R.id.rv_todo);
 
@@ -111,14 +111,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void loadReceontDB() {
-        todos = todoDB.getTodoList();
-        if(adapter == null){
-            adapter = new CustomAdapter(todos, this);
-            rv_todo.setHasFixedSize(true);
-            rv_todo.setAdapter(adapter);
-        }
-    }
+//    private void loadReceontDB() {
+//        todos = todoDB.getTodoList();
+//        if(adapter == null){
+//            adapter = new CustomAdapter(todos, this);
+//            rv_todo.setHasFixedSize(true);
+//            rv_todo.setAdapter(adapter);
+//        }
+//    }
 
 
 

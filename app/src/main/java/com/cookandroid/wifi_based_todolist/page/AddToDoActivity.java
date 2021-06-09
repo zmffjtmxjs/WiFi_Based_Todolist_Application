@@ -90,6 +90,9 @@ public class AddToDoActivity extends Activity {
                 String getToDoNote = String.valueOf(toDoNote.getText());
                 String getToDoGroup = String.valueOf(toDoGroup.getText());
 
+                todo = new Todo();
+                todo.setContent(getTitle);
+
                 Log.v("제목", getTitle);
                 Log.v("날짜", getDate);
                 Log.v("시간", getTime);
