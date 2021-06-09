@@ -5,7 +5,6 @@
     <!-- IP 주소를 가져오기 위한 권한입니다. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- -->
 
     <application
         android:allowBackup="true"
@@ -14,6 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WiFi_Based_Todolist">
+        <receiver
+            android:name=".module.NetworkChangeReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <service
+            android:name=".module.BackgroundService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity android:name=".page.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +30,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".page.AddToDoActivity" android:label="할일 추가 화면 엑티비티" />
-        <activity android:name=".page.SetWiFiActivity" android:label="WiFi 설정 화면 엑티비티" />
-        <activity android:name=".popup.DuePickerActivity" android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" android:label="날짜 및 시간 선택 다이얼로그 엑티비티" />
-        <activity android:name=".popup.GroupSelector" android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" android:label="그룹 선택 다이얼로그 엑티비티" />
+        <activity
+            android:name=".page.AddToDoActivity"
+            android:label="할일 추가 화면 엑티비티" />
+        <activity
+            android:name=".page.SetWiFiActivity"
+            android:label="WiFi 설정 화면 엑티비티" />
+        <activity
+            android:name=".popup.DuePickerActivity"
+            android:label="날짜 및 시간 선택 다이얼로그 엑티비티"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
+        <activity
+            android:name=".popup.GroupSelector"
+            android:label="그룹 선택 다이얼로그 엑티비티"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
     </application>
 
 </manifest>

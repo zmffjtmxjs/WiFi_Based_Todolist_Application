@@ -15,6 +15,7 @@ import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
+import com.cookandroid.wifi_based_todolist.module.BackgroundService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.reflect.Array;
@@ -44,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //백그라운드 서비스 계속 작동시키기
+        Intent intent = new Intent(
+                getApplicationContext(),
+                BackgroundService.class);
+        startService(intent);// 백그라운드 서비스 "BackgroundService"를 시작합니다. 일단 어플이 시작되면 멈추지 않습니다.onStartCommand()가 실행됩니다.
 
         //DB부분 추가
         todoDB = new TodoDB(this);
