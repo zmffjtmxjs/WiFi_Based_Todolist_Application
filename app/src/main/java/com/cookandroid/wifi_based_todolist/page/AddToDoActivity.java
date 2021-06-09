@@ -173,7 +173,7 @@ public class AddToDoActivity extends Activity {
     public void dateTimePickerPopup (View view) {
         Intent intent = new Intent(this, DuePickerActivity.class);
         //선택된 날짜의 값을 보낸다.
-        intent.putExtra("Date", date);
+        intent.putExtra("Date", transport.format(cal.getTime()));
         startActivityForResult(intent, 1);
     }
 
