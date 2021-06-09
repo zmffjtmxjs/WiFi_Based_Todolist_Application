@@ -44,7 +44,7 @@ public class WifiDB extends SQLiteOpenHelper {
                 String wifiInfo = cursor.getString(cursor.getColumnIndex("wifiInfo"));
 
                 Wifi wifi = new Wifi();
-                wifi.setWifiInfo(wifiMac);
+                wifi.setWifiMac(wifiMac);
                 wifi.setWifiInfo(wifiInfo);
                 wifis.add(wifi);
             }
@@ -65,7 +65,7 @@ public class WifiDB extends SQLiteOpenHelper {
     // UPDATE 문
     public void UpdateTodo(String wifiMac, String wifiInfo){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE WifiInfo SET wifiMac = '"+wifiMac +"', wifiInfo = '"+wifiInfo +"' where wifiInfo = '"+wifiInfo +"'");
+        db.execSQL("UPDATE WifiInfo SET wifiMac = '"+wifiMac +"', wifiInfo = '"+wifiInfo +"' where wifiMac = '"+wifiMac +"'");
     }
 
     //DELETE 문
