@@ -83,7 +83,7 @@ public class SetWiFiActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if(mode==2){
-                    if(IP != null && locationName != null && !locationName.equals("") ) {
+                    //if(IP != null && locationName != null && !locationName.equals("") ) {
                         wifidb.UpdateTodo(IP,locationName.getText().toString());
                         Toast.makeText(getApplicationContext(), "업데이트 완료.", Toast.LENGTH_SHORT).show();
                         IP = null;
@@ -92,7 +92,7 @@ public class SetWiFiActivity extends Activity {
                         locationName.setVisibility(View.INVISIBLE);
                         locationText.setVisibility(View.INVISIBLE);
                         deleteWifi.setVisibility(View.INVISIBLE);
-                    }
+                 //   }
                     return;
                 }
                 //insert DB
@@ -101,12 +101,12 @@ public class SetWiFiActivity extends Activity {
                 wifis.add(wifi);
 
                 if(IP != null && locationName != null && !locationName.equals("") ){
-                    for(Wifi wifi : wifidb.getWifiList()){
-                        if(IP.equals(wifi.getWifiMac())) {
-                            Toast.makeText(getApplicationContext(), "이미 저장된 wifi입니다.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
+                  //  for(Wifi wifi : wifidb.getWifiList()){
+                    //    if(IP.equals(wifi.getWifiMac())) {
+                     //       Toast.makeText(getApplicationContext(), "이미 저장된 wifi입니다.", Toast.LENGTH_SHORT).show();
+                      //      return;
+                    //    }
+                  //  }
 
                     wifidb.InsertTodo(IP, locationName.getText().toString());
 
