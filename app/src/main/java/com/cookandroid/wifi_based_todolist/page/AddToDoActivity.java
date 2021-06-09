@@ -3,8 +3,9 @@ package com.cookandroid.wifi_based_todolist.page;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,8 @@ public class AddToDoActivity extends Activity {
 
     //뷰 등록을 위한 선언
     ImageView cancelAddToDo, saveAddToDo;
-    TextView titleText, pickDueDate;
+    TextView titleText, pickDueDate, toDoGroup;
+    EditText toDoTitle, toDoNote;
 
     final Calendar cal = Calendar.getInstance();
 
@@ -42,9 +44,15 @@ public class AddToDoActivity extends Activity {
 
         //ImageView 등록
         cancelAddToDo = (ImageView) findViewById(R.id.discard);
+        saveAddToDo = (ImageView) findViewById(R.id.save);
         //TextView 등록
         titleText = (TextView) findViewById(R.id.titleText);
         pickDueDate = (TextView) findViewById(R.id.pickedDue);
+        toDoGroup = (TextView) findViewById(R.id.pickedGroup);
+        //EditText
+        toDoTitle = (EditText) findViewById(R.id.ToDoTitle);
+        toDoNote = (EditText) findViewById(R.id.ToDoNote);
+
 
         //화면 제목 표시
         titleText.setText("할 일 편집");
@@ -57,6 +65,24 @@ public class AddToDoActivity extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        //세이브 버튼 터치 시
+        saveAddToDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String getTitle = String.valueOf(toDoTitle.getText());
+                String getDate = new SimpleDateFormat("yyyy.MM.dd").format(cal.getTime());
+                String getTime = new SimpleDateFormat("HH:mm").format(cal.getTime());
+                String getToDoNote = String.valueOf(toDoNote.getText());
+                String getToDoGroup = String.valueOf(toDoGroup.getText());
+
+                Log.v("제목", getTitle);
+                Log.v("날짜", getDate);
+                Log.v("시간", getTime);
+                Log.v("메모", getToDoNote);
+                Log.v("그룹", getToDoGroup);
             }
         });
     }
