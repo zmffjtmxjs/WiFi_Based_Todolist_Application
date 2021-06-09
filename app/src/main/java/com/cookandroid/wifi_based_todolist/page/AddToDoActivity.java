@@ -101,12 +101,16 @@ public class AddToDoActivity extends Activity {
         //디테일 화면 상태일 시 인덱스 변수(toDoId) 기반으로 데이터 베이스에서 정보를 가져오고 setText()적용
         if (mode == 1) {
             //화면 제목 표시
+            Todo todo = tododb.getTodo(toDoId);
+
             titleText.setText("할 일 편집");
 
-            toDoTitle.setText("불러온 할일 제목");
+            toDoTitle.setText(todo.getContent());
             //cal.setTime(transport.parse());           <==날짜 변수
-            toDoNote.setText("불러온 할일 메모");
-            toDoGroup.setText("불러온 할일 그룹");
+            //todo.getDate()
+            //todo.getTime()
+            toDoNote.setText(todo.getMemo());
+            toDoGroup.setText(todo.getWifiInfo());
 
             deleteToDo.setVisibility(View.VISIBLE);
         } else {
