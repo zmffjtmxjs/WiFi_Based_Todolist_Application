@@ -71,6 +71,18 @@
             android:text="표시 위치 선택"
             android:onClick="locationPopup" />
 
+        <!-- 삭제 버튼 -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/deleteBtn"
+            android:layout_gravity="right"
+            android:textSize="10pt"
+            android:textColor="#FF0000"
+            android:text="삭제"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
 </RelativeLayout>
