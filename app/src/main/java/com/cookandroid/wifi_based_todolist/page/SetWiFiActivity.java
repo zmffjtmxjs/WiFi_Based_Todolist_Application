@@ -45,16 +45,7 @@ public class SetWiFiActivity extends Activity {
 
         wifidb = new WifiDB(this);
         wifis = new ArrayList<>();
-
-        new Thread(){//네트워크 작업을 위해서 스레드 작업
-            public void run(){
-                try {
-                    IP = IPAddress.getRealIP(); // 현재 연결 된 wifi의 IP를 가져 옵니다
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+        wifi = new Wifi();
 
         //ImageView 등록
         cancelSetWifi = (ImageView) findViewById(R.id.discard);
@@ -85,24 +76,25 @@ public class SetWiFiActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //insert DB
-//                wifi.setWifiMac(IP);
-//                wifi.setWifiInfo(locationName.getText().toString());
+                wifi.setWifiMac(IP);
+                wifi.setWifiInfo(locationName.getText().toString());
+                wifis.add(wifi);
                 wifidb.InsertTodo(IP, locationName.getText().toString());
 
                 if(IP != null && locationName != null && !locationName.equals("") ){
-                    if(IP == wifi.getWifiMac()) {
-                        Toast.makeText(getApplicationContext(), "이미 저장된 wifi입니다.", Toast.LENGTH_SHORT).show();
-                    }
-                    Intent intent = getIntent();// 저장 성공할 경우. 첫 상태로 만듭니다.
-                    finish();
-                    startActivity(intent);
+//                    if(IP == wifi.getWifiMac()) {
+//                        Toast.makeText(getApplicationContext(), "이미 저장된 wifi입니다.", Toast.LENGTH_SHORT).show();
+//                    }
+
+                    // 저장 성공할 경우. 첫 상태로 만듭니다.
+                    IP = null;
+                    selectedIP.setText("");
+                    locationName.setText("");
+                    locationName.setVisibility(View.INVISIBLE);
+                    locationText.setVisibility(View.INVISIBLE);
                     Toast.makeText(getApplicationContext(), "저장 완료", Toast.LENGTH_SHORT).show();
                     System.out.println(IP);
                     System.out.println(locationName);
-
-                        //IP와 locationName을 DB에 저장하는 코드 => junhyeok
-                        // [중복 체크 필요할 듯 / 중복 시 break;]
-
                 }
             }
         });
@@ -114,6 +106,24 @@ public class SetWiFiActivity extends Activity {
 
         selectWifi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+
+                Thread thread = new Thread(){//네트워크 작업을 위해서 스레드 작업
+                    public void run(){
+                        try {
+                            IP = IPAddress.getRealIP(); // 현재 연결 된 wifi의 IP를 가져 옵니다
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 Toast.makeText(getApplicationContext(), IP + "선택 됨", Toast.LENGTH_SHORT).show(); // IP를 Toast로 띄워줍니다
                 selectedIP.setText("현재 선택 : " + IP); // 선택 된 IP를 보여줍니다.
 
