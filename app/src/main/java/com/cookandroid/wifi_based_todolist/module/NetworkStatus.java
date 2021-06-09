@@ -23,4 +23,19 @@ public class NetworkStatus { // 연결된 네트워크를 알려주는 모듈
         }
         return TYPE_NOT_CONNECTED;  //연결이 되지않은 상태
     }
+
+    public static String getConnectivityStatusString(Context context) {
+        int conn = NetworkStatus.getConnectivityStatus(context);
+        String status = null;
+        if (conn == NetworkStatus.TYPE_WIFI) {
+            status = "Wifi enabled";
+        } else if (conn == NetworkStatus.TYPE_MOBILE) {
+            status = "Mobile data enabled";
+        } else if (conn == NetworkStatus.TYPE_NOT_CONNECTED) {
+            status = "Not connected to Internet";
+        }
+        return status;
+    }
+
+
 }
