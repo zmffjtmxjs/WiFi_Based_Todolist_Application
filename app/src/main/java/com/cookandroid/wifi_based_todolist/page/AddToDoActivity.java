@@ -70,6 +70,7 @@ public class AddToDoActivity extends Activity {
         if ((CustomAdapter.mode != null) && (CustomAdapter.toDoId != null)) {
             mode = CustomAdapter.mode;
             toDoId = CustomAdapter.toDoId;
+            mode += 1;
         } else {
             mode = 0;
         }
@@ -104,9 +105,11 @@ public class AddToDoActivity extends Activity {
             titleText.setText("할 일 편집");
 
             toDoTitle.setText(todo.getContent());
-            //cal.setTime(transport.parse());           <==날짜 변수
-            //todo.getDate()
-            //todo.getTime()
+            try {
+                cal.setTime(transport.parse(todo.getDate() + ' ' + todo.getTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             toDoNote.setText(todo.getMemo());
             toDoGroup.setText(todo.getWifiInfo());
 

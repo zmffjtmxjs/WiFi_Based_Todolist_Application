@@ -170,11 +170,9 @@ public class SetWiFiActivity extends Activity {
                 locationName.setVisibility(View.INVISIBLE);
                 locationText.setVisibility(View.INVISIBLE);
                 deleteWifi.setVisibility(View.INVISIBLE);
+                finish();
             }
         });
-
-
-
     }
 
     //기존 위치 관리 버튼을 눌렀을 때

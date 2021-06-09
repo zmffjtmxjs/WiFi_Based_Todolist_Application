@@ -57,11 +57,8 @@ public class CustomAdapter extends BaseAdapter {
         toDoItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, pos + "번", Toast.LENGTH_SHORT).show();
-
                 mode = 1;
                 toDoId = pos;
-
                 Intent intent = new Intent(view.getContext(), AddToDoActivity.class);
                 view.getContext().startActivity(intent);
             }
