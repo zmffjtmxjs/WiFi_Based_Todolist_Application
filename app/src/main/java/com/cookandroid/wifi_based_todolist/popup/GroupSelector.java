@@ -13,8 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
+import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
+import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +28,11 @@ public class GroupSelector extends Activity {
 
     ListView wifiList;
     ArrayAdapter adapter;
+
+    Todo todo;
+    TodoDB tododb;
+    ArrayList<Wifi> wifis;
+    Wifi wifi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +59,23 @@ public class GroupSelector extends Activity {
         //리스트 뷰에 반영할 리스트에 더미 데이터를 넣음
         /* TODO 데이터 베이스에서 위치목록을 가져와서 배열에 추가
         *   Wifi 이름(=위치 이름), Wifi IP 배열이 필요할 것으로 예상 */
-        for (int i = 0; i < 50; i++) {
-            //리스트에 원소 추가 (공간의 한계는 없음)
-            preWifi.add(String.valueOf(i));
+
+
+//        for(Wifi wifi : wifidb.getWifiList()){
+//            if(IP.equals(wifi.getWifiMac())) {
+//                Toast.makeText(getApplicationContext(), "이미 저장된 wifi입니다.", Toast.LENGTH_SHORT).show();
+//                break;
+//            }
+//        }
+
+        tododb = new TodoDB(this);
+        for(int i=0; i<tododb.getTodoList().size();i++){
+            preWifi.add(tododb.getTodoList().get(i).getWifiInfo());
         }
+//        for (int i = 0; i < 50; i++) {
+//            //리스트에 원소 추가 (공간의 한계는 없음)
+//            preWifi.add(tododb.getTodoList());
+//        }
 
         //선언한 어뎁터를 리스트뷰에 적용
         wifiList.setAdapter(adapter);
