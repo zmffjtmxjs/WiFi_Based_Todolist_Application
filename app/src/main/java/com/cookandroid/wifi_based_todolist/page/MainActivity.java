@@ -10,6 +10,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
@@ -27,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     /* TODO (우선순위 : 하)
            사용자가 원하는 조건(분류)를 선택하여 해당하는 할 일만 출력 */
     //recyclerView
-    private RecyclerView rv_todo;
+    private ListView rv_todo;
+    CustomAdapter customAdapter;
+
     private FloatingActionButton addToDoButton;
     private ArrayList<Todo> todos;
     private TodoDB todoDB;
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        todoDB = new TodoDB(this);
 //        todos = new ArrayList<>();
+
         //백그라운드 서비스 계속 작동시키기
         Intent intent = new Intent(
                 getApplicationContext(),
@@ -60,13 +65,21 @@ public class MainActivity extends AppCompatActivity {
 
         //DB부분 추가
         todoDB = new TodoDB(this);
+
+        //todos = todoDB.getTodoList();
         todos = todoDB.getTodoList();
+
         wifiDB = new WifiDB(this);
         wifis = wifiDB.getWifiList();
 
+        customAdapter = new CustomAdapter(todos,this);
 //        loadReceontDB();
 
+        //RecyclerView 등록 --6맨--
         rv_todo = findViewById(R.id.rv_todo);
+        rv_todo.setAdapter(customAdapter);
+
+
 
         //ImageView 등록
         sideBarButton = (ImageView) findViewById(R.id.sideBarButton);
