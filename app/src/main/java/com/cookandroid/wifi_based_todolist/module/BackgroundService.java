@@ -22,6 +22,7 @@ import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.alarmpage.AlarmViewActivity;
 import com.cookandroid.wifi_based_todolist.page.AddToDoActivity;
+import com.cookandroid.wifi_based_todolist.page.MainActivity;
 import com.cookandroid.wifi_based_todolist.popup.GroupSelector;
 
 import java.util.List;
@@ -66,7 +67,7 @@ public class BackgroundService extends Service {
                                 String ip = IPAddress.getRealIP();
                                 for (int i = 0; i < wifiDB.getWifiList().size(); i++) {
                                     if (ip.equals(wifiDB.getWifiList().get(i).getWifiMac())) {
-                                        Intent intent = new Intent(getApplicationContext(), AlarmViewActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);//AlarmViewActivity.class);
                                         startActivity(intent);
                                     }
                                 }
