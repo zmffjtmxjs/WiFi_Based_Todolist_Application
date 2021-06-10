@@ -171,8 +171,8 @@ public class SetWiFiActivity extends Activity {
         deleteWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                wifidb.DeleteTodo(locate);
-                Toast.makeText(getApplicationContext(), "삭제 완료.", Toast.LENGTH_SHORT).show();
+                wifidb.DeleteTodo(IP);
+                Toast.makeText(getApplicationContext(), "삭제 완료." + IP, Toast.LENGTH_SHORT).show();
                 locate = null;
                 selectedIP.setText("");
                 locationName.setText("");

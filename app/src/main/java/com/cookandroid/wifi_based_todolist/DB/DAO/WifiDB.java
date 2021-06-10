@@ -87,8 +87,8 @@ public class WifiDB extends SQLiteOpenHelper {
     }
 
     //DELETE 문
-    public void DeleteTodo(String wifiInfo){
+    public void DeleteTodo(String wifiMac){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM WifiInfo WHERE wifiInfo = '"+wifiInfo +"'");
+        db.execSQL("DELETE FROM WifiInfo WHERE wifiMac = '" + wifiMac + "'");
     }
 }
