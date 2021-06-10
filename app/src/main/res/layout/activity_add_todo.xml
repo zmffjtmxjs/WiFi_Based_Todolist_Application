@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 할일 추가 화면 -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar_cancel_save"
+        android:id="@+id/toolBar"
+        style="@style/toolbar"/>
+
+    <!-- 툴바 아래 구역(본문) -->
+    <LinearLayout
+        android:layout_below="@+id/toolBar"
+        style="@style/mainDivision">
+
+        <!-- 할 일 제목 입력 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="할 일" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ToDoTitle" />
+        <!-- 만료 날짜와 시간 -->
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="날짜 및 시간" />
+        <!-- 설정된 만료 날짜 및 시간(텍스트 값은 포맷 예제) -->
+        <TextView
+            android:id="@+id/pickedDue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="dateTimePickerPopup"
+            android:textSize="25dp"
+            android:text="2021-05-30 (일)  오전 10시49분"/>
+
+        <!-- Todo 알람 설정 (우선순위 : 하) -->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="알람" />-->
+
+
+        <!-- 메모 작성 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="메모" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ToDoNote" />
+
+        <!-- 위치 작성 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="표시 위치" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pickedGroup"
+            android:layout_gravity="center"
+            android:textSize="25dp"
+            android:text="표시 위치 선택"
+            android:onClick="locationPopup" />
+
+        <!-- 삭제 버튼 -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/deleteBtn"
+            android:layout_gravity="right"
+            android:textSize="10pt"
+            android:textColor="#FF0000"
+            android:text="삭제"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- WiFi 설정 화면 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- 화면 상단 툴바 -->
+    <include
+        layout="@layout/toolbar_cancel_save"
+        android:id="@+id/toolBar"
+        style="@style/toolbar"/>
+
+    <!-- TODO 와이파이 설정 화면 디테일 : zmffjtmxjs -->
+    <!-- 툴바 아래 구역(본문) -->
+    <!-- wifi 선택 및 위치 설정 -->
+    <LinearLayout
+        android:layout_below="@+id/toolBar"
+        style="@style/mainDivision">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/selectWifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="연결된 Wifi 선택" />
+
+            <Button
+                android:id="@+id/manageLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="locationPopup"
+                android:text="기존 위치 관리" />
+
+            <TextView
+                android:id="@+id/selectedIP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/locationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="위치 이름"
+                />
+
+            <EditText
+                android:id="@+id/locationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/deleteWiFi"
+                android:text="위치 삭제"
+                android:textSize="10pt"
+                android:textColor="#FF0000"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 네비게이션뷰 메인 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:id="@+id/filterDrawer">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="표시할 태그 선택"
+        android:textSize="25sp"
+        android:gravity="center" />
+
+    <!-- 태그 리스트와 체크박스 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp" >
+
+        <CheckBox
+            android:id="@+id/viewAllTag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="전체 표시" />
+
+    </LinearLayout>
+
+</LinearLayout>
