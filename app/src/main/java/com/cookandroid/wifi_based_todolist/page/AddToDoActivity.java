@@ -196,7 +196,7 @@ public class AddToDoActivity extends Activity {
         else if((requestCode == 2) && (resultCode == RESULT_OK)) {
             //선택한 리스트 뷰의 id값을 가져옴 (DB에 맞게 변경필요)
             //TODO 와이파이 이름 & IP 받기
-            String getGroupId = data.getStringExtra("Id");
+            String getGroupId = data.getStringExtra("locate");
 
             toDoGroup.setText(getGroupId);
         }

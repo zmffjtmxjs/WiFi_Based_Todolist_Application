@@ -89,8 +89,7 @@ public class GroupSelector extends Activity {
 
                 //리스트 뷰의 위치를 preWifi 배열의 인덱스 값으로 사용하여 정보 추출 (DB에 맞게 변경 필요 시 자유롭게 바꿀 것)
                 Intent intent = new Intent();
-                intent.putExtra("Id",  String.valueOf(preWifi.get(position)));
-                intent.putExtra("Name", "");
+                intent.putExtra("locate",  String.valueOf(preWifi.get(position)));
                 //TODO 와이파이 이름 & IP 가져오기
                 setResult(RESULT_OK, intent);
 

@@ -2,6 +2,7 @@ package com.cookandroid.wifi_based_todolist.page;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,7 +42,8 @@ public class SetWiFiActivity extends Activity {
     EditText locationName; // 선택한 wifi에 대응되는 위치 이름을 입력하기 위한 EditText
     Button deleteWifi; //불러온 wifi 삭제버튼
 
-    String IP; // 가져온 IP 주소입니다.
+
+    String locate; // 가져온 IP 주소입니다.
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -82,11 +84,12 @@ public class SetWiFiActivity extends Activity {
         saveSetWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //기존 와이파이를 선택후 저장을 눌럿을 경우
                 if(mode==2){
                     //if(IP != null && locationName != null && !locationName.equals("") ) {
-                        wifidb.UpdateTodo(IP,locationName.getText().toString());
+                        wifidb.UpdateTodo(locate,locationName.getText().toString());
                         Toast.makeText(getApplicationContext(), "업데이트 완료.", Toast.LENGTH_SHORT).show();
-                        IP = null;
+                        locate = null;
                         selectedIP.setText("");
                         locationName.setText("");
                         locationName.setVisibility(View.INVISIBLE);
@@ -96,12 +99,12 @@ public class SetWiFiActivity extends Activity {
                     return;
                 }
                 //insert DB
-                wifi.setWifiMac(IP);
+                wifi.setWifiMac(locate);
                 wifi.setWifiInfo(locationName.getText().toString());
                 wifis.add(wifi);
 
 
-                if(IP != null && locationName != null && !locationName.equals("") ){
+                if(locate != null && locationName != null && !locationName.equals("") ){
                   //  for(Wifi wifi : wifidb.getWifiList()){
                     //    if(IP.equals(wifi.getWifiMac())) {
                      //       Toast.makeText(getApplicationContext(), "이미 저장된 wifi입니다.", Toast.LENGTH_SHORT).show();
@@ -109,18 +112,20 @@ public class SetWiFiActivity extends Activity {
                     //    }
                   //  }
 
-                    wifidb.InsertTodo(IP, locationName.getText().toString());
+                    wifidb.InsertTodo(locate, locationName.getText().toString());
 
                     // 저장 성공할 경우. 첫 상태로 만듭니다.
-                    IP = null;
+                    locate = null;
                     selectedIP.setText("");
                     locationName.setText("");
                     locationName.setVisibility(View.INVISIBLE);
                     locationText.setVisibility(View.INVISIBLE);
                     Toast.makeText(getApplicationContext(), "저장 완료", Toast.LENGTH_SHORT).show();
-                    System.out.println(IP);
+                    System.out.println(locate);
                     System.out.println(locationName);
                 }
+
+                finish();
             }
         });
 
@@ -130,13 +135,14 @@ public class SetWiFiActivity extends Activity {
         locationName.setVisibility(View.INVISIBLE);// 와이파이가 선택되기 전에는 숨깁니다.
         deleteWifi.setVisibility(View.INVISIBLE);
 
+        //연결된 와이파이에서 정보를 가져온다.
         selectWifi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 mode=1;
                 Thread thread = new Thread(){//네트워크 작업을 위해서 스레드 작업
                     public void run(){
                         try {
-                            IP = IPAddress.getRealIP(); // 현재 연결 된 wifi의 IP를 가져 옵니다
+                            locate = IPAddress.getRealIP(); // 현재 연결 된 wifi의 IP를 가져 옵니다
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -150,21 +156,21 @@ public class SetWiFiActivity extends Activity {
                     e.printStackTrace();
                 }
 
-                Toast.makeText(getApplicationContext(), IP + "선택 됨", Toast.LENGTH_SHORT).show(); // IP를 Toast로 띄워줍니다
-                selectedIP.setText("현재 선택 : " + IP); // 선택 된 IP를 보여줍니다.
+                Toast.makeText(getApplicationContext(), locate + "선택 됨", Toast.LENGTH_SHORT).show(); // IP를 Toast로 띄워줍니다
+                selectedIP.setText("현재 선택 : " + locate); // 선택 된 IP를 보여줍니다.
 
                 locationText.setVisibility(View.VISIBLE);
                 locationName.setVisibility(View.VISIBLE);// 와이파이가 선택되면 보입니다.
             }
         });
 
-
+        //삭제버튼에 대한 온클릭리스너
         deleteWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                wifidb.DeleteTodo(locationName.getText().toString());
+                wifidb.DeleteTodo(locate);
                 Toast.makeText(getApplicationContext(), "삭제 완료.", Toast.LENGTH_SHORT).show();
-                IP = null;
+                locate = null;
                 selectedIP.setText("");
                 locationName.setText("");
                 locationName.setVisibility(View.INVISIBLE);
@@ -189,9 +195,8 @@ public class SetWiFiActivity extends Activity {
             if(resultCode == RESULT_OK) {
                 //선택한 리스트 뷰의 id값을 가져옴 (DB에 맞게 변경필요)
                 //TODO 와이파이 이름 & IP 보내기
-                 IP = data.getStringExtra("Id");
-                 selectedIP.setText("현재 선택 : " + IP);
-                 locationName.setText(data.getStringExtra("Name"));
+                 locate = data.getStringExtra("locate");
+                 locationName.setText(locate);
                  locationText.setVisibility(View.VISIBLE);
                  locationName.setVisibility(View.VISIBLE);// 와이파이가 선택되면 보입니다.
                  deleteWifi.setVisibility(View.VISIBLE);
