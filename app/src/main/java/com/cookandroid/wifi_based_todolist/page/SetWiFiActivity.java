@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
+import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.module.IPAddress;
@@ -197,6 +198,8 @@ public class SetWiFiActivity extends Activity {
                 //TODO 와이파이 이름 & IP 보내기
                  locate = data.getStringExtra("locate");
                  locationName.setText(locate);
+                Wifi wifi = wifidb.getWifi(locate);
+                selectedIP.setText(wifi.getWifiMac());
                  locationText.setVisibility(View.VISIBLE);
                  locationName.setVisibility(View.VISIBLE);// 와이파이가 선택되면 보입니다.
                  deleteWifi.setVisibility(View.VISIBLE);

@@ -30,6 +30,24 @@ public class WifiDB extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public Wifi getWifi(String locate) {
+        Wifi wifi = null;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM WifiInfo WHERE wifiInfo = " + "'" + locate + "'", null);//가르키는 행위
+        if (cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                String wifiMac = cursor.getString(cursor.getColumnIndex("wifiMac"));
+                String wifiInfo = cursor.getString(cursor.getColumnIndex("wifiInfo"));
+
+                wifi = new Wifi();
+                wifi.setWifiMac(wifiMac);
+                wifi.setWifiInfo(wifiInfo);
+            }
+        }
+        cursor.close();
+        return wifi;
+    }
+
     //SELECT 문
     public ArrayList<Wifi> getWifiList() {
         ArrayList<Wifi> wifis = new ArrayList<>();
