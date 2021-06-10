@@ -44,7 +44,8 @@ public class SetWiFiActivity extends Activity {
     Button deleteWifi; //불러온 wifi 삭제버튼
 
 
-    String locate; // 가져온 IP 주소입니다.
+    String locate; // 가져온 장소 이름입니다.
+    String IP; // 가져온 IP 주소입니다.
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -88,7 +89,7 @@ public class SetWiFiActivity extends Activity {
                 //기존 와이파이를 선택후 저장을 눌럿을 경우
                 if(mode==2){
                     //if(IP != null && locationName != null && !locationName.equals("") ) {
-                        wifidb.UpdateTodo(locate,locationName.getText().toString());
+                        wifidb.UpdateTodo(IP, String.valueOf(locationName.getText()));
                         Toast.makeText(getApplicationContext(), "업데이트 완료.", Toast.LENGTH_SHORT).show();
                         locate = null;
                         selectedIP.setText("");
@@ -97,6 +98,7 @@ public class SetWiFiActivity extends Activity {
                         locationText.setVisibility(View.INVISIBLE);
                         deleteWifi.setVisibility(View.INVISIBLE);
                  //   }
+                    finish();
                     return;
                 }
                 //insert DB
@@ -200,6 +202,7 @@ public class SetWiFiActivity extends Activity {
                  locationName.setText(locate);
                 Wifi wifi = wifidb.getWifi(locate);
                 selectedIP.setText(wifi.getWifiMac());
+                IP = wifi.getWifiMac();
                  locationText.setVisibility(View.VISIBLE);
                  locationName.setVisibility(View.VISIBLE);// 와이파이가 선택되면 보입니다.
                  deleteWifi.setVisibility(View.VISIBLE);
