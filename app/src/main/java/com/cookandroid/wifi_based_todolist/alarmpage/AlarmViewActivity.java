@@ -25,8 +25,31 @@ import java.util.ArrayList;
 
 public class AlarmViewActivity extends AppCompatActivity {
 
+    // 사이드 바 관련
     ImageView sideBarButton;
-    DrawerLayout sideBarDrawerView;
+    DrawerLayout sideBarDrawerV;
+    
+    //할 일 목록 가져오기 관련
+    private TodoDB todoDB;
+    private ArrayList<Todo> todos;
+    private WifiDB wifiDB;
+    private ArrayList<Wifi> wifis;
+    private ListView lv_todo;
+    CustomAdapter customAdapter;
+
+    protected void onResume() {
+        super.onResume();
+        //ListView에 할 일목록 가져오기
+        todoDB = new TodoDB(this);
+        todos = todoDB.getTodoList();
+        wifiDB = new WifiDB(this);
+        wifis = wifiDB.getWifiList();
+        customAdapter = new CustomAdapter(todos,this);
+
+        //ListView 등록
+        lv_todo = findViewById(R.id.lv_todoV);
+        lv_todo.setAdapter(customAdapter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +59,17 @@ public class AlarmViewActivity extends AppCompatActivity {
         //ImageView 등록
         sideBarButton = (ImageView) findViewById(R.id.sideBarButton);
         //DrawerLayout 등록
-        sideBarDrawerView = (DrawerLayout) findViewById(R.id.drawerLayoutView);
+        sideBarDrawerV = (DrawerLayout) findViewById(R.id.drawerLayoutV);
 
         //사이드 메뉴 버튼 터치 시 사이드 바 활성화 기능
         sideBarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sideBarDrawerView.openDrawer(Gravity.LEFT);
+                sideBarDrawerV.openDrawer(Gravity.LEFT);
             }
         });
+
+
 
 
     }

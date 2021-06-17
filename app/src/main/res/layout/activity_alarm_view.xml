@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
-    android:id="@+id/drawerLayoutView"
+    android:id="@+id/drawerLayoutV"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,14 +14,15 @@
 
         <include
             layout="@layout/toolbar_main"
-            android:id="@+id/toolBar"
+            android:id="@+id/toolBarV"
             style="@style/toolbar"/> <!-- toolbar_main 툴바를 포함합니다 -->
 
         <LinearLayout
-            android:layout_below="@+id/toolBar"
+            android:layout_below="@+id/toolBarV"
             style="@style/mainDivision">
 
             <ListView
+                android:id="@+id/lv_todoV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" /> <!-- 할 일을 불러올 ListView -->
         </LinearLayout>
