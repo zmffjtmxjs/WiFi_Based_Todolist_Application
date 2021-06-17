@@ -17,14 +17,7 @@
         <include
             layout="@layout/toolbar_main"
             android:id="@+id/toolBar"
-            style="@style/toolbar"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/goSetWiFi"
-            android:text="WiFi 설정" />
+            style="@style/toolbar"/> <!-- toolbar_main 툴바를 포함합니다 -->
 
         <LinearLayout
             android:layout_below="@+id/toolBar"
@@ -34,8 +27,15 @@
             <ListView
                 android:id="@+id/lv_todo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" /> <!-- 할 일을 불러올 ListView -->
         </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/goSetWiFi"
+            android:text="WiFi 설정" /> <!-- WiFi 설정화면으로 이동할 버튼 -->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addToDoButton"
@@ -47,10 +47,10 @@
             android:scaleType="fitCenter"
             android:contentDescription="할일 추가"
             android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true" /> <!-- 할 일 추가 화면 이동 버튼 -->
 
     </RelativeLayout>
 
-    <include layout="@layout/nav_filter_menu" />
+    <include layout="@layout/nav_filter_menu" /> <!-- 사이드 바 -->
 
 </androidx.drawerlayout.widget.DrawerLayout>

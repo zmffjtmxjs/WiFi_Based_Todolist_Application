@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton addToDoButton;
     private ArrayList<Todo> todos;
     private TodoDB todoDB;
-    private CustomAdapter adapter;
 
     ImageView sideBarButton;
     DrawerLayout sideBarDrawer;
