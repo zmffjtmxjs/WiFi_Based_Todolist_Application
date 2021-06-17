@@ -11,11 +11,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="표시할 태그 선택"
+        android:text="표시 조건 선택"
         android:textSize="25sp"
         android:gravity="center" />
 
-    <!-- 태그 리스트와 체크박스 -->
+    <!-- 표시 조건 리스트와 체크박스 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
