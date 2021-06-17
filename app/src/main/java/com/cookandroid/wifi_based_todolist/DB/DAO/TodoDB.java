@@ -53,12 +53,25 @@ public class TodoDB extends SQLiteOpenHelper {
         cursor.close();
         return todo;
     }
+
+    public ArrayList<Todo> getTodoList(String filterCondition){
+        return getTodoList(filterCondition,null);
+    }
     //SELECT 문
-    public ArrayList<Todo> getTodoList() {
+    public ArrayList<Todo> getTodoList(String filterCondition,String wifiInfoInput) {
         ArrayList<Todo> todos = new ArrayList<>();
+        Cursor cursor;
 
         SQLiteDatabase db = getReadableDatabase();//읽기 가능한
-        Cursor cursor = db.rawQuery("SELECT * FROM TodoList ORDER BY date DESC;", null);//가르키는 행위
+        if( null == filterCondition ) {
+            return todos;
+        }else if( filterCondition.equals("all") ){
+            cursor = db.rawQuery("SELECT * FROM TodoList ORDER BY date DESC;", null);//가르키는 행위
+        }else if( filterCondition.equals("ip") ){
+            cursor = db.rawQuery("SELECT * FROM TodoList WHERE wifiInfo ='"+wifiInfoInput+"' ORDER BY date DESC;", null);//가르키는 행위
+        }else{
+            return todos;
+        }
 
         if (cursor.getCount() != 0) {
             //조회한 데이터가 있는 경우
