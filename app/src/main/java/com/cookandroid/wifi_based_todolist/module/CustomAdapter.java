@@ -28,14 +28,14 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup parent) {
         Todo item = todos.get(i);
         final int pos = i;
-        final Context context = viewGroup.getContext();
+        final Context context = parent.getContext();
 
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.item_list,viewGroup,false);
+            view = inflater.inflate(R.layout.item_list,parent,false);
         }
 
         CheckBox checkBox = view.findViewById(R.id.checkBox);
@@ -54,14 +54,12 @@ public class CustomAdapter extends BaseAdapter {
         });
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
                     textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 } else {
                     textView.setPaintFlags(0);
-
                 }
             }
         });

@@ -32,7 +32,7 @@
             style="@style/mainDivision">
 
             <ListView
-                android:id="@+id/rv_todo"
+                android:id="@+id/lv_todo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

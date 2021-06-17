@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
@@ -27,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
     /* TODO (우선순위 : 하)
            사용자가 원하는 조건(분류)를 선택하여 해당하는 할 일만 출력 */
 
-    //recyclerView
-    private ListView rv_todo;
+    //ListView
+    private ListView lv_todo;
     CustomAdapter customAdapter;
 
     private FloatingActionButton addToDoButton;
@@ -44,33 +46,32 @@ public class MainActivity extends AppCompatActivity {
     private WifiDB wifiDB;
     private ArrayList<Wifi> wifis;
 
+    protected void onResume() {
+        super.onResume();
+        //ListView에 할 일목록 가져오기
+        todoDB = new TodoDB(this);
+        todos = todoDB.getTodoList();
+        wifiDB = new WifiDB(this);
+        wifis = wifiDB.getWifiList();
+        customAdapter = new CustomAdapter(todos,this);
+
+        //ListView 등록
+        lv_todo = findViewById(R.id.lv_todo);
+        lv_todo.setAdapter(customAdapter);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toast.makeText(getApplicationContext(), "Main Test", Toast.LENGTH_SHORT).show();
 
         //백그라운드 서비스 계속 작동시키기
         Intent intent = new Intent(
                 getApplicationContext(),
                 BackgroundService.class);
         startService(intent);// 백그라운드 서비스 "BackgroundService"를 시작합니다. 일단 어플이 시작되면 멈추지 않습니다.onStartCommand()가 실행됩니다.
-
-        //DB부분 추가
-        todoDB = new TodoDB(this);
-
-        todos = todoDB.getTodoList();
-
-        wifiDB = new WifiDB(this);
-        wifis = wifiDB.getWifiList();
-
-        customAdapter = new CustomAdapter(todos,this);
-
-
-        //RecyclerView 등록 --6맨--
-        rv_todo = findViewById(R.id.rv_todo);
-        rv_todo.setAdapter(customAdapter);
-
-
 
         //ImageView 등록
         sideBarButton = (ImageView) findViewById(R.id.sideBarButton);
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 //                todo.setMemo(ToDoNote.getText().toString());
 
 //                adapter.addItem(item);
-//                rv_todo.smoothScrollToPosition(0);
+//                lv_todo.smoothScrollToPosition(0);
 
             }
         });
