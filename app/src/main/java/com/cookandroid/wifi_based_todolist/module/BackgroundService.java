@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
+import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.alarmpage.AlarmViewActivity;
 import com.cookandroid.wifi_based_todolist.page.MainActivity;
+
+import java.util.ArrayList;
 
 
 // 서비스 클래스를 구현하려면, Service 를 상속받는다
@@ -45,10 +48,11 @@ public class BackgroundService extends Service {
                         if ("Wifi enabled".equals(NetworkStatus.getConnectivityStatusString(getApplicationContext()))) {//와이파이 연결상태일 경우
                             try {
                                 String ip = IPAddress.getRealIP();
-                                for (int i = 0; i < wifiDB.getWifiList().size(); i++) {
-                                    if (ip.equals(wifiDB.getWifiList().get(i).getWifiMac())) {
+                                ArrayList<Wifi> wifis = wifiDB.getWifiList();
+                                for (int i = 0; i < wifis.size(); i++) {
+                                    if (ip.equals(wifis.get(i).getWifiMac())) {
                                         Intent intent = new Intent(getApplicationContext(), AlarmViewActivity.class);//AlarmViewActivity.class);
-                                        intent.putExtra("ip",ip);
+                                        intent.putExtra("wifiInfo",wifis.get(i).getWifiInfo());
                                         startActivity(intent);
                                     }
                                 }
