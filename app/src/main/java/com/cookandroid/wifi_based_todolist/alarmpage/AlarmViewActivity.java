@@ -25,10 +25,27 @@ import java.util.ArrayList;
 
 public class AlarmViewActivity extends AppCompatActivity {
 
+    ImageView sideBarButton;
+    DrawerLayout sideBarDrawerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_view);
+
+        //ImageView 등록
+        sideBarButton = (ImageView) findViewById(R.id.sideBarButton);
+        //DrawerLayout 등록
+        sideBarDrawerView = (DrawerLayout) findViewById(R.id.drawerLayoutView);
+
+        //사이드 메뉴 버튼 터치 시 사이드 바 활성화 기능
+        sideBarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sideBarDrawerView.openDrawer(Gravity.LEFT);
+            }
+        });
+
 
     }
 
