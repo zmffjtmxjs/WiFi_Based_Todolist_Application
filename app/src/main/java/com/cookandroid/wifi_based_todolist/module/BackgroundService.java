@@ -48,6 +48,7 @@ public class BackgroundService extends Service {
                                 for (int i = 0; i < wifiDB.getWifiList().size(); i++) {
                                     if (ip.equals(wifiDB.getWifiList().get(i).getWifiMac())) {
                                         Intent intent = new Intent(getApplicationContext(), AlarmViewActivity.class);//AlarmViewActivity.class);
+                                        intent.putExtra("ip",ip);
                                         startActivity(intent);
                                     }
                                 }
