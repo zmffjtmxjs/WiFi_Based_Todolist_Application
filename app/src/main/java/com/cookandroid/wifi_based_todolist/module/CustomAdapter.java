@@ -21,12 +21,10 @@ import java.util.ArrayList;
 public class CustomAdapter extends BaseAdapter {
     private ArrayList<Todo> todos;
     private Context context;
-    private TodoDB todoDB;
 
     public CustomAdapter(ArrayList<Todo> todo, Context context) {
+        this.todos = todo;
         this.context = context;
-        todoDB = new TodoDB(context);
-        this.todos = todoDB.getTodoList();
     }
 
     @Override
