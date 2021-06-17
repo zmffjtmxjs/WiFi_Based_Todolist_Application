@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toast.makeText(getApplicationContext(), "Main Test", Toast.LENGTH_SHORT).show();
-
         //백그라운드 서비스 계속 작동시키기
         Intent intent = new Intent(
                 getApplicationContext(),
@@ -106,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
 
 //                adapter.addItem(item);
 //                lv_todo.smoothScrollToPosition(0);
-
             }
         });
 
