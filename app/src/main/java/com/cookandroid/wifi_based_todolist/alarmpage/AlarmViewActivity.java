@@ -39,9 +39,13 @@ public class AlarmViewActivity extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
+
+        Intent intent = getIntent();
+        String ip = intent.getStringExtra("ip");// 작동원인이 된 ip 받음.
+
         //ListView에 할 일목록 가져오기
         todoDB = new TodoDB(this);
-        todos = todoDB.getTodoList();
+        todos = todoDB.getTodoList("ip",ip);// 해당 ip로 검색
         wifiDB = new WifiDB(this);
         wifis = wifiDB.getWifiList();
         customAdapter = new CustomAdapter(todos,this);

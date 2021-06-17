@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         //ListView에 할 일목록 가져오기
         todoDB = new TodoDB(this);
-        todos = todoDB.getTodoList();
+        todos = todoDB.getTodoList("all");
         wifiDB = new WifiDB(this);
         wifis = wifiDB.getWifiList();
         customAdapter = new CustomAdapter(todos,this);
