@@ -2,7 +2,6 @@ package com.cookandroid.wifi_based_todolist.alarmpage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +18,7 @@ import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.page.AddToDoActivity;
-import com.cookandroid.wifi_based_todolist.page.CustomAdapter;
+import com.cookandroid.wifi_based_todolist.module.CustomAdapter;
 import com.cookandroid.wifi_based_todolist.page.SetWiFiActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;

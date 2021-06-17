@@ -4,16 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
@@ -21,7 +17,6 @@ import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.popup.DuePickerActivity;
 import com.cookandroid.wifi_based_todolist.popup.GroupSelector;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -222,5 +217,9 @@ public class AddToDoActivity extends Activity {
 
         AlertDialog msgDlg = msgBuilder.create();
         msgDlg.show();
+    }
+
+    public static Integer setToDoId(int id){
+        return toDoId=id;
     }
 }

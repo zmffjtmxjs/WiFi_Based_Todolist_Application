@@ -1,4 +1,4 @@
-package com.cookandroid.wifi_based_todolist.page;
+package com.cookandroid.wifi_based_todolist.module;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.R;
+import com.cookandroid.wifi_based_todolist.page.AddToDoActivity;
+
 import java.util.ArrayList;
 
 public class CustomAdapter extends BaseAdapter {
@@ -47,7 +49,7 @@ public class CustomAdapter extends BaseAdapter {
         toDoItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddToDoActivity.toDoId = pos + 1;
+                AddToDoActivity.setToDoId(pos + 1);
                 Intent intent = new Intent(view.getContext(), AddToDoActivity.class);
                 view.getContext().startActivity(intent);
             }
