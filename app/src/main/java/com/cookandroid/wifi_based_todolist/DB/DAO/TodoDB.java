@@ -58,7 +58,7 @@ public class TodoDB extends SQLiteOpenHelper {
         ArrayList<Todo> todos = new ArrayList<>();
 
         SQLiteDatabase db = getReadableDatabase();//읽기 가능한
-        Cursor cursor = db.rawQuery("SELECT * FROM TodoList ORDER BY date DESC", null);//가르키는 행위
+        Cursor cursor = db.rawQuery("SELECT * FROM TodoList ORDER BY date DESC;", null);//가르키는 행위
 
         if (cursor.getCount() != 0) {
             //조회한 데이터가 있는 경우
@@ -96,12 +96,12 @@ public class TodoDB extends SQLiteOpenHelper {
     // UPDATE 문
     public void UpdateTodo(String content, String wifiInfo, String date, String time, String memo, int id){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE TodoList SET content = '"+content +"', wifiInfo = '"+wifiInfo +"', date = '"+date +"', time = '"+time +"', memo = '"+memo +"' where id = '"+id +"'");
+        db.execSQL("UPDATE TodoList SET content = '"+content +"', wifiInfo = '"+wifiInfo +"', date = '"+date +"', time = '"+time +"', memo = '"+memo +"' where id = '"+id +"';");
     }
 
     //DELETE 문
     public void DeleteTodo(int id){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM TodoList WHERE id = '"+id +"'");
+        db.execSQL("DELETE FROM TodoList WHERE id = '"+id +"';");
     }
 }
