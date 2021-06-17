@@ -1,33 +1,12 @@
 package com.cookandroid.wifi_based_todolist.module;
 
-import android.app.ActivityManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
-
-import androidx.core.app.NotificationCompat;
-
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
-import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
-import com.cookandroid.wifi_based_todolist.R;
-import com.cookandroid.wifi_based_todolist.alarmpage.AlarmViewActivity;
-import com.cookandroid.wifi_based_todolist.page.AddToDoActivity;
 import com.cookandroid.wifi_based_todolist.page.MainActivity;
-import com.cookandroid.wifi_based_todolist.popup.GroupSelector;
 
-import java.util.List;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 // 서비스 클래스를 구현하려면, Service 를 상속받는다
 public class BackgroundService extends Service {
