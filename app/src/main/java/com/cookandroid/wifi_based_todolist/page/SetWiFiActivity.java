@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
@@ -25,6 +26,7 @@ public class SetWiFiActivity extends Activity {
 
     //DB
     private WifiDB wifidb;
+    private TodoDB tododb;
 
     //............toolbar 관련 요소
     ImageView cancelSetWifi, saveSetWifi;
@@ -48,6 +50,7 @@ public class SetWiFiActivity extends Activity {
         setContentView(R.layout.activity_set_wifi);
 
         wifidb = new WifiDB(this);
+        tododb = new TodoDB(this);
 
         //ImageView 등록
         cancelSetWifi = (ImageView) findViewById(R.id.discard);
@@ -82,7 +85,7 @@ public class SetWiFiActivity extends Activity {
                 if(locate!=null){ // ......수정 절차.
                     if( !locationName.getText().toString().trim().equals("") ) {
                         wifidb.UpdateWifi(IP,locate,locationName.getText().toString());
-                        Toast.makeText(getApplicationContext(), "업데이트 완료.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "업데이트 완료", Toast.LENGTH_SHORT).show();
                         IP=null;
                         locate=null;
                         selectedIP.setText("");
@@ -91,7 +94,7 @@ public class SetWiFiActivity extends Activity {
                         locationText.setVisibility(View.INVISIBLE);
                         deleteWifi.setVisibility(View.INVISIBLE);
                     }else{ // ...수정 조건에 맞지 않는 경우 메시지 출력
-                            Toast.makeText(getApplicationContext(), "공백 입니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "공백 입니다", Toast.LENGTH_SHORT).show();
                     }
                     return;
                 }
@@ -99,10 +102,10 @@ public class SetWiFiActivity extends Activity {
                 if(IP != null && !locationName.getText().toString().trim().equals("") ){
                     for(Wifi wifi : wifidb.getWifiList()){
                         if(IP.equals(wifi.getWifiMac())) {
-                            Toast.makeText(getApplicationContext(), "이미 등록된 적 있는 IP 입니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "이미 등록된 적 있는 IP 입니다", Toast.LENGTH_SHORT).show();
                             return;
                         }else if(locationName.getText().toString().trim().equals(wifi.getWifiInfo())){
-                            Toast.makeText(getApplicationContext(), "기존에 등록된 위치 이름과 중복입니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "기존에 등록된 위치 이름과 중복입니다", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
@@ -157,6 +160,12 @@ public class SetWiFiActivity extends Activity {
         deleteWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ArrayList<Todo> todoList = tododb.getTodoList("all");
+                for (int i=0; i<todoList.size();i++){
+                    if(todoList.get(i).getWifiInfo().equals(locate)){ // 위치를 삭제 하려는데 , 등록된 할 일 중에서 이 위치를 사용하고 있는 위치가 있다면 해당 할 일에 등록된 위치들을 빈 문자열로 변경합니다.
+                        todoList.get(i).setWifiInfo("");
+                    }
+                }
                 wifidb.DeleteWifi(locate);
                 Toast.makeText(getApplicationContext(), "삭제완료|IP:" + IP + "|위치:" + locate, Toast.LENGTH_SHORT).show();
                 locate = null;
