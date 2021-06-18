@@ -65,7 +65,7 @@ public class BackgroundService extends Service {
 
                                 for (int i = 0; i < wifis.size(); i++) {
                                     if (ip.equals(wifis.get(i).getWifiMac())) {
-                                        Intent intent = new Intent(getApplicationContext(), AlarmViewActivity.class);//AlarmViewActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), AlarmViewActivity.class);
                                         intent.putExtra("wifiInfo",wifis.get(i).getWifiInfo());
                                         startActivity(intent);
                                     }
