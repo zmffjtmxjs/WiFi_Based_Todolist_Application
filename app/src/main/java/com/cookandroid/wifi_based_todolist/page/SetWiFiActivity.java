@@ -23,13 +23,8 @@ import java.util.ArrayList;
 
 public class SetWiFiActivity extends Activity {
 
-    //모드 변수입니다. 1은 추가모드 2는 수정모드를 의미합니다.
-    private int mode=1;
-
     //DB
     private WifiDB wifidb;
-    private Wifi wifi;
-    private ArrayList<Wifi> wifis;
 
     //............toolbar 관련 요소
     ImageView cancelSetWifi, saveSetWifi;
@@ -44,7 +39,7 @@ public class SetWiFiActivity extends Activity {
     Button deleteWifi; //불러온 wifi 삭제버튼
 
 
-    String locate; // 위치 관리 팝업창에서 위치를 눌렀을 경우, 현재 수정 혹은 삭제의 대상이 되고 있는 wifiInfo를 뜻합니다.
+    String locate; // 위치 관리 팝업창에서 위치를 눌렀을 경우, 현재 수정 혹은 삭제의 대상이 되고 있는 wifiInfo를 뜻합니다. Null -> 기본 모드 , Null 아니면 -> 수정 모드를 의미합니다.
     String IP; // 가져온 IP 주소입니다.
 
     @Override
@@ -53,8 +48,6 @@ public class SetWiFiActivity extends Activity {
         setContentView(R.layout.activity_set_wifi);
 
         wifidb = new WifiDB(this);
-        wifis = new ArrayList<>();
-        wifi = new Wifi();
 
         //ImageView 등록
         cancelSetWifi = (ImageView) findViewById(R.id.discard);
@@ -82,14 +75,13 @@ public class SetWiFiActivity extends Activity {
             }
         });
 
-        //IP와 위치 이름이 입력되어 있다면 -> 저장작업 / 그렇지 않다면 -> 아무 동작도 하지 않음
-        saveSetWifi.setOnClickListener(new View.OnClickListener() {
+        //locate가 null이면 추가 절차. null이 아니면 수정 절차.
+        saveSetWifi.setOnClickListener(new View.OnClickListener() { //기존 와이파이를 선택후 저장을 눌럿을 경우
             @Override
             public void onClick(View view) {
-                //기존 와이파이를 선택후 저장을 눌럿을 경우
-                if(mode==2){
+                if(locate!=null){ // ......수정 절차.
                     if(IP != null && locationName != null && !locationName.equals("") ) {
-                        wifidb.UpdateTodo(IP, locationName.getText().toString());
+                        wifidb.UpdateWifi(IP,locate,locationName.getText().toString());
                         Toast.makeText(getApplicationContext(), "업데이트 완료.", Toast.LENGTH_SHORT).show();
                         IP=null;
                         locate=null;
@@ -102,12 +94,7 @@ public class SetWiFiActivity extends Activity {
                     finish();
                     return;
                 }
-                //insert DB
-                wifi.setWifiMac(locate);
-                wifi.setWifiInfo(locationName.getText().toString());
-                wifis.add(wifi);
-
-
+                // ......추가 절차.
                 if(IP != null && locationName != null && !locationName.equals("") ){
                     for(Wifi wifi : wifidb.getWifiList()){
                         if(IP.equals(wifi.getWifiMac())) {
@@ -129,8 +116,8 @@ public class SetWiFiActivity extends Activity {
                     System.out.println(locate);
                     System.out.println(locationName);
                 }
-
                 finish();
+                return;
             }
         });
 
@@ -143,7 +130,7 @@ public class SetWiFiActivity extends Activity {
         //연결된 와이파이에서 정보를 가져온다.
         selectWifi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                mode=1;
+                locate=null;
                 Thread thread = new Thread(){//네트워크 작업을 위해서 스레드 작업
                     public void run(){
                         try {
@@ -208,7 +195,6 @@ public class SetWiFiActivity extends Activity {
                  locationText.setVisibility(View.VISIBLE);
                  locationName.setVisibility(View.VISIBLE);// 와이파이가 선택되면 보입니다.
                  deleteWifi.setVisibility(View.VISIBLE);
-                 mode=2;
             }
         }
     }
