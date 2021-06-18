@@ -78,7 +78,7 @@ public class BackgroundService extends Service {
                     try {
                         pre=now;
                         now=NetworkStatus.getConnectivityStatusString(getApplicationContext());
-                        Thread.sleep(2000);
+                        Thread.sleep(3000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
