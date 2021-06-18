@@ -161,13 +161,9 @@ public class SetWiFiActivity extends Activity {
             @Override
             public void onClick(View view) {
                 ArrayList<Todo> todoList = tododb.getTodoList("all");
-                for (int i=0; i<todoList.size();i++){
-                    if(todoList.get(i).getWifiInfo().equals(locate)){ // 위치를 삭제 하려는데 , 등록된 할 일 중에서 이 위치를 사용하고 있는 위치가 있다면 해당 할 일에 등록된 위치들을 빈 문자열로 변경합니다.
-                        todoList.get(i).setWifiInfo("");
-                    }
-                }
+                tododb.WifiCleanInTodo(locate);
                 wifidb.DeleteWifi(locate);
-                Toast.makeText(getApplicationContext(), "삭제완료|IP:" + IP + "|위치:" + locate, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "삭제완료|IP:" + IP + "\n" + "위치:" + locate, Toast.LENGTH_SHORT).show();
                 locate = null;
                 IP = null;
                 selectedIP.setText("");
