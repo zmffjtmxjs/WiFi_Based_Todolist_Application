@@ -80,7 +80,7 @@ public class SetWiFiActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if(locate!=null){ // ......수정 절차.
-                    if(IP != null && locationName != null && !locationName.equals("") ) {
+                    if( !locationName.getText().equals("") ) {
                         wifidb.UpdateWifi(IP,locate,locationName.getText().toString());
                         Toast.makeText(getApplicationContext(), "업데이트 완료.", Toast.LENGTH_SHORT).show();
                         IP=null;
@@ -90,21 +90,23 @@ public class SetWiFiActivity extends Activity {
                         locationName.setVisibility(View.INVISIBLE);
                         locationText.setVisibility(View.INVISIBLE);
                         deleteWifi.setVisibility(View.INVISIBLE);
+                    }else{ // ...수정 조건에 맞지 않는 경우 메시지 출력
+                            Toast.makeText(getApplicationContext(), "공백 입니다.", Toast.LENGTH_SHORT).show();
                     }
-                    finish();
                     return;
                 }
                 // ......추가 절차.
-                if(IP != null && locationName != null && !locationName.equals("") ){
+                if(IP != null && !locationName.getText().equals("") ){
                     for(Wifi wifi : wifidb.getWifiList()){
                         if(IP.equals(wifi.getWifiMac())) {
-                            Toast.makeText(getApplicationContext(), "이미 저장된 wifi입니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "이미 등록된 적 있는 IP 입니다.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }else if(locationName.getText().equals(wifi.getWifiInfo())){
+                            Toast.makeText(getApplicationContext(), "기존에 등록된 위치 이름과 중복입니다.", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
-
-                    wifidb.InsertTodo(IP, locationName.getText().toString());
-
+                    wifidb.InsertWifi(IP, locationName.getText().toString());
                     // 저장 성공할 경우. 첫 상태로 만듭니다.
                     locate = null;
                     IP = null;
@@ -113,11 +115,8 @@ public class SetWiFiActivity extends Activity {
                     locationName.setVisibility(View.INVISIBLE);
                     locationText.setVisibility(View.INVISIBLE);
                     Toast.makeText(getApplicationContext(), "저장 완료", Toast.LENGTH_SHORT).show();
-                    System.out.println(locate);
-                    System.out.println(locationName);
+                    return;
                 }
-                finish();
-                return;
             }
         });
 
@@ -140,7 +139,6 @@ public class SetWiFiActivity extends Activity {
                         }
                     }
                 };
-
                 thread.start();
                 try {
                     thread.join();
@@ -150,7 +148,6 @@ public class SetWiFiActivity extends Activity {
 
                 Toast.makeText(getApplicationContext(), IP + "선택 됨", Toast.LENGTH_SHORT).show(); // IP를 Toast로 띄워줍니다
                 selectedIP.setText("현재 선택 : " + IP); // 선택 된 IP를 보여줍니다.
-
                 locationText.setVisibility(View.VISIBLE);
                 locationName.setVisibility(View.VISIBLE);// 와이파이가 선택되면 보입니다.
             }
@@ -160,8 +157,8 @@ public class SetWiFiActivity extends Activity {
         deleteWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                wifidb.DeleteTodo(locate);
-                Toast.makeText(getApplicationContext(), "삭제 완료." + IP, Toast.LENGTH_SHORT).show();
+                wifidb.DeleteWifi(locate);
+                Toast.makeText(getApplicationContext(), "삭제완료/IP:" + IP + "/위치:" + locate, Toast.LENGTH_SHORT).show();
                 locate = null;
                 IP = null;
                 selectedIP.setText("");
@@ -169,7 +166,6 @@ public class SetWiFiActivity extends Activity {
                 locationName.setVisibility(View.INVISIBLE);
                 locationText.setVisibility(View.INVISIBLE);
                 deleteWifi.setVisibility(View.INVISIBLE);
-                finish();
             }
         });
     }
