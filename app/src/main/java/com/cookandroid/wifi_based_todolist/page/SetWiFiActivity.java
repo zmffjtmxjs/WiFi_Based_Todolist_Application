@@ -80,7 +80,7 @@ public class SetWiFiActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if(locate!=null){ // ......수정 절차.
-                    if( !locationName.getText().equals("") ) {
+                    if( !locationName.getText().toString().trim().equals("") ) {
                         wifidb.UpdateWifi(IP,locate,locationName.getText().toString());
                         Toast.makeText(getApplicationContext(), "업데이트 완료.", Toast.LENGTH_SHORT).show();
                         IP=null;
@@ -96,12 +96,12 @@ public class SetWiFiActivity extends Activity {
                     return;
                 }
                 // ......추가 절차.
-                if(IP != null && !locationName.getText().equals("") ){
+                if(IP != null && !locationName.getText().toString().trim().equals("") ){
                     for(Wifi wifi : wifidb.getWifiList()){
                         if(IP.equals(wifi.getWifiMac())) {
                             Toast.makeText(getApplicationContext(), "이미 등록된 적 있는 IP 입니다.", Toast.LENGTH_SHORT).show();
                             return;
-                        }else if(locationName.getText().equals(wifi.getWifiInfo())){
+                        }else if(locationName.getText().toString().trim().equals(wifi.getWifiInfo())){
                             Toast.makeText(getApplicationContext(), "기존에 등록된 위치 이름과 중복입니다.", Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -158,7 +158,7 @@ public class SetWiFiActivity extends Activity {
             @Override
             public void onClick(View view) {
                 wifidb.DeleteWifi(locate);
-                Toast.makeText(getApplicationContext(), "삭제완료/IP:" + IP + "/위치:" + locate, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "삭제완료|IP:" + IP + "|위치:" + locate, Toast.LENGTH_SHORT).show();
                 locate = null;
                 IP = null;
                 selectedIP.setText("");
