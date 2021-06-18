@@ -76,7 +76,7 @@ public class SetWiFiActivity extends Activity {
         });
 
         //locate가 null이면 추가 절차. null이 아니면 수정 절차.
-        saveSetWifi.setOnClickListener(new View.OnClickListener() { //기존 와이파이를 선택후 저장을 눌럿을 경우
+        saveSetWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(locate!=null){ // ......수정 절차.
@@ -187,14 +187,14 @@ public class SetWiFiActivity extends Activity {
             if(resultCode == RESULT_OK) {
                 //선택한 리스트 뷰의 id값을 가져옴 (DB에 맞게 변경필요)
                 //TODO 와이파이 이름 & IP 보내기
-                 locate = data.getStringExtra("locate");
-                 locationName.setText(locate);
+                locate = data.getStringExtra("locate");
+                IP = data.getStringExtra("IP");
+                locationName.setText(locate);
                 Wifi wifi = wifidb.getWifi(locate);
-                selectedIP.setText(wifi.getWifiMac());
-                IP = wifi.getWifiMac();
-                 locationText.setVisibility(View.VISIBLE);
-                 locationName.setVisibility(View.VISIBLE);// 와이파이가 선택되면 보입니다.
-                 deleteWifi.setVisibility(View.VISIBLE);
+                selectedIP.setText("현재 수정중 : " + wifi.getWifiMac());
+                locationText.setVisibility(View.VISIBLE);
+                locationName.setVisibility(View.VISIBLE);// 와이파이가 선택되면 보입니다.
+                deleteWifi.setVisibility(View.VISIBLE);
             }
         }
     }
