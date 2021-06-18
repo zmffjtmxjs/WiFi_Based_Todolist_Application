@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
@@ -84,23 +86,35 @@ public class AddToDoActivity extends Activity {
         //Button
         deleteToDo = (Button) findViewById(R.id.deleteBtn);
 
-        if (toDoId != 0) {
-            //화면 제목 표시
+        if (toDoId != 0) {      // 할일 리스트에서 클릭하고 들어왔을 때
+            //화면 제목 변경
             Todo todo = tododb.getTodo(toDoId);
 
             titleText.setText("할 일 편집");
 
+            //할일 제목 받아오기
             toDoTitle.setText(todo.getContent());
+
+            //날짜 받아오기
             try {
                 cal.setTime(new SimpleDateFormat("yyyy.MM.dd HH:mm").parse((todo.getDate() + ' ' + todo.getTime())));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
+            //메모 내용 받아오기
             toDoNote.setText(todo.getMemo());
-            toDoGroup.setText(todo.getWifiInfo());
+
+            //표시위치 받아오기
+            if ((todo.getWifiInfo()).equals("")) {
+                toDoGroup.setText("삭제된 위치(새로 등록해주세요.)");
+            } else {
+                toDoGroup.setText(todo.getWifiInfo());
+            }
+
 
             deleteToDo.setVisibility(View.VISIBLE);
-        } else {
+        } else {               // 할일 추가 버튼을 누르고 들어왔을 때
             //화면 제목 표시
             titleText.setText("할 일 추가");
         }
