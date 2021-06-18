@@ -81,9 +81,9 @@ public class WifiDB extends SQLiteOpenHelper {
     }
 
     // UPDATE 문
-    public void UpdateTodo(String wifiMac, String wifiInfo){
+    public void UpdateWifi(String wifiMac, String wifiInfo, String newWifiInfo){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE WifiInfo SET wifiMac = '"+wifiMac +"', wifiInfo = '"+wifiInfo +"' where wifiMac = '"+wifiMac +"'");
+        db.execSQL("UPDATE WifiInfo SET wifiMac = '"+wifiMac +"', wifiInfo = '"+newWifiInfo +"' where wifiInfo = '"+wifiInfo+"'");
     }
 
     //DELETE 문
