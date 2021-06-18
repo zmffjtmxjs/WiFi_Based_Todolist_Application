@@ -57,7 +57,7 @@ public class BackgroundService extends Service {
                                 ArrayList<Wifi> wifis = new ArrayList<Wifi>();
                                 ArrayList<Todo> todos = todoDB.getTodoList("all");
                                 for (int i = 0;i<todos.size();i++){                             // 할 일 목록에 설정된 위치만 비교합니다.
-                                    Wifi wifi = wifiDB.getWifi(todos.get(i).getWifiInfo());
+                                    Wifi wifi = wifiDB.getWifi(todos.get(i).getWifiInfo()); // 할 일 중에는 등록된 위치가 ""인 것도 있기 때문에 null 체크 해줘야 합니다.
                                     if(wifi!=null) {
                                         wifis.add(wifi);
                                     }
