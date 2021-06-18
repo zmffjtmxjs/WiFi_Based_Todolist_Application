@@ -58,7 +58,7 @@ public class TodoDB extends SQLiteOpenHelper {
         return getTodoList(filterCondition,null);
     }
     //SELECT 문
-    public ArrayList<Todo> getTodoList(String filterCondition,String wifiInfoInput) {
+    public ArrayList<Todo> getTodoList(String filterCondition,String wifiInfoInput) { // 필터 조건에 해당하는 할 일 목록을 불러옵니다.
         ArrayList<Todo> todos = new ArrayList<>();
         Cursor cursor;
 

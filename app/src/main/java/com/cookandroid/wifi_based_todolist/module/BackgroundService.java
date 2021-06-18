@@ -4,11 +4,15 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+
+import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
+import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.alarmpage.AlarmViewActivity;
 import com.cookandroid.wifi_based_todolist.page.MainActivity;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -16,6 +20,7 @@ import java.util.ArrayList;
 public class BackgroundService extends Service {
 
     WifiDB wifiDB;
+    TodoDB todoDB;
     String pre;
     String now;
 
@@ -39,6 +44,7 @@ public class BackgroundService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // 서비스가 호출될 때마다 실행
         wifiDB = new WifiDB(this);
+        todoDB = new TodoDB(this);
         now=NetworkStatus.getConnectivityStatusString(getApplicationContext());
         pre=now;
         new Thread() {
@@ -48,7 +54,15 @@ public class BackgroundService extends Service {
                         if ("Wifi enabled".equals(NetworkStatus.getConnectivityStatusString(getApplicationContext()))) {//와이파이 연결상태일 경우
                             try {
                                 String ip = IPAddress.getRealIP();
-                                ArrayList<Wifi> wifis = wifiDB.getWifiList();
+                                ArrayList<Wifi> wifis = new ArrayList<Wifi>();
+                                ArrayList<Todo> todos = todoDB.getTodoList("all");
+                                for (int i = 0;i<todos.size();i++){                             // 할 일 목록에 설정된 위치만 비교합니다.
+                                    Wifi wifi = wifiDB.getWifi(todos.get(i).getWifiInfo());
+                                    if(wifi!=null) {
+                                        wifis.add(wifi);
+                                    }
+                                }
+
                                 for (int i = 0; i < wifis.size(); i++) {
                                     if (ip.equals(wifis.get(i).getWifiMac())) {
                                         Intent intent = new Intent(getApplicationContext(), AlarmViewActivity.class);//AlarmViewActivity.class);
@@ -64,7 +78,7 @@ public class BackgroundService extends Service {
                     try {
                         pre=now;
                         now=NetworkStatus.getConnectivityStatusString(getApplicationContext());
-                        Thread.sleep(1000);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
