@@ -85,8 +85,6 @@ public class GroupSelector extends Activity {
         wifiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), String.valueOf(preWifi.get(position)), Toast.LENGTH_SHORT).show();
-
                 //리스트 뷰의 위치를 preWifi 배열의 인덱스 값으로 사용하여 정보 추출 (DB에 맞게 변경 필요 시 자유롭게 바꿀 것)
                 Intent intent = new Intent();
                 intent.putExtra("locate",  String.valueOf(preWifi.get(position)));
