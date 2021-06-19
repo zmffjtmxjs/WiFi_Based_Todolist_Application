@@ -10,7 +10,7 @@ public class Todo {
     private String date;
     private String time;
     private String memo;
-    private boolean checked;
+    private int checked;
 
     public int getId() {
         return id;
@@ -60,11 +60,7 @@ public class Todo {
         this.memo = memo;
     }
 
-    public boolean isChecked() {
-        return checked;
-    }
+    public int getChecked() { return checked; }
 
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
+    public void setChecked(int checked) { this.checked = checked; }
 }
