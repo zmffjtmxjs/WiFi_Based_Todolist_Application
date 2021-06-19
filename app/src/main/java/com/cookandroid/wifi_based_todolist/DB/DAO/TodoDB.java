@@ -117,4 +117,10 @@ public class TodoDB extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM TodoList WHERE id = '"+id +"';");
     }
+
+    // 할일에 등록된 삭제된 wifi를 공백으로 변경
+    public void WifiCleanInTodo(String wifiInfo) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE TodoList SET wifiInfo = '" + "' WHERE wifiInfo = '" + wifiInfo + "';");
+    }
 }
