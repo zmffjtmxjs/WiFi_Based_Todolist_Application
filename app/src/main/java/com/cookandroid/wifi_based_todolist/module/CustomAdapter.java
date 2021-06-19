@@ -10,7 +10,12 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.page.AddToDoActivity;
@@ -20,6 +25,9 @@ import java.util.ArrayList;
 public class CustomAdapter extends BaseAdapter {
     private ArrayList<Todo> todos;
     private Context context;
+
+    private TodoDB tododb;
+
 
     public CustomAdapter(ArrayList<Todo> todo, Context context) {
         this.todos = todo;
@@ -43,10 +51,19 @@ public class CustomAdapter extends BaseAdapter {
 
         textView.setText(item.getContent());
 
+        if(item.getChecked() == 1) {
+            checkBox.setChecked(true);
+            textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            checkBox.setChecked(false);
+        }
+
+
+
         toDoItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddToDoActivity.setToDoId(pos + 1);
+                AddToDoActivity.setToDoId(item.getId());
                 Intent intent = new Intent(view.getContext(), AddToDoActivity.class);
                 view.getContext().startActivity(intent);
             }
@@ -55,10 +72,14 @@ public class CustomAdapter extends BaseAdapter {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                tododb = new TodoDB(parent.getContext());
                 if (isChecked) {
                     textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    tododb.UpadateCheck(item.getId(), 1);
                 } else {
                     textView.setPaintFlags(0);
+                    tododb.UpadateCheck(item.getId(), 0);
+
                 }
             }
         });
