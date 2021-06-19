@@ -16,6 +16,7 @@ import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
+import com.cookandroid.wifi_based_todolist.module.AlarmSetting;
 import com.cookandroid.wifi_based_todolist.module.BackgroundService;
 import com.cookandroid.wifi_based_todolist.module.CustomAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -66,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
                 getApplicationContext(),
                 BackgroundService.class);
         startService(intent);// 백그라운드 서비스 "BackgroundService"를 시작합니다. 일단 어플이 시작되면 멈추지 않습니다.onStartCommand()가 실행됩니다.
+        //알람 설정하기
+        Intent intent2 = new Intent(
+                getApplicationContext(),
+                AlarmSetting.class);
+        startService(intent2);
+
 
         //ImageView 등록
         sideBarButton = (ImageView) findViewById(R.id.sideBarButton);
