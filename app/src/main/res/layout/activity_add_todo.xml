@@ -41,12 +41,35 @@
             android:text="2021-05-30 (일)  오전 10시49분"/>
 
         <!-- Todo 알람 설정 (우선순위 : 하) -->
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="알람" />-->
-
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="알람" />
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/alarmGroup">
+                <RadioButton
+                    android:id="@+id/NO"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="없음"
+                    android:checked="true"/>
+                <RadioButton
+                    android:id="@+id/ONE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="한 번만"/>
+                <RadioButton
+                    android:id="@+id/WEEK"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="주 마다"/>
+            </RadioGroup>
         <!-- 메모 작성 -->
         <TextView
             android:layout_width="match_parent"

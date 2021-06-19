@@ -9,8 +9,9 @@ public class Todo {
     private String wifiInfo;
     private String date;
     private String time;
+    private int alarm;
     private String memo;
-    private boolean checked;
+    private int checked;
 
     public int getId() {
         return id;
@@ -52,6 +53,14 @@ public class Todo {
         this.time = time;
     }
 
+    public int getAlarm() {
+        return alarm;
+    }
+
+    public void setAlarm(int alarm) {
+        this.alarm = alarm;
+    }
+
     public String getMemo() {
         return memo;
     }
@@ -60,11 +69,7 @@ public class Todo {
         this.memo = memo;
     }
 
-    public boolean isChecked() {
-        return checked;
-    }
+    public int getChecked() { return checked; }
 
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
+    public void setChecked(int checked) { this.checked = checked; }
 }

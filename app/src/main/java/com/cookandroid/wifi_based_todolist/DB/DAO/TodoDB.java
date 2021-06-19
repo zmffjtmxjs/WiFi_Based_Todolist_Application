@@ -21,13 +21,14 @@ public class TodoDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {//DB가 생성됬을 때 호출
-        db.execSQL("CREATE TABLE IF NOT EXISTS TodoList (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, memo TEXT, wifiInfo TEXT NOT NULL);");//id는 pk, 자동으로 하나씩 증가
+        db.execSQL("CREATE TABLE IF NOT EXISTS TodoList (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, alarm INTEGER, memo TEXT, wifiInfo TEXT NOT NULL, checked INTEGER);");//id는 pk, 자동으로 하나씩 증가
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onCreate(db);
     }
+
     public Todo getTodo(int i){
         Todo todo=null;
         SQLiteDatabase db = getReadableDatabase();
@@ -39,7 +40,9 @@ public class TodoDB extends SQLiteOpenHelper {
                 String wifiInfo = cursor.getString(cursor.getColumnIndex("wifiInfo"));
                 String date = cursor.getString(cursor.getColumnIndex("date"));
                 String time = cursor.getString(cursor.getColumnIndex("time"));
+                int alarm = cursor.getInt(cursor.getColumnIndex("alarm"));
                 String memo = cursor.getString(cursor.getColumnIndex("memo"));
+                int checked = cursor.getInt(cursor.getColumnIndex("checked"));
 
                 todo = new Todo();
                 todo.setId(id);
@@ -47,7 +50,9 @@ public class TodoDB extends SQLiteOpenHelper {
                 todo.setWifiInfo(wifiInfo);
                 todo.setDate(date);
                 todo.setTime(time);
+                todo.setAlarm(alarm);
                 todo.setMemo(memo);
+                todo.setChecked(checked);
             }
         }
         cursor.close();
@@ -81,7 +86,9 @@ public class TodoDB extends SQLiteOpenHelper {
                 String wifiInfo = cursor.getString(cursor.getColumnIndex("wifiInfo"));
                 String date = cursor.getString(cursor.getColumnIndex("date"));
                 String time = cursor.getString(cursor.getColumnIndex("time"));
+                int alarm = cursor.getInt(cursor.getColumnIndex("alarm"));
                 String memo = cursor.getString(cursor.getColumnIndex("memo"));
+                int checked = cursor.getInt(cursor.getColumnIndex("checked"));
 
                 Todo todo = new Todo();
                 todo.setId(id);
@@ -89,7 +96,9 @@ public class TodoDB extends SQLiteOpenHelper {
                 todo.setWifiInfo(wifiInfo);
                 todo.setDate(date);
                 todo.setTime(time);
+                todo.setAlarm(alarm);
                 todo.setMemo(memo);
+                todo.setChecked(checked);
                 todos.add(todo);
             }
         }
@@ -101,15 +110,25 @@ public class TodoDB extends SQLiteOpenHelper {
     //여기까지 06.03 수정완료
 
     //INSERT 문
-    public void InsertTodo(String content, String date, String time, String memo, String wifiInfo){
+    public void InsertTodo(String content, String date, String time,int alarm ,String memo, String wifiInfo){
         SQLiteDatabase db = getWritableDatabase();//쓰기가 가능한
-        db.execSQL("INSERT INTO TodoList (content, date, time, memo, wifiInfo) VALUES('"+content +"','"+date +"','"+time +"','"+memo +"','"+wifiInfo +"');");
+        db.execSQL("INSERT INTO TodoList (content, date, time, alarm, memo, wifiInfo) VALUES('"+content +"','"+date +"','"+time +"','"+alarm+"','"+memo +"','"+wifiInfo +"');");
     }
 
     // UPDATE 문
-    public void UpdateTodo(String content, String wifiInfo, String date, String time, String memo, int id){
+    public void UpdateTodo(String content, String wifiInfo, String date, String time,int alarm, String memo, int id){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE TodoList SET content = '"+content +"', wifiInfo = '"+wifiInfo +"', date = '"+date +"', time = '"+time +"', memo = '"+memo +"' where id = '"+id +"';");
+        db.execSQL("UPDATE TodoList SET content = '"+content +"', wifiInfo = '"+wifiInfo +"', date = '"+date +"', time = '"+time +"', alarm = '"+alarm+"',memo = '"+memo +"' where id = '"+id +"';");
+    }
+
+    public void CheckTodo(String wifiInfo){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE TodoList SET checked = '1' where wifiInfo = '"+wifiInfo+"'");
+    }
+
+    public void UnCheckTodo(String wifiInfo){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE TodoList SET checked = '0' where wifiInfo = '"+wifiInfo+"'");
     }
 
     //DELETE 문
