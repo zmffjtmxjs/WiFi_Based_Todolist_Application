@@ -1,31 +1,24 @@
 package com.cookandroid.wifi_based_todolist.module;
 
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-
-import androidx.core.app.NotificationCompat;
 
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
-import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
-import com.cookandroid.wifi_based_todolist.R;
-import com.cookandroid.wifi_based_todolist.alarmpage.AlarmViewActivity;
+import com.cookandroid.wifi_based_todolist.page.AddToDoActivity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 // 서비스 클래스를 구현하려면, Service 를 상속받는다
 public class AlarmService extends Service {
-
     WifiDB wifiDB;
     TodoDB todoDB;
     AlarmManager mAlarmManager;
@@ -48,22 +41,17 @@ public class AlarmService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d("test","하하 AlarmService");
         // 서비스가 호출될 때마다 실행
-        wifiDB = new WifiDB(this);
-        todoDB = new TodoDB(this);
-        ArrayList<Todo> todos = todoDB.getTodoList("all");
-        ArrayList<Todo> alarmTodos = new ArrayList<Todo>();
-        for(int i = 0 ; i < todos.size() ; i++){
-            if(todos.get(i).getAlarm()==1 || todos.get(i).getAlarm()==2){
-                alarmTodos.add(todos.get(i));
-            }
+        Bundle extras = intent.getExtras();
+        if(extras != null)
+        {
+            int id = extras.getInt("id");
+            AddToDoActivity.setToDoId(id);
+            Intent intent2 = new Intent(this, AddToDoActivity.class);
+            this.startActivity(intent2);
         }
 
-        new Thread() {
-            public void run() {
-
-            }
-        }.start();
         return super.onStartCommand(intent, flags, startId);
     }
 
