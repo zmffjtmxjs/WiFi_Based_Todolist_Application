@@ -85,7 +85,7 @@ public class AlarmSetting extends Service {
                             this,
                             i,
                             mAlarmIntent,
-                            PendingIntent.FLAG_UPDATE_CURRENT
+                            PendingIntent.FLAG_CANCEL_CURRENT
                     );
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

@@ -47,7 +47,7 @@ public class AlarmService extends Service {
         Bundle extras = intent.getExtras();
         if(extras != null)
         {
-            int id = extras.getInt("id");
+            String id = String.valueOf(extras.getInt("id"));
             Intent intent2 = new Intent(this, AlarmViewActivity.class);
             intent2.putExtra("id",id);
             this.startActivity(intent2);

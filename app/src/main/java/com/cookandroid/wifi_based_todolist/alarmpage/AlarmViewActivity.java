@@ -48,7 +48,7 @@ public class AlarmViewActivity extends AppCompatActivity {
         if(id == null) {
             todos = todoDB.getTodoList("wifiInfo", wifiInfo);// 해당 wifiInfo로 검색
         }else{
-            todos = todoDB.getTodoList("id", id);// 해당 wifiInfo로 검색
+            todos = todoDB.getTodoList("id", String.valueOf(id));// 해당 wifiInfo로 검색
         }
         customAdapter = new CustomAdapter(todos,this);
 
