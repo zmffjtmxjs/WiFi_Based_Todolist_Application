@@ -19,6 +19,14 @@
         <activity android:name=".alarmpage.AlarmViewActivity"></activity>
 
         <service
+            android:name=".module.AlarmService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".module.AlarmSetting"
+            android:enabled="true"
+            android:exported="true" />
+        <service
             android:name=".module.BackgroundService"
             android:enabled="true"
             android:exported="true" />
