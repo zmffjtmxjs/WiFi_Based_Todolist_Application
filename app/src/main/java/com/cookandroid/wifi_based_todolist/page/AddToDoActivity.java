@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,8 @@ public class AddToDoActivity extends Activity {
     TextView titleText, pickDueDate, toDoGroup;
     EditText toDoTitle, toDoNote;
     Button deleteToDo;
+    RadioGroup alarmGroup;
+    RadioButton NO,ONE,WEEK;
 
     final Calendar cal = Calendar.getInstance();
 
@@ -85,6 +89,12 @@ public class AddToDoActivity extends Activity {
         toDoNote = (EditText) findViewById(R.id.ToDoNote);
         //Button
         deleteToDo = (Button) findViewById(R.id.deleteBtn);
+        //RadioGroup
+        alarmGroup = (RadioGroup) findViewById(R.id.alarmGroup);
+        //RadioButton
+        NO = (RadioButton) findViewById(R.id.NO);
+        ONE = (RadioButton) findViewById(R.id.ONE);
+        WEEK = (RadioButton) findViewById(R.id.WEEK);
 
         if (toDoId != 0) {      // 할일 리스트에서 클릭하고 들어왔을 때
             //화면 제목 변경
@@ -101,6 +111,9 @@ public class AddToDoActivity extends Activity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            
+            //알람 설정 받아오기
+
 
             //메모 내용 받아오기
             toDoNote.setText(todo.getMemo());

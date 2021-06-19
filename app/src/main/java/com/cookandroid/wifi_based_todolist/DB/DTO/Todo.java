@@ -9,6 +9,7 @@ public class Todo {
     private String wifiInfo;
     private String date;
     private String time;
+    private int alarm;
     private String memo;
     private int checked;
 
@@ -50,6 +51,14 @@ public class Todo {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getAlarm() {
+        return alarm;
+    }
+
+    public void setAlarm(int alarm) {
+        this.alarm = alarm;
     }
 
     public String getMemo() {
