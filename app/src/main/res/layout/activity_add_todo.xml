@@ -54,7 +54,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="없음"/>
+                    android:text="없음"
+                    android:checked="true"/>
                 <RadioButton
                     android:id="@+id/ONE"
                     android:layout_width="wrap_content"
