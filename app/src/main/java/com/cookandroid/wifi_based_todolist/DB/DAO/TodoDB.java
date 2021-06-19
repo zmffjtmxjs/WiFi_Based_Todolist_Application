@@ -96,6 +96,7 @@ public class TodoDB extends SQLiteOpenHelper {
                 todo.setWifiInfo(wifiInfo);
                 todo.setDate(date);
                 todo.setTime(time);
+                todo.setAlarm(alarm);
                 todo.setMemo(memo);
                 todo.setChecked(checked);
                 todos.add(todo);
