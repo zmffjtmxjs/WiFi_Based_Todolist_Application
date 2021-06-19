@@ -43,15 +43,12 @@ public class MainActivity extends AppCompatActivity {
 
     //DB부분 추가
     private WifiDB wifiDB;
-    private ArrayList<Wifi> wifis;
 
     protected void onResume() {
         super.onResume();
         //ListView에 할 일목록 가져오기
         todoDB = new TodoDB(this);
         todos = todoDB.getTodoList("all");
-        wifiDB = new WifiDB(this);
-        wifis = wifiDB.getWifiList();
         customAdapter = new CustomAdapter(todos,this);
 
         //ListView 등록
