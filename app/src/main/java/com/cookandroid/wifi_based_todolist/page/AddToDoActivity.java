@@ -19,6 +19,7 @@ import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
+import com.cookandroid.wifi_based_todolist.module.AlarmSetting;
 import com.cookandroid.wifi_based_todolist.popup.DuePickerActivity;
 import com.cookandroid.wifi_based_todolist.popup.GroupSelector;
 import java.text.ParseException;
@@ -67,6 +68,8 @@ public class AddToDoActivity extends Activity {
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_add_todo);
+
+        Intent intent2 = new Intent(this,AlarmSetting.class);
 
         //DB
         //아직 todo 저장이 없음
@@ -187,9 +190,11 @@ public class AddToDoActivity extends Activity {
 
                 if(toDoId == 0) {     //할일 추가 버튼을 통해서 들어온 상태일때
                     tododb.InsertTodo(getTitle,getDate,getTime,getAlarm,getToDoNote,getToDoGroup);
+                    startService(intent2);
                     finish();
                 } else {              //리스트뷰 터치를 통해서 들어온 상태일때
                     tododb.UpdateTodo(getTitle,getToDoGroup,getDate,getTime,getAlarm,getToDoNote, toDoId);
+                    startService(intent2);
                     finish();
                 }
 

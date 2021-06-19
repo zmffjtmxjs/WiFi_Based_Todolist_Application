@@ -42,6 +42,7 @@ public class BackgroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d("test","하하 BackgroundService");
         // 서비스가 호출될 때마다 실행
         wifiDB = new WifiDB(this);
         todoDB = new TodoDB(this);
@@ -50,6 +51,7 @@ public class BackgroundService extends Service {
         new Thread() {
             public void run() {
                 while (true) {
+                    Log.d("test","하하 BackgroundService2");
                     if(!pre.equals(now)) {
                         if ("Wifi enabled".equals(NetworkStatus.getConnectivityStatusString(getApplicationContext()))) {//와이파이 연결상태일 경우
                             try {
