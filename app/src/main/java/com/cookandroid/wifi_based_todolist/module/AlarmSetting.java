@@ -21,6 +21,7 @@ import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
 import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.alarmpage.AlarmViewActivity;
+import com.cookandroid.wifi_based_todolist.receiver.AlarmReceiver;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -54,7 +55,6 @@ public class AlarmSetting extends Service {
         // 서비스가 호출될 때마다 실행
         wifiDB = new WifiDB(this);
         todoDB = new TodoDB(this);
-        Context c = this;
         ArrayList<Todo> todos = todoDB.getTodoList("all");
         ArrayList<Todo> alarmTodos = new ArrayList<Todo>();
 
@@ -73,25 +73,29 @@ public class AlarmSetting extends Service {
             mCalendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(time[0]));
             mCalendar.set(Calendar.MINUTE,Integer.parseInt(time[1]));
 
-            Intent mAlarmIntent = new Intent("com.test.alarmtestous.ALARM_START");
+            AlarmManager mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+            Intent mAlarmIntent = new Intent(this, AlarmReceiver.class);
             Bundle bundle = new Bundle();
             bundle.putInt("id",alarmTodos.get(i).getId());
             intent.putExtras(bundle);
 
             PendingIntent mPendingIntent =
                     PendingIntent.getBroadcast(
-                            c,
+                            this,
                             i,
                             mAlarmIntent,
                             PendingIntent.FLAG_UPDATE_CURRENT
                     );
 
-            AlarmManager mAlarmManager = (AlarmManager) getSystemService(c.ALARM_SERVICE);
-            mAlarmManager.set(
-                    AlarmManager.RTC_WAKEUP,
-                    mCalendar.getTimeInMillis(),
-                    mPendingIntent
-            );
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mAlarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), mPendingIntent);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), mPendingIntent);
+            } else {
+                mAlarmManager.set(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), mPendingIntent);
+            }
+
         }
 
         return super.onStartCommand(intent, flags, startId);
