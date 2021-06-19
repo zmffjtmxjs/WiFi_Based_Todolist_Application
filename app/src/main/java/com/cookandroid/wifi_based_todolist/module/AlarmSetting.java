@@ -80,12 +80,19 @@ public class AlarmSetting extends Service {
             bundle.putInt("id",alarmTodos.get(i).getId());
             intent.putExtras(bundle);
 
+            Intent p = new Intent(this, AlarmReceiver.class);
+            PendingIntent sender = PendingIntent.getBroadcast(this, i, p, PendingIntent.FLAG_UPDATE_CURRENT);
+            if (sender != null) {
+                mAlarmManager.cancel(sender);
+                sender.cancel();
+            }
+
             PendingIntent mPendingIntent =
                     PendingIntent.getBroadcast(
                             this,
                             i,
                             mAlarmIntent,
-                            PendingIntent.FLAG_CANCEL_CURRENT
+                            PendingIntent.FLAG_UPDATE_CURRENT
                     );
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
