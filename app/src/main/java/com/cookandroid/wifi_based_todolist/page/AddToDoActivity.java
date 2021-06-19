@@ -35,6 +35,7 @@ public class AddToDoActivity extends Activity {
     EditText toDoTitle, toDoNote;
     Button deleteToDo;
     RadioGroup alarmGroup;
+    RadioButton NO,ONE,WEEK;
 
     final Calendar cal = Calendar.getInstance();
 
@@ -90,6 +91,10 @@ public class AddToDoActivity extends Activity {
         deleteToDo = (Button) findViewById(R.id.deleteBtn);
         //RadioGroup
         alarmGroup = (RadioGroup) findViewById(R.id.alarmGroup);
+        //RadioButton
+        NO = (RadioButton) findViewById(R.id.NO);
+        ONE = (RadioButton) findViewById(R.id.ONE);
+        WEEK = (RadioButton) findViewById(R.id.WEEK);
 
         if (toDoId != 0) {      // 할일 리스트에서 클릭하고 들어왔을 때
             //화면 제목 변경
@@ -108,7 +113,16 @@ public class AddToDoActivity extends Activity {
             }
             
             //알람 설정 받아오기
-
+            switch (todo.getAlarm()){
+                case 1:
+                    ONE.setChecked(true);
+                    break;
+                case 2:
+                    WEEK.setChecked(true);
+                    break;
+                default:
+                    NO.setChecked(true);
+            }
 
             //메모 내용 받아오기
             toDoNote.setText(todo.getMemo());
@@ -150,9 +164,6 @@ public class AddToDoActivity extends Activity {
                 String getTime = new SimpleDateFormat("HH:mm").format(cal.getTime());
                 int getAlarm;
                 switch (alarmGroup.getCheckedRadioButtonId()){
-                    case R.id.NO:
-                        getAlarm = 0;
-                        break;
                     case R.id.ONE:
                         getAlarm = 1;
                         break;
