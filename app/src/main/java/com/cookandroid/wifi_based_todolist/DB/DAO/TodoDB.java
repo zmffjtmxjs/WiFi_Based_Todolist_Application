@@ -112,7 +112,7 @@ public class TodoDB extends SQLiteOpenHelper {
     //INSERT 문
     public void InsertTodo(String content, String date, String time,int alarm ,String memo, String wifiInfo){
         SQLiteDatabase db = getWritableDatabase();//쓰기가 가능한
-        db.execSQL("INSERT INTO TodoList (content, date, time, alarm, memo, wifiInfo) VALUES('"+content +"','"+date +"','"+time +"','"+alarm+"','"+memo +"','"+wifiInfo +"');");
+        db.execSQL("INSERT INTO TodoList (content, date, time, alarm, memo, wifiInfo, checked) VALUES('"+content +"','"+date +"','"+time +"','"+alarm+"','"+memo +"','"+wifiInfo +"','0');");
     }
 
     // UPDATE 문
@@ -137,9 +137,15 @@ public class TodoDB extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM TodoList WHERE id = '"+id +"';");
     }
 
-    // 할일에 등록된 삭제된 wifi를 공백으로 변경
+    //할일에 등록된 삭제된 wifi를 공백으로 변경하는 UPDATE문
     public void WifiCleanInTodo(String wifiInfo) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("UPDATE TodoList SET wifiInfo = '" + "' WHERE wifiInfo = '" + wifiInfo + "';");
+    }
+
+    //할일 완료 체크 박스 클릭 시 동작하는 UPDATE 문
+    public void UpadateCheck(int id, int check) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE TodoList SET checked = '" + check + "' WHERE id = '" + id + "';");
     }
 }
