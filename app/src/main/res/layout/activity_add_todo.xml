@@ -68,7 +68,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="주 마다"/>
+                    android:text="주 마다"
+                    android:enabled="false"/>
             </RadioGroup>
         <!-- 메모 작성 -->
         <TextView
