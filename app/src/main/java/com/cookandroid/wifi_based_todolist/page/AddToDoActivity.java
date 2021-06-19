@@ -35,7 +35,6 @@ public class AddToDoActivity extends Activity {
     EditText toDoTitle, toDoNote;
     Button deleteToDo;
     RadioGroup alarmGroup;
-    RadioButton NO,ONE,WEEK;
 
     final Calendar cal = Calendar.getInstance();
 
@@ -91,10 +90,6 @@ public class AddToDoActivity extends Activity {
         deleteToDo = (Button) findViewById(R.id.deleteBtn);
         //RadioGroup
         alarmGroup = (RadioGroup) findViewById(R.id.alarmGroup);
-        //RadioButton
-        NO = (RadioButton) findViewById(R.id.NO);
-        ONE = (RadioButton) findViewById(R.id.ONE);
-        WEEK = (RadioButton) findViewById(R.id.WEEK);
 
         if (toDoId != 0) {      // 할일 리스트에서 클릭하고 들어왔을 때
             //화면 제목 변경
@@ -153,6 +148,20 @@ public class AddToDoActivity extends Activity {
                 String getTitle = String.valueOf(toDoTitle.getText());
                 String getDate = new SimpleDateFormat("yyyy.MM.dd").format(cal.getTime());
                 String getTime = new SimpleDateFormat("HH:mm").format(cal.getTime());
+                int getAlarm;
+                switch (alarmGroup.getCheckedRadioButtonId()){
+                    case R.id.NO:
+                        getAlarm = 0;
+                        break;
+                    case R.id.ONE:
+                        getAlarm = 1;
+                        break;
+                    case R.id.WEEK:
+                        getAlarm = 2;
+                        break;
+                    default:
+                        getAlarm = 0;
+                }
                 String getToDoNote = String.valueOf(toDoNote.getText());
                 String getToDoGroup = String.valueOf(toDoGroup.getText());
 
@@ -161,14 +170,15 @@ public class AddToDoActivity extends Activity {
                 todo.setDate(getDate);
                 todo.setTime(getTime);
                 todo.setMemo(getToDoNote);
+                todo.setAlarm(getAlarm);
                 todo.setWifiInfo(getToDoGroup);
                 todos.add(todo);
 
                 if(toDoId == 0) {     //할일 추가 버튼을 통해서 들어온 상태일때
-                    tododb.InsertTodo(getTitle,getDate,getTime,getToDoNote,getToDoGroup);
+                    tododb.InsertTodo(getTitle,getDate,getTime,getAlarm,getToDoNote,getToDoGroup);
                     finish();
                 } else {              //리스트뷰 터치를 통해서 들어온 상태일때
-                    tododb.UpdateTodo(getTitle,getToDoGroup,getDate,getTime,getToDoNote, toDoId);
+                    tododb.UpdateTodo(getTitle,getToDoGroup,getDate,getTime,getAlarm,getToDoNote, toDoId);
                     finish();
                 }
 
