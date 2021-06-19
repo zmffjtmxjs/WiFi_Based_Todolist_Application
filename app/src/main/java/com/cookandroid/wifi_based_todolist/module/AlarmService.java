@@ -12,6 +12,7 @@ import android.util.Log;
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
+import com.cookandroid.wifi_based_todolist.alarmpage.AlarmViewActivity;
 import com.cookandroid.wifi_based_todolist.page.AddToDoActivity;
 
 import java.util.ArrayList;
@@ -47,8 +48,8 @@ public class AlarmService extends Service {
         if(extras != null)
         {
             int id = extras.getInt("id");
-            AddToDoActivity.setToDoId(id);
-            Intent intent2 = new Intent(this, AddToDoActivity.class);
+            Intent intent2 = new Intent(this, AlarmViewActivity.class);
+            intent2.putExtra("id",id);
             this.startActivity(intent2);
         }
 

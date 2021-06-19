@@ -74,6 +74,8 @@ public class TodoDB extends SQLiteOpenHelper {
             cursor = db.rawQuery("SELECT * FROM TodoList ORDER BY date DESC;", null);//가르키는 행위
         }else if( filterCondition.equals("wifiInfo") ){
             cursor = db.rawQuery("SELECT * FROM TodoList WHERE wifiInfo ='"+wifiInfoInput+"' ORDER BY date DESC;", null);//가르키는 행위
+        }else if( filterCondition.equals("id") ){
+            cursor = db.rawQuery("SELECT * FROM TodoList WHERE id ='"+wifiInfoInput+"' ORDER BY date DESC;", null);//가르키는 행위
         }else{
             return todos;
         }
