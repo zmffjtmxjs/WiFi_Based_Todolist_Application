@@ -21,13 +21,14 @@ public class TodoDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {//DB가 생성됬을 때 호출
-        db.execSQL("CREATE TABLE IF NOT EXISTS TodoList (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, memo TEXT, wifiInfo TEXT NOT NULL);");//id는 pk, 자동으로 하나씩 증가
+        db.execSQL("CREATE TABLE IF NOT EXISTS TodoList (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL, date TEXT NOT NULL, time TEXT NOT NULL, memo TEXT, wifiInfo TEXT NOT NULL, checked INTEGER);");//id는 pk, 자동으로 하나씩 증가
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onCreate(db);
     }
+
     public Todo getTodo(int i){
         Todo todo=null;
         SQLiteDatabase db = getReadableDatabase();
@@ -40,6 +41,7 @@ public class TodoDB extends SQLiteOpenHelper {
                 String date = cursor.getString(cursor.getColumnIndex("date"));
                 String time = cursor.getString(cursor.getColumnIndex("time"));
                 String memo = cursor.getString(cursor.getColumnIndex("memo"));
+                int checked = cursor.getInt(cursor.getColumnIndex("checked"));
 
                 todo = new Todo();
                 todo.setId(id);
@@ -48,6 +50,7 @@ public class TodoDB extends SQLiteOpenHelper {
                 todo.setDate(date);
                 todo.setTime(time);
                 todo.setMemo(memo);
+                todo.setChecked(checked);
             }
         }
         cursor.close();
@@ -82,6 +85,7 @@ public class TodoDB extends SQLiteOpenHelper {
                 String date = cursor.getString(cursor.getColumnIndex("date"));
                 String time = cursor.getString(cursor.getColumnIndex("time"));
                 String memo = cursor.getString(cursor.getColumnIndex("memo"));
+                int checked = cursor.getInt(cursor.getColumnIndex("checked"));
 
                 Todo todo = new Todo();
                 todo.setId(id);
@@ -90,6 +94,7 @@ public class TodoDB extends SQLiteOpenHelper {
                 todo.setDate(date);
                 todo.setTime(time);
                 todo.setMemo(memo);
+                todo.setChecked(checked);
                 todos.add(todo);
             }
         }
@@ -110,6 +115,16 @@ public class TodoDB extends SQLiteOpenHelper {
     public void UpdateTodo(String content, String wifiInfo, String date, String time, String memo, int id){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("UPDATE TodoList SET content = '"+content +"', wifiInfo = '"+wifiInfo +"', date = '"+date +"', time = '"+time +"', memo = '"+memo +"' where id = '"+id +"';");
+    }
+
+    public void CheckTodo(String wifiInfo){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE TodoList SET checked = '1' where wifiInfo = '"+wifiInfo+"'");
+    }
+
+    public void UnCheckTodo(String wifiInfo){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE TodoList SET checked = '0' where wifiInfo = '"+wifiInfo+"'");
     }
 
     //DELETE 문
