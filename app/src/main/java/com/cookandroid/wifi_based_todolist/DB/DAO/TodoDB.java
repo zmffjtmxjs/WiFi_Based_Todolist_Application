@@ -118,7 +118,7 @@ public class TodoDB extends SQLiteOpenHelper {
     // UPDATE 문
     public void UpdateTodo(String content, String wifiInfo, String date, String time,int alarm, String memo, int id){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE TodoList SET content = '"+content +"', wifiInfo = '"+wifiInfo +"', date = '"+date +"', time = '"+time +"','"+alarm+"','"+memo +"' where id = '"+id +"';");
+        db.execSQL("UPDATE TodoList SET content = '"+content +"', wifiInfo = '"+wifiInfo +"', date = '"+date +"', time = '"+time +"', alarm = '"+alarm+"',memo = '"+memo +"' where id = '"+id +"';");
     }
 
     public void CheckTodo(String wifiInfo){
