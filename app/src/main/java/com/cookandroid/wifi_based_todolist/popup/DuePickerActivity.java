@@ -51,9 +51,6 @@ public class DuePickerActivity extends Activity {
         Intent intent = getIntent();
         String pickedStrDate = intent.getStringExtra("Date");
 
-        //로드 시 기본값을 할 일 추가(편집) 화면의 만료 기한과 동일
-        dateView.setText(pickedStrDate);
-
         //가져온 시간을 Calender타입으로 변환
         try {
             pickDate.setTime(transport.parse(pickedStrDate));
@@ -79,6 +76,9 @@ public class DuePickerActivity extends Activity {
         //타임 피커 초기값 지정
         timePicker.setCurrentHour(pickDate.get(HOUR_OF_DAY));
         timePicker.setCurrentMinute(pickDate.get(MINUTE));
+
+        //시간 초기값 설정이 완료된 후 텍스트 뷰 내용 업데이트
+        autoUpdatePickDateView();
 
         //타임 피커 체인지 리스너
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {

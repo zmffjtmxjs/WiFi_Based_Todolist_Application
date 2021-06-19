@@ -132,7 +132,7 @@ public class AddToDoActivity extends Activity {
 
             //표시위치 받아오기
             if ((todo.getWifiInfo()).equals("")) {
-                toDoGroup.setText("삭제된 위치(새로 등록해주세요.)");
+                toDoGroup.setText("삭제된 위치(다시 설정해주세요.)");
             } else {
                 toDoGroup.setText(todo.getWifiInfo());
             }
