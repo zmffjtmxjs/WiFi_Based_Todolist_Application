@@ -75,20 +75,20 @@ public class WifiDB extends SQLiteOpenHelper {
     //여기까지 06.08 수정완료
 
     //INSERT 문
-    public void InsertTodo(String wifiMac, String wifiInfo){
+    public void InsertWifi(String wifiMac, String wifiInfo){
         SQLiteDatabase db = getWritableDatabase();//쓰기가 가능한
         db.execSQL("INSERT INTO WifiInfo (wifiMac, wifiInfo) VALUES('"+wifiMac +"','"+wifiInfo +"');");
     }
 
     // UPDATE 문
-    public void UpdateTodo(String wifiMac, String wifiInfo){
+    public void UpdateWifi(String wifiMac, String wifiInfo, String newWifiInfo){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE WifiInfo SET wifiMac = '"+wifiMac +"', wifiInfo = '"+wifiInfo +"' where wifiMac = '"+wifiMac +"'");
+        db.execSQL("UPDATE WifiInfo SET wifiMac = '"+wifiMac +"', wifiInfo = '"+newWifiInfo +"' where wifiInfo = '"+wifiInfo+"'");
     }
 
     //DELETE 문
-    public void DeleteTodo(String wifiMac){
+    public void DeleteWifi(String wifiInfo){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM WifiInfo WHERE wifiMac = '" + wifiMac + "'");
+        db.execSQL("DELETE FROM WifiInfo WHERE wifiInfo = '" + wifiInfo + "'");
     }
 }
