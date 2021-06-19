@@ -42,10 +42,14 @@ public class AlarmViewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String wifiInfo = intent.getStringExtra("wifiInfo");// 작동원인이 된 wifiInfo 받음.
-
+        String id = intent.getStringExtra("id");
         //ListView에 할 일목록 가져오기
         todoDB = new TodoDB(this);
-        todos = todoDB.getTodoList("wifiInfo",wifiInfo);// 해당 wifiInfo로 검색
+        if(id == null) {
+            todos = todoDB.getTodoList("wifiInfo", wifiInfo);// 해당 wifiInfo로 검색
+        }else{
+            todos = todoDB.getTodoList("id", String.valueOf(id));// 해당 wifiInfo로 검색
+        }
         customAdapter = new CustomAdapter(todos,this);
 
         //ListView 등록
