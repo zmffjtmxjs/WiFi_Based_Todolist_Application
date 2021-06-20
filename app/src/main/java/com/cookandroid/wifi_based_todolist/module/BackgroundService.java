@@ -1,38 +1,26 @@
 package com.cookandroid.wifi_based_todolist.module;
 
-import android.app.ActivityManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.core.app.NotificationCompat;
-
+import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
 import com.cookandroid.wifi_based_todolist.DB.DAO.WifiDB;
+import com.cookandroid.wifi_based_todolist.DB.DTO.Todo;
 import com.cookandroid.wifi_based_todolist.DB.DTO.Wifi;
-import com.cookandroid.wifi_based_todolist.R;
 import com.cookandroid.wifi_based_todolist.alarmpage.AlarmViewActivity;
-import com.cookandroid.wifi_based_todolist.page.AddToDoActivity;
 import com.cookandroid.wifi_based_todolist.page.MainActivity;
-import com.cookandroid.wifi_based_todolist.popup.GroupSelector;
 
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 // 서비스 클래스를 구현하려면, Service 를 상속받는다
 public class BackgroundService extends Service {
 
     WifiDB wifiDB;
+    TodoDB todoDB;
     String pre;
     String now;
 
@@ -54,20 +42,33 @@ public class BackgroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d("test","하하 BackgroundService");
         // 서비스가 호출될 때마다 실행
         wifiDB = new WifiDB(this);
+        todoDB = new TodoDB(this);
         now=NetworkStatus.getConnectivityStatusString(getApplicationContext());
         pre=now;
         new Thread() {
             public void run() {
                 while (true) {
+                    Log.d("test","하하 BackgroundService2");
                     if(!pre.equals(now)) {
                         if ("Wifi enabled".equals(NetworkStatus.getConnectivityStatusString(getApplicationContext()))) {//와이파이 연결상태일 경우
                             try {
                                 String ip = IPAddress.getRealIP();
-                                for (int i = 0; i < wifiDB.getWifiList().size(); i++) {
-                                    if (ip.equals(wifiDB.getWifiList().get(i).getWifiMac())) {
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);//AlarmViewActivity.class);
+                                ArrayList<Wifi> wifis = new ArrayList<Wifi>();
+                                ArrayList<Todo> todos = todoDB.getTodoList("all");
+                                for (int i = 0;i<todos.size();i++){                             // 할 일 목록에 설정된 위치만 비교합니다.
+                                    Wifi wifi = wifiDB.getWifi(todos.get(i).getWifiInfo()); // 할 일 중에는 등록된 위치가 ""인 것도 있기 때문에 null 체크 해줘야 합니다.
+                                    if(wifi!=null) {
+                                        wifis.add(wifi);
+                                    }
+                                }
+
+                                for (int i = 0; i < wifis.size(); i++) {
+                                    if (ip.equals(wifis.get(i).getWifiMac())) {
+                                        Intent intent = new Intent(getApplicationContext(), AlarmViewActivity.class);
+                                        intent.putExtra("wifiInfo",wifis.get(i).getWifiInfo());
                                         startActivity(intent);
                                     }
                                 }
@@ -79,7 +80,7 @@ public class BackgroundService extends Service {
                     try {
                         pre=now;
                         now=NetworkStatus.getConnectivityStatusString(getApplicationContext());
-                        Thread.sleep(1000);
+                        Thread.sleep(3000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
