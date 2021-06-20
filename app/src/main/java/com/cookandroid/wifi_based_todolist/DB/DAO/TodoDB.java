@@ -140,9 +140,15 @@ public class TodoDB extends SQLiteOpenHelper {
     }
 
     //할일에 등록된 삭제된 wifi를 공백으로 변경하는 UPDATE문
-    public void WifiCleanInTodo(String wifiInfo) {
+    public void UpdateTodoWifi(String wifiInfo) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("UPDATE TodoList SET wifiInfo = '" + "' WHERE wifiInfo = '" + wifiInfo + "';");
+    }
+
+    //할일에 등록된 수정된 wifi 이름을 적용하는 UPDATE문
+    public void UpdateTodoWifi(String oldWifiInfo, String newWifiInfo) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE TodoList SET wifiInfo = '" + newWifiInfo + "' WHERE wifiInfo = '" + oldWifiInfo + "';");
     }
 
     //할일 완료 체크 박스 클릭 시 동작하는 UPDATE 문

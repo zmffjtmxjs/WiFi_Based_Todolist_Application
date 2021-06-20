@@ -85,6 +85,7 @@ public class SetWiFiActivity extends Activity {
                 if(locate!=null){ // ......수정 절차.
                     if( !locationName.getText().toString().trim().equals("") ) {
                         wifidb.UpdateWifi(IP,locate,locationName.getText().toString());
+                        tododb.UpdateTodoWifi(locate, locationName.getText().toString());
                         Toast.makeText(getApplicationContext(), "업데이트 완료", Toast.LENGTH_SHORT).show();
                         IP=null;
                         locate=null;
@@ -161,7 +162,7 @@ public class SetWiFiActivity extends Activity {
             @Override
             public void onClick(View view) {
                 ArrayList<Todo> todoList = tododb.getTodoList("all");
-                tododb.WifiCleanInTodo(locate);
+                tododb.UpdateTodoWifi(locate);
                 wifidb.DeleteWifi(locate);
                 Toast.makeText(getApplicationContext(), "삭제완료|IP:" + IP + "\n" + "위치:" + locate, Toast.LENGTH_SHORT).show();
                 locate = null;
