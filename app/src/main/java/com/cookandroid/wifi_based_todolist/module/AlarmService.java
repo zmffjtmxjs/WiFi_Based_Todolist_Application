@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.util.Log;
 
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
@@ -50,6 +51,8 @@ public class AlarmService extends Service {
             String id = String.valueOf(extras.getInt("id")+1);
             Intent intent2 = new Intent(this, AlarmViewActivity.class);
             intent2.putExtra("id",id);
+            Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+            vibrator.vibrate(1000);
             this.startActivity(intent2);
         }
 
