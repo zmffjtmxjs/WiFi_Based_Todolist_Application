@@ -73,6 +73,12 @@ public class AlarmSetting extends Service {
             mCalendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(time[0]));
             mCalendar.set(Calendar.MINUTE,Integer.parseInt(time[1]));
 
+            long now = System.currentTimeMillis();
+            long ctime = mCalendar.getTimeInMillis();
+            if( now > ctime){
+                return super.onStartCommand(intent, flags, startId);
+            }
+
             AlarmManager mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
             Intent mAlarmIntent = new Intent(this, AlarmReceiver.class);
