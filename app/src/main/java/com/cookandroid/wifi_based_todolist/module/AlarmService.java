@@ -5,8 +5,12 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.util.Log;
 
 import com.cookandroid.wifi_based_todolist.DB.DAO.TodoDB;
@@ -50,6 +54,11 @@ public class AlarmService extends Service {
             String id = String.valueOf(extras.getInt("id")+1);
             Intent intent2 = new Intent(this, AlarmViewActivity.class);
             intent2.putExtra("id",id);
+            Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+            vibrator.vibrate(1000);
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(),notification);
+            ringtone.play();
             this.startActivity(intent2);
         }
 
